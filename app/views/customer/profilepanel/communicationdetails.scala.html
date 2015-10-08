@@ -1,0 +1,426 @@
+@import models.user._
+@(profile: Profile)
+<script>
+$(function(){
+	$('#surnamebox').editable({
+		url: "@routes.UpdateCustomerMethods.updateSurname()",
+		send: 'always'
+	});
+	$('#firstnamebox').editable({
+		url: "@routes.UpdateCustomerMethods.updateFirstName()",
+		send: 'always'
+	});
+	$('#usernamebox').editable({
+		url: "@routes.UpdateCustomerMethods.updateUsername()",
+		send: 'always'
+	});
+	$('#mailbox').editable({
+		url: "@routes.UpdateCustomerMethods.updateEmail()",
+		send: 'always'
+	});	
+	$('#mobilephonebox').editable({
+		url: "@routes.UpdateCustomerMethods.updateMobilePhone()",
+		send: 'always'
+	});	
+	$('#phonebox').editable({
+		url: "@routes.UpdateCustomerMethods.updatePhone()",
+		send: 'always'
+	});	
+	$('#countrybox').editable({
+		url: "@routes.UpdateCustomerMethods.updateCountry()",
+		send: 'always'
+	});	
+	$('#citybox').editable({
+		url: "@routes.UpdateCustomerMethods.updateCity()",
+		send: 'always'
+	});	
+	$('#postcodebox').editable({
+		url: "@routes.UpdateCustomerMethods.updatePostCode()",
+		send: 'always'
+	});		
+});
+function changePassword() {
+	$.ajax({
+		type: 'POST',
+		url: "@routes.Owner.checkPassword()",
+		data: {"password" : $("#OLDpassword").val()},
+		datatype: 'json',
+		success: function(response) {
+			if (response == "not_found") {
+				//$("#wrongPasswordDiv").attr("style", "");
+				bootbox.alert("Εισάγατε λάθος κωδικό");
+				return;
+			} else if (response == "found") {
+				//$("#wrongPasswordDiv").attr("style", "display:none");
+				if ( $("#NEWpassword1").val() != $("#NEWpassword2").val()) {
+					//$("#mismatchedPasswordDiv").attr("style", "");
+					bootbox.alert("Τα δύο συνθηματικά δεν ταιριάζουν");
+					return;
+				} else if ($("#NEWpassword1").val().length < 1) {
+					bootbox.alert("password too short");
+					return;
+				} else {
+					$.ajax({
+						type: 'POST',
+						url: "@routes.Owner.changePassword()",
+						data: {"password" : $("#NEWpassword1").val()},
+						datatype: 'json',
+						success: function(response) {
+							bootbox.alert("Το password ενημερώθηκε με επιτυχία");
+							//$("#passwordChangeSuccessDiv").attr("style", "");
+						},
+						error: function() {
+							bootbox.alert("The server responed with unknown error while parsing your request");
+						}
+							
+					});
+				}
+			}
+		},
+		error: function() {
+			alert("The server responed with unknown error while parsing your request");
+		}
+	});	
+}
+</script>
+ <!--  panel Στοιχεία Επικοινωνίας  -->
+ <div class="row">
+     <div class="col-lg-12">
+
+         <div class="box">
+
+             <!-- PanelHeading -->
+             <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                 <h2>
+                     <i class="fa fa-comments-o" style="color: white;"></i>
+                     <span class="break"></span>
+                     Στοιχεία Επικοινωνίας
+                 </h2>
+                 <div class="box-icon">
+                     <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                     <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                 </div>
+             </div>
+             <!-- /PanelHeading -->
+
+             <!-- Panel Content -->
+             <div class="box-content clearfix" style="display: none;">
+
+                 <div class="row">&nbsp;</div>
+
+                 <div class="row" style="margin: 0px;">
+
+                     <div class="col-lg-4">
+                         <div class="form-group">
+                             <label class="control-label">
+                                 Επίθετο Χρήστη
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12">	
+                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>&nbsp;
+                                     <a href="#" id="surnamebox" data-type="text" data-pk="1" data-original-title="Enter username">
+                                         @profile.getSurname()
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>                                            
+
+                     <div class="col-lg-4">
+                         <div class="form-group">
+                             <label class="control-label">
+                                 Όνομα Χρήστη
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12">	
+                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>&nbsp;
+                                     <a href="#" id="firstnamebox" data-type="text" data-pk="1" data-original-title="Enter username">
+                                         @profile.getName()
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-4">
+                         <div class="form-group">
+                             <label class="control-label">
+                                 Ψευδώνυμο
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12">	
+                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>&nbsp;
+                                     <a href="#" id="usernamebox" data-type="text" data-pk="1" data-original-title="Enter username">
+                                         @profile.getAlias()
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                 </div>
+
+                 <div class="row">&nbsp;</div>
+
+                 <div class="row" style="margin: 0px;">
+
+                     <div class="col-lg-4">
+                         <div class="input-group">
+                             <label class="control-label">
+                                 Διεύθυνση ηλεκτρονικού ταχυδρομίου
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12">	
+                                     <span class="input-group-addon">@@</span>&nbsp;
+                                     <a href="#" id="mailbox" data-type="text" data-pk="1" data-original-title="Enter mail">
+                                         @profile.getEmail()
+                                     </a>
+                                 </div>	
+                             </div>
+                         </div>	
+                     </div>
+
+                     <div class="col-lg-4">
+                         <div class="input-group">
+                             <label class="control-label">
+                                 Κινητό Τηλέφωνο
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12">	
+                                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>&nbsp;
+                                     <a href="#" id="mobilephonebox" data-type="text" data-pk="1" data-original-title="Enter phonenumber">
+                                         @profile.getMobilephone()
+                                     </a>
+                                 </div>	
+                             </div>
+                         </div>	
+                     </div>
+
+                     <div class="col-lg-4">
+                         <div class="input-group">
+                             <label class="control-label">
+                                 Σταθερό Τηλέφωνο
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12">	
+                                     <span class="input-group-addon"><i class="fa fa-phone-square"></i></span>&nbsp;
+                                     <a href="#" id="phonebox" data-type="text" data-pk="1" data-original-title="Enter phonenumber">
+                                         @profile.getPhone()
+                                     </a>
+                                 </div>	
+                             </div>
+                         </div>
+                     </div>
+
+                 </div>
+
+                 <div class="row">&nbsp;</div>
+
+                 <div class="row" style="margin: 0px;">
+
+                     <div class="col-lg-4">	
+                         <label class="control-label">
+                             Χώρα
+                         </label>
+                         <div class="controls row">
+                             <div class="input-group col-sm-12">	
+                                 <span class="input-group-addon"><i class="fa fa-globe"></i></span>&nbsp;
+                                 <a href="#" id="countrybox" data-type="text" data-pk="1" data-original-title="Enter country">
+                                     @profile.getCountry()
+                                 </a>
+                             </div>	
+                         </div>
+                     </div>	
+
+                     <div class="col-lg-4">	
+                         <label class="control-label">
+                             Πόλη
+                         </label>
+                         <div class="controls row">
+                             <div class="input-group col-sm-12">	
+                                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>&nbsp;
+                                 <a href="#" id="citybox" data-type="text" data-pk="1" data-original-title="Enter city">
+                                     @profile.getCity()
+                                 </a>
+                             </div>	
+                         </div>
+                     </div>	
+
+                     <div class="col-lg-4">
+                         <label class="control-label">
+                             Τ.Κ.
+                         </label>
+                         <div class="controls row">
+                             <div class="input-group col-sm-12">	
+                                 <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>&nbsp;
+                                 <a href="#" id="postcodebox" data-type="text" data-pk="1" data-original-title="Enter postcode">
+                                     @profile.getPostalcode()
+                                 </a>
+                             </div>	
+                         </div>
+                     </div>	
+
+                 </div>
+
+                 <br>
+
+                 <div class="row" style="margin: 0px;">
+                     <!--  Personal Information - ChangePASSWORD  -->
+                     <div class="col-lg-4">
+                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion7" href="#collapseSeven" style="cursor: pointer; text-decoration: none;">
+                             <h3 class="btn btn-sm">
+                                 <span style="color: hsla(0,0%,0%,1.00); font-size: 15px">
+                                     <b>
+                                         <em>
+                                             Αλλαγή Κωδικού Πρόσβασης
+                                         </em>
+                                     </b>
+                                 </span>
+                                 &nbsp;
+                                 <i class="fa fa-chevron-down"></i>
+                             </h3>
+                         </a>
+                     </div>
+
+                 </div><!--  /row  -->
+
+                 <div class="row">
+                     <div class="col-lg-12">
+                         <div id="collapseSeven" class="accordion-body collapse">
+                             <div class="accordion-inner">
+
+                                 <div class="text-left">
+
+                                     <div class="row">&nbsp;</div>
+
+                                     <div class="col-lg-4">
+                                         <label class="control-label">Παλιός Κωδικός</label>
+                                         <div class="controls row">
+                                             <div class="input-group col-sm-12">	
+                                                 <input type="password" class="form-control" id="OLDpassword"/>
+                                                 <span class="input-group-addon">
+                                                     <i class="fa fa-key"></i>
+                                                 </span>
+                                             </div>	
+                                         </div>
+                                     </div>
+
+                                     <div class="col-lg-4">
+                                         <label class="control-label">Νέος Κωδικός</label>
+                                         <div class="controls row">
+                                             <div class="input-group col-sm-12">	
+                                                 <input type="password" class="form-control" id="NEWpassword1"/>
+                                                 <span class="input-group-addon">
+                                                     <i class="fa fa-key"></i>
+                                                 </span>
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                     <div class="col-lg-4">
+                                         <label class="control-label">Επανάληψη Νέου Κωδικού</label>
+                                         <div class="controls row">
+                                             <div class="input-group col-sm-12">	
+                                                 <input type="password" class="form-control" id="NEWpassword2"/>
+                                                 <span class="input-group-addon">
+                                                     <i class="fa fa-check"></i>
+                                                     <!-- <i class="fa fa-times"></i> -->
+                                                 </span>
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                     <div class="row">&nbsp;</div>
+                                     <br>
+
+                                 </div><!--  /text-left  -->
+
+                             </div><!-- /accordion-inner -->
+                         </div><!-- /accordion-body -->
+
+                         <div class="row">&nbsp;</div>
+
+                         <div class="col-lg-12">
+                             <div class="text-right">
+                                 <div class="btn btn-primary"onclick="changePassword()" style="margin-bottom: 10px; width: 150px;">
+                                     <strong>
+                                         Αποθήκευση
+                                     </strong>
+                                 </div>
+                             </div>
+                         </div>
+
+                         <p></p>
+
+                         <!--  ALERTS - ΔιαμόρφωσηΠροσωπικώνΣτοιχείων  -->
+                         <div class="col-lg-12" style="display:none">
+                             <div class="text-center">
+                                 <div class="alert alert-danger">
+                                     <button type="button" class="close" data-dismiss="alert">×</button>
+                                     <i class="fa fa-exclamation-triangle"></i>
+                                     <strong>
+                                         Προσοχή!
+                                     </strong>
+                                     Το Όνομα Χρήστη χρησιμοποιείται ήδη.
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-lg-12" style="display:none">
+                             <div class="text-center">
+                                 <div class="alert alert-danger">
+                                     <button type="button" class="close" data-dismiss="alert">×</button>
+                                     <i class="fa fa-exclamation-triangle"></i>
+                                     <strong>
+                                         Προσοχή!
+                                     </strong>
+                                     Οι χαρακτήρες που χρησιμοποιήσατε στον Κωδικό Πρόσβασης δεν είναι αποδεκτοί.
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-lg-12" style="display:none">
+                             <div class="text-center">                                                    
+                                 <div class="alert alert-success">
+                                     <button type="button" class="close" data-dismiss="alert">×</button>
+                                     <i class="fa fa-thumbs-up"></i>
+                                     <strong>
+                                         Συγχαρητήρια!
+                                     </strong>
+                                     Οι αλλαγές των προσωπικών σας στοιχείων πραγματοποιήθηκαν με επιτυχία.
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-lg-12" style="display:none">
+                             <div class="text-center">                                                    
+                                 <div class="alert alert-warning">
+                                     <button type="button" class="close" data-dismiss="alert">×</button>
+                                     <strong>
+                                         <i class="fa fa-exclamation-circle"></i>
+                                         Προσοχή!
+                                     </strong>
+                                     Είστε σίγουροι ότι θέλετε να ακυρώσετε τη διαδικασία Διαμόρφωσης Προσωπικών Στοιχείων;
+                                     <p>&nbsp;</p>
+                                     <div class="text-center">
+                                         <div class="btn btn-danger" style="width:105px">
+                                             <strong>
+                                                 Ακύρωση
+                                             </strong>
+                                         </div>
+                                         &nbsp;
+                                         <div class="btn btn-primary" style="width:105px">
+                                             <strong>
+                                                 Συνέχεια
+                                             </strong>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <!--  / ALERTS - /ΔιαμόρφωσηΠροσωπικώνΣτοιχείων  -->
+
+                     </div>
+                     <!-- Panel Content -->
+
+                 </div>
+             </div>
+         </div>
+         <!--  /panel /Στοιχεία Επικοινωνίας  -->

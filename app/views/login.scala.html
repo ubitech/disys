@@ -1,0 +1,157 @@
+@import models.user._
+@(userForm: Form[User])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("login", "none", "Login", "NONE") {
+        <div id="content" class="col-lg-12 full">
+
+            <div class="row">&nbsp;</div>
+
+            <div class="row">
+
+                <div class="col-lg-4">&nbsp;</div>
+
+                <!-- Log In 1-->
+                <div class="col-lg-4">
+
+                    <div class="box">
+                        <div class="box-header" style="background-color: #28993c; border-color: #248936;">
+                            <h2 style="color: white">
+                                Είσοδος Χρήστη
+                            </h2>
+                        </div>
+
+                        <div class="box-content clearfix">
+
+                            <div class="text-center">
+
+                                <h2>
+                                    <em>
+                                        Καλως ήρθατε στο 
+                                        <a href="http://www.disys.gr/" target="_blank" style="text-decoration: none;">
+                                            ΔΙΣΥΣ
+                                        </a>
+                                    </em>
+                                </h2>
+
+                                <a href="http://www.disys.gr/" target="_blank">
+                                    <img src="@routes.Assets.at("NEWNEW3.png")" height="120" alt="">
+                                </a>
+
+                                <p style="margin: 0px">&nbsp;</p>
+
+						@if(flash.containsKey("UserNotExists")){
+                                <div class="text-center">
+                                    <div class="alert alert-dismissable alert-danger" style="font-family: arial">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            ×
+                                        </button>
+                                        <strong>
+                                            Συγγνώμη!
+                                        </strong>
+                                        <a class="alert-link" style="text-decoration: none;">
+                                            Το όνομα χρήστη ή ο κωδικός που πληκτρολογήσατε δεν είναι σωστά.
+                                        </a>
+                                        <em>
+                                            Παρακαλούμε προσπαθήστε ξανά!
+                                        </em>
+                                    </div>
+                                </div>
+                         }
+
+						@if(flash.containsKey("UserLoggedOut")){
+                                <div class="text-center">
+                                    <div class="alert alert-dismissable alert-info" style="font-family: arial">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            ×
+                                        </button>
+                                        <a class="alert-link" style="text-decoration: none;">
+                                            Έχετε εξέλθει επιτυχώς από το σύστημα.
+                                        </a>
+                                        <p></p>
+                                        <em>
+                                            Για να εισέλθετε ξανά, πληκτρολογήστε εκ νέου τα διαπιστευτήριά σας.
+                                        </em>
+                                    </div>
+                                </div>
+                         }
+
+								@helper.form(action=routes.Application.loginUser(), 'id -> "frmLogin" , 'class -> "form-horizontal login") {
+                                    <fieldset class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">	
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Email" value=""/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12" style="margin-bottom: 0px">	
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Κωδικός" value=""/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-key"></i>
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="confirm" style="padding-bottom: 5px;">
+                                            <div class="col-lg-4" style="padding: 0px; top: 2px;">
+                                                <div class="text-right">
+                                                    <input type="checkbox" name="remember" style="margin-top: 0px"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8" style="padding-left: 5px">
+                                                <div class="text-left">
+                                                    <label>
+                                                        Να Με Θυμάσαι
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>	
+
+                                        <div class="row">
+                                            <button type="submit" value="LogInBTN" id="LogInBTN" class="btn btn-lg btn-primary col-xs-12">
+                                                Είσοδος
+                                            </button>
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+                                    </fieldset>	
+								}
+
+                                <a class="pull-left" href="#">
+                                    <strong>
+                                        Ξέχασα τον κωδικό μου.
+                                    </strong>
+                                </a>
+                                <a class="pull-right" href="@routes.Registration.registerOwnerMain()" style="color: blue">
+                                    <strong>
+                                        Εγγραφή Νέου Χρήστη!
+                                    </strong>
+                                </a>
+
+                                <div class="clearfix">&nbsp;</div>								
+
+                            </div><!--  /text-center  -->	
+
+                        </div><!--  /box-content  -->
+
+                    </div><!--  /box  -->	
+
+                </div><!--/col-lg-4 -->
+                <!-- /Log In 1-->
+
+                <div class="col-lg-4">&nbsp;</div>
+
+            </div><!-- /row -->
+
+        </div><!--  /col - id="content"  -->
+
+}

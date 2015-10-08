@@ -1,0 +1,55 @@
+ @(pageCategory: String)
+ 
+
+<!-- HeaderBar -->
+<header class="navbar" style="font-family: arial">
+	<div class="container">
+		<a id="main-menu-toggle" class="hidden-xs open"
+			style="padding-left: 0px; padding-bottom: 0px; padding-top: 0px;">
+			<img src="@routes.Assets.at("NEWNEW4.png")" alt="" height="40">&nbsp;
+		</a>
+		<div class="col-sm-7 col-xs-8 col-lg-6" style="margin: 8px; padding-left: 5px; padding-top: 2px;">
+	      <a href="http://www.disys.gr/" target="_blank" style="text-decoration: none">
+	          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	          <strong>
+	              ΔΙΣΥΣ
+	          </strong>
+	          &nbsp;&nbsp;
+	          -
+	          &nbsp;&nbsp;
+	          Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+	       </a>
+		</div>
+
+
+ @if(pageCategory != "Login") {
+		<!-- HeaderMenu -->
+		<div class="nav-no-collapse header-nav">
+			<ul class="nav navbar-nav pull-right">
+
+
+				<!-- HeaderUserDropdown -->
+				<li class="dropdown"><a class="btn account dropdown-toggle"
+					data-toggle="dropdown" href="#">
+						<div class="avatar"></div>
+						<div class="user">
+							<span class="hello"> Καλώς ήρθατε! </span> <span class="name"> @session.get("username") </span>
+						</div>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="index.html#"> <i class="fa fa-cog"></i>
+								Ρυθμίσεις Προφίλ
+						</a></li>
+						<li><a href="@routes.Application.logout()"> <i class="fa fa-sign-out"></i>
+								Αποσύνδεση
+						</a></li>
+					</ul></li>
+				<!-- HeaderUserDropdown -->
+			</ul>
+		</div>
+		<!-- /HeaderMenu -->
+		}
+
+	</div>
+</header>
+<!-- /HeaderBar -->

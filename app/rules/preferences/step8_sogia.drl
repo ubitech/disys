@@ -1,0 +1,30 @@
+import models.user.Profile;
+import models.restaurant.Dish;
+ 
+dialect "mvel"
+ 
+/*RULES FOR 8ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules Includes/ Excludes dishes based on preferences for sogia  
+ */
+
+rule "Includes dishes based on preferences for sogia"
+    when $u : Profile(wantSogia==2)
+	    $dish : Dish()
+   		eval($dish.getListOfIngredientCategoriesArrayStr() contains "12")
+    then
+    	$dish.priority = 2;
+        System.out.println("Rule (user LIKES σόγια): " + $dish.priority);    
+end
+
+rule "Excludes dishes based on preferences for sogia"
+    when $u : Profile(wantSogia==1)
+     	$dish : Dish()
+   		eval($dish.getListOfIngredientCategoriesArrayStr() contains "12")
+    then
+    	$dish.exclude = true;
+        System.out.println("Rule (user DOES NOT LIKE sogia): " + $dish.exclude);    
+end
+
+

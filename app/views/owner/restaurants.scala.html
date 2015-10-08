@@ -1,0 +1,114 @@
+@import models.restaurant._
+@(restaurantForm: Form[Restaurant], restaurants: List[Restaurant], cousines: List[models.lists.Hcousine],
+licences: List[models.lists.Hrestaurantlicence],
+prices: List[models.lists.Hpricerange],
+restaurantcategories: List[models.lists.Hrestaurantcategory]
+)
+@import helper._
+@import helper.twitterBootstrap._
+@main("ΔΙΣΥΣ - Καταστηματάρχης - Τα Καταστήματά Μου", "OWNER", "owner", "OWNER_RESTAURANTS") {
+                <!-- start: Content -->
+                <div id="content" class="col-lg-10 col-sm-11 ">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#" style="text-decoration: none;">
+                                &nbsp;ΔΙΣΥΣ
+                            </a>
+                        </li>
+                        <li class="active">
+                            Τα καταστήματά μου
+                        </li>
+                    </ol>
+
+
+                    <!--  panel   -->
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="box">
+
+                                <!-- PanelHeading -->
+                                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                    <h2>
+                                        <i class="fa fa-building-o" style="color: white;"></i>
+                                        <span class="break"></span>
+                                        Τα Καταστήματά Μου
+                                    </h2>
+                                    <div class="box-icon">
+                                        <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                    </div>
+                                </div>
+                                <!-- /PanelHeading -->
+
+                                <!-- Panel Content -->
+                                <div class="box-content clearfix">
+@restaurantpanels.myrestaurantslist(restaurants)
+
+
+                                    <br><br>
+                                    <div class="row">&nbsp;</div>
+                                    <div class="col-lg-12">
+
+                                        <div class="box">
+
+                                            <!-- PanelHeading -->
+                                            <div class="box-header" style="background-color: #f0f0f0; border-color: #d0d0d0; color: #28993c;">
+                                                <h2>
+                                                    <!--<i class="fa fa-building-o" style="color: white;"></i>-->
+                                                    <span class="break"></span>
+                                                    <strong id="strongheaderresttitle"></strong>
+                                                </h2>
+                                                <div class="box-icon">
+                                                    <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: #28993c;"></i></a>
+                                                    <a href="#" class="btn-close"><i class="fa fa-times" style="color: #28993c;"></i></a>
+                                                </div>
+                                                <ul class="nav tab-menu nav-tabs" id="myTab">
+                                                    <li class="active"><a href="ui-elements.html#info" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Στοιχεία</a></li>
+                                                    <li><a href="ui-elements.html#orektiko" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Ορεκτικό</a></li>
+                                                    <li><a href="ui-elements.html#salata" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Σαλάτα</a></li>
+                                                    <li><a href="ui-elements.html#kuriwspiato" style="font-size: 11px; padding-top:5px; padding-left: 7px; padding-right: 7px;"><div class=text-center>Κυρίως<br>Πιάτο</div></a></li>
+                                                    <li><a href="ui-elements.html#epidorpio" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Επιδόρπιο</a></li>
+                                                    <li><a href="ui-elements.html#prwino" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Πρωϊνό</a></li>
+                                                    <li><a href="ui-elements.html#snak" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Σνακ</a></li>
+                                                    <li><a href="ui-elements.html#poto" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Ποτό</a></li>
+                                                    <li><a href="ui-elements.html#rofima" style="font-size: 11px; padding-left: 7px; padding-right: 7px;">Ρόφημα</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- /PanelHeading -->
+
+                                            <!-- Panel Content -->
+                                            <div class="box-content clearfix">
+
+                                                <br>
+
+                                                <div id="myTabContent" class="tab-content">
+@restaurantpanels.myrestaurantslistrestaurantinfo(cousines, licences, prices, restaurantcategories)
+@restaurantpanels.myrestaurantlistdishes()
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- Panel Content -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  /panel /  -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+}

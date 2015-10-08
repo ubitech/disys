@@ -1,0 +1,809 @@
+@import models.restaurant._
+@(dishes: List[Dish])
+@main("ΔΙΣΥΣ - Καταστηματάρχης - Οι Συνταγές Μου", "OWNER", "owner", "OWNER_RECIPES") {
+                <!-- start: Content -->
+         <div id="content" class="col-lg-10 col-sm-11 ">
+
+             <ol class="breadcrumb">
+                 <li>
+                     <a href="#" style="text-decoration: none;">
+                         &nbsp;ΔΙΣΥΣ
+                     </a>
+                 </li>
+                 <li>
+                     Συνταγές
+                 </li>
+                 <li class="active">
+                     Οι Συνταγές Μου
+                 </li>
+             </ol>
+
+
+             <!--  panel   -->
+             <div class="row">
+                 <div class="col-lg-12">
+
+                     <div class="box">
+
+                         <!-- PanelHeading -->
+                         <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                             <h2>
+                                 <i class="fa fa-files-o" style="color: white;"></i>
+                                 <span class="break"></span>
+                                 Οι Συνταγές Μου
+                             </h2>
+                             <div class="box-icon">
+                                 <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                 <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                             </div>
+                         </div>
+                         <!-- /PanelHeading -->
+
+                         <!-- Panel Content -->
+                         <div class="box-content clearfix">
+
+                             <div class="col-lg-12">
+                                 <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                     <!--  Table HEADING  -->
+                                     <thead>
+                                         <tr>
+                                             <th class="col-lg-3">
+                                                 Όνομα Πιάτου
+                                             </th>
+                                             <th class="col-lg-4">
+                                                 Κατηγορία
+                                             </th>
+                                             <th class="col-lg-2">
+                                                 Χαρακτηριστικό
+                                             </th>
+                                             <th class="col-lg-2">
+                                                 Κουζίνα
+                                             </th>
+                                             <th class="col-lg-1">
+                                                 Επεξεργασία
+                                             </th>
+                                         </tr>
+                                     </thead>   
+                                     <!--  / Table HEADING  -->
+
+                                     <!--  Table  BODY  -->
+                                     <tbody>
+@for(dish <- dishes) {
+<tr>
+    <td>
+        @dish.getName()
+        <a class="btn btn-xs btn-setting1" href="#" style="text-decoration: none;" onclick="fillInfo(@dish.getId())">
+            &nbsp;<i class="fa fa-info"></i>&nbsp;
+        </a>
+    </td>
+    <td>
+@if(dish.getCategory() != null) {    
+        @dish.getCategory().getDescription()
+}        
+    </td>
+    <td>
+      
+	</td>
+    <td>
+@if(dish.getCousine() != null) {    
+        @dish.getCousine().getDescription()
+}
+    </td>                                                    
+    <td class="text-center">
+        <a title="Διαγραφή" data-rel="tooltip" class="btn btn-xs btn-danger" href="#" onclick="deleteDish(@dish.getId())">
+            <i class="fa fa-trash-o"></i> 
+        </a>
+    </td>
+</tr>
+}                                     
+                                     </tbody>
+                                     <!--  / Table  BODY -->
+                                 </table>
+                             </div>
+
+                         </div>
+                         <!-- Panel Content -->
+
+                     </div>
+                 </div>
+             </div>
+             <!--  /panel /  -->
+
+
+
+         </div>
+     </div><!--/col-->
+
+ </div>
+
+
+<script>
+function deleteDish(dishid) {
+	bootbox.confirm("Πρόκειται να διαγράψετε τη συνταγή. Η διαγραφή είναι μόνιμη! Είστε σίγουρος;", function(result) {
+		if (result == true) {
+		    var form = $(document.createElement('form'));
+		    $(form).attr("action", "@routes.Owner.deleteDish()");
+		    $(form).attr("method", "POST");
+	
+		    var input = $("<input>").attr("type", "hidden").attr("name", "dishid").val(dishid);
+		    $(form).append($(input));
+		    $(form).submit();
+		}
+	});
+}
+function fillInfo(dishid) {
+	$.ajax({
+		url: "@routes.Owner.calculateDishDailyRatiosByDish()",
+		data: {"dishid": dishid},
+		method: "POST",
+		success: function(result) {
+			var fields = result;
+			document.getElementById("p_calories").innerHTML =fields["calories"]+"Kcal";
+			$("#caloriesModal").html(fields["calories"]+" Kcal");
+			$("#caloriesModalpc").html((100*fields["calories"]/fields["weight"]).toFixed(2)+" Kcal");
+			document.getElementById("p_proteins").innerHTML =fields["proteins"]+"g";
+			$("#proteinModal").html(fields["proteins"]+" g");
+			$("#proteinModalpc").html((100*fields["proteins"]/fields["weight"]).toFixed(2)+" g");
+			document.getElementById("p_fats").innerHTML =fields["fats"]+"g";
+			$("#fatsModal").html(fields["fats"]+" g");
+			$("#fatsModalpc").html((100*fields["fats"]/fields["weight"]).toFixed(2)+" g");
+			document.getElementById("p_hydros").innerHTML =fields["hydros"]+"g";
+			$("#hydrosModal").html(fields["hydros"]+" g");
+			$("#hydrosModalpc").html((100*fields["hydros"]/fields["weight"]).toFixed(2)+" g");
+			document.getElementById("p_saturated").innerHTML =fields["saturated"]+"g";
+			$("#saturatedModal").html(fields["saturated"]+" g");
+			$("#saturatedModalpc").html((100*fields["saturated"]/fields["weight"]).toFixed(2)+" g");
+			document.getElementById("p_salt").innerHTML =fields["salt"]+"mg";
+			$("#saltModal").html(fields["salt"]+" mg");
+			$("#saltModalpc").html((100*fields["salt"]/fields["weight"]).toFixed(2)+" mg");
+			document.getElementById("p_sugars").innerHTML =fields["sugars"]+"g";			
+			$("#sugarsModal").html(fields["sugars"]+" g");
+			$("#sugarsModalpc").html((100*fields["sugars"]/fields["weight"]).toFixed(2)+" g");
+			$("#fiberModal").html(fields["fiber"]+" g");
+			$("#fiberModalpc").html((100*fields["fiber"]/fields["weight"]).toFixed(2)+" g");
+			
+			$("#sugarsModal").html(fields["sugars"]+" g");
+			$("#fiberModal").html(fields["fiber"]+" g");
+			
+			$("#thiaminModal").html(fields["thiamin"]+" mg ("+(100*fields["thiamin"]/1.2).toFixed(2)+"%)" );
+			$("#thiaminModalpc").html((100*fields["thiamin"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["thiamin"]/(6/5) ))/fields["weight"]).toFixed(2)+"%)" );
+			
+			$("#riboflavinModal").html(fields["riboflavin"]+" mg ("+(100*fields["riboflavin"]/1.3).toFixed(2)+"%)");
+			$("#riboflavinModalpc").html((100*fields["riboflavin"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100* (100*(fields["riboflavin"]/(13/10) ))/fields["weight"]).toFixed(2)+"%)");
+			
+			$("#folateModal").html(fields["folate"]+" μg ("+(100*fields["folate"]/400).toFixed(2)+"%)");
+			$("#folateModalpc").html( (100*fields["folate"]/fields["weight"]).toFixed(2)+
+					" μg ("+ (100* (100*(fields["folate"]/400))/fields["weight"]).toFixed(2)+"%)");
+			
+			$("#vitcModal").html(fields["vitaminc"]+" mg ("+(100*fields["vitaminc"]/90).toFixed(2)+"%)");
+			$("#vitcModalpc").html((100*fields["vitaminc"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["vitaminc"]/90))/fields["weight"]).toFixed(2) +"%)");
+			
+			
+			$("#vitdModal").html(fields["vitamind"]+" mg ("+(100*fields["vitamind"]/15).toFixed(2)+"%)");
+			$("#vitdModalpc").html((100*fields["vitamind"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["vitamind"]/15))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#viteModal").html(fields["vitamine"]+" mg ("+(100*fields["vitamine"]/15).toFixed(2)+"%)");
+			$("#viteModalpc").html((100*fields["vitamine"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["vitamine"]/15))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#vitkModal").html(fields["vitamink"]+" μg ("+(100*fields["vitamink"]/120).toFixed(2)+"%)");
+			$("#vitkModalpc").html((100*fields["vitamink"]/fields["weight"]).toFixed(2)+
+					" μg ("+(100*(100*(fields["vitamink"]/120))/fields["weight"]).toFixed(2) +"%)");
+			
+			document.getElementById("p_caloriesPerCent").innerHTML = (100*(fields["calories"]/2000.0)).toFixed(2)+"%";
+			document.getElementById("p_proteinsPerCent").innerHTML = (100*(fields["proteins"]/50.0)).toFixed(2)+"%";
+			document.getElementById("p_fatsPerCent").innerHTML = (100*(fields["fats"]/70.0)).toFixed(2)+"%";
+			document.getElementById("p_hydrosPerCent").innerHTML = (100*(fields["hydros"]/260.0)).toFixed(2)+"%";
+			document.getElementById("p_saturatedPerCent").innerHTML = (100*(fields["saturated"]/20.0)).toFixed(2)+"%";
+			document.getElementById("p_saltPerCent").innerHTML = (100*(fields["salt"]/6000.0)).toFixed(2)+"%";
+			document.getElementById("p_sugarsPerCent").innerHTML = (100*(fields["sugars"]/90.0)).toFixed(2)+"%";
+			
+			
+			$("#vitaminaModal").html(fields["vitamina"].toFixed(2)+" μg ("+(100*fields["vitamina"]/900).toFixed(2)+"%)");
+			$("#vitaminaModalpc").html((100*fields["vitamina"]/fields["weight"]).toFixed(2)+
+					" μg ("+(100*(100*(fields["vitamina"]/900))/fields["weight"]).toFixed(2) +"%)");
+			
+			$("#niacinModal").html(fields["niacin"].toFixed(2)+" mg ("+(100*fields["niacin"]/16).toFixed(2)+"%)");
+			$("#niacinModalpc").html((100*fields["niacin"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["niacin"]/16))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#b6Modal").html(fields["b6"].toFixed(2)+" mg ("+(100*fields["b6"]/1.3).toFixed(2)+"%)");
+			$("#b6Modalpc").html((100*fields["b6"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["b6"]/1.3))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#b12Modal").html(fields["b12"].toFixed(2)+" μg ("+(100*fields["b12"]/2.4).toFixed(2)+"%)");
+			$("#b12Modalpc").html((100*fields["b12"]/fields["weight"]).toFixed(2)+
+					" μg ("+(100*(100*(fields["b12"]/2.4))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#pantothenicModal").html(fields["pantothenic"].toFixed(2)+" mg ("+(100*fields["pantothenic"]/16).toFixed(2)+"%)");
+			$("#pantothenicModalpc").html((100*fields["pantothenic"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["pantothenic"]/16))/fields["weight"]).toFixed(2) +"%)");
+			
+			$("#potassiumModal").html(fields["potassium"].toFixed(2)+" mg ("+(100*fields["potassium"]/4700).toFixed(2)+"%)");
+			$("#potassiumModalpc").html((100*fields["potassium"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["potassium"]/4700))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#calciumModal").html(fields["calcium"].toFixed(2)+" mg ("+(100*fields["calcium"]/1000).toFixed(2)+"%)");
+			$("#calciumModalpc").html((100*fields["calcium"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["calcium"]/1000))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#phosphorusModal").html(fields["phosphorus"].toFixed(2)+" mg ("+(100*fields["phosphorus"]/700).toFixed(2)+"%)");
+			$("#phosphorusModalpc").html((100*fields["phosphorus"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["phosphorus"]/700))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#magnesiumModal").html(fields["magnesium"].toFixed(2)+" mg ("+(100*fields["magnesium"]/400).toFixed(2)+"%)");
+			$("#magnesiumModalpc").html((100*fields["magnesium"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["magnesium"]/400))/fields["weight"]).toFixed(2) +"%)");
+			
+			$("#ironModal").html(fields["iron"].toFixed(2)+" mg ("+(100*fields["iron"]/8).toFixed(2)+"%)");
+			$("#ironModalpc").html((100*fields["iron"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["iron"]/8))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#zincModal").html(fields["zinc"].toFixed(2)+" mg ("+(100*fields["zinc"]/11).toFixed(2)+"%)");
+			$("#zincModalpc").html((100*fields["zinc"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["zinc"]/11))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#copperModal").html(fields["copper"].toFixed(2)+" mg ("+(100*fields["copper"]/550).toFixed(2)+"%)");
+			$("#copperModalpc").html((100*fields["copper"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["copper"]/550))/fields["weight"]).toFixed(2) +"%)");	
+			
+			$("#maganeseModal").html(fields["maganese"].toFixed(2)+" mg ("+(100*fields["maganese"]/2.3).toFixed(2)+"%)");
+			$("#maganeseModalpc").html((100*fields["maganese"]/fields["weight"]).toFixed(2)+
+					" mg ("+(100*(100*(fields["maganese"]/2.3))/fields["weight"]).toFixed(2) +"%)");
+			
+			$("#seleniumModal").html(fields["selenium"].toFixed(2)+" μg ("+(100*fields["selenium"]/55).toFixed(2)+"%)");
+			$("#seleniumModalpc").html((100*fields["selenium"]/fields["weight"]).toFixed(2)+
+					" μg ("+(100*(100*(fields["selenium"]/55))/fields["weight"]).toFixed(2) +"%)");					
+		},
+		error: function(result) {
+			valid = false;
+			alert("Error!");
+		}
+	});
+}
+</script>
+
+ <!-- - - - -  modal 1 - - - - - -->
+ <div class="modal fade" id="myModal1">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Διατροφική Ανάλυση πιάτου</h4>
+             </div>
+             <div class="modal-body">
+
+                 <!--  / DiatrofikiAnalysi /Table -->
+                 <div class="col-lg-12">
+
+
+                     <!-- Food Labels -->
+                     <div class="row">
+                         <div class="col-lg-12">
+                             <table class="table" id="FoodLabelsTable" style="border: white;">
+                                 <thead>
+                                     <!--  FoodLabelsTable Table  Line1  -->
+                                     <tr>
+                                         <td>
+                                             <div class="text-center">
+                                                 <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                     <div class="text-center">
+                                                         <p>&nbsp;</p>
+                                                         <p style="font-size: 12px;">Θερμίδες</p>
+                                                         <p id="p_calories"></p>
+                                                         <p style="padding-top: 19px; color: black;" id="p_caloriesPerCent"></p>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="text-center">
+                                                 <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                     <div class="text-center">
+                                                         <p>&nbsp;</p>
+                                                         <p style="font-size: 12px;">Λιπαρά</p>
+                                                         <p id="p_fats"></p>
+                                                         <p style="padding-top: 19px; color: black;" id="p_fatsPerCent"></p>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="text-center">
+                                                 <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                     <div class="text-center">
+                                                         <p>&nbsp;</p>
+                                                         <p style="font-size: 12px;">Κορεσμένα</p>
+                                                         <p id="p_saturated"></p>
+                                                         <p style="padding-top: 19px; color: black;" id="p_saturatedPerCent"></p>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                 <div class="text-center">
+                                                     <p>&nbsp;</p>
+                                                     <p style="font-size: 12px;">Υδατάνθρακες</p>
+                                                     <p id="p_hydros"></p>
+                                                     <p style="padding-top: 19px; color: black;" id="p_hydrosPerCent"></p>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                 <div class="text-center">
+                                                     <p>&nbsp;</p>
+                                                     <p style="font-size: 12px;">Απλά Σάκχαρα</p>
+                                                     <p id="p_sugars"></p>
+                                                     <p style="padding-top: 19px; color: black;" id="p_sugarsPerCent"></p>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                 <div class="text-center">
+                                                     <p>&nbsp;</p>
+                                                     <p style="font-size: 12px;">Πρωτεΐνες</p>
+                                                     <p id="p_proteins"></p>
+                                                     <p style="padding-top: 19px; color: black;" id="p_proteinsPerCent"></p>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                 <div class="text-center">
+                                                     <p>&nbsp;</p>
+                                                     <p style="font-size: 12px;">Αλάτι</p>
+                                                     <p id="p_salt"></p>
+                                                     <p style="padding-top: 19px; color: black;" id="p_saltPerCent"></p>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>
+                                     <!--  /FoodLabelsTable Table  /Line1  -->                                            
+                                 </thead>
+                             </table>
+                         </div>
+                     </div>
+
+                     <br><br>
+                     <!-- /Food Labels -->
+
+
+                     <div class="box">
+
+                         <!-- PanelHeading -->
+                         <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                             <h2>
+                                 <i class="fa fa-info" style="color: white;"></i>
+                                 <span class="break"></span>
+                                 Πίνακας Διατροφικής Αξίας
+                             </h2>
+                             <div class="box-icon">
+                                 <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                 <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                             </div>
+                         </div>
+                         <!-- /PanelHeading -->
+
+                         <!-- Panel Content -->
+                         <div class="box-content clearfix" style="display: none;">
+
+                                        <table class="table table-striped table-bordered" id="DiatrofikhAnalysi">
+                                            <!--  DiatrofikiAnalysi Table HEADING  -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-6">
+                                                        Μέση Ανάλυση Θρ. Συστατικών
+                                                    </th>
+                                                    <th class="col-lg-3">
+                                                        Ανά 100g Πιάτου
+                                                    </th>
+                                                    <th class="col-lg-3">
+                                                        Ανά Μερίδα
+                                                    </th>
+                                                </tr>
+                                            </thead>   
+                                            <!--  / DiatrofikiAnalysi Table  HEADING  -->
+
+                                            <!--  DiatrofikiAnalysi Table   BODY  -->
+                                            <tbody>
+                                                <!--  DiatrofikiAnalysi Table  Line1  -->
+                                                <tr>
+                                                    <td>
+                                                        Ενέργεια
+                                                    </td>
+                                                    <td id="caloriesModalpc">                                                       
+                                                    </td>
+                                                    <td id="caloriesModal">
+                                                       
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table  Line1  -->
+                                                <!--  DiatrofikiAnalysi Table  Line2  -->
+                                                <tr>
+                                                    <td>
+                                                        Λιπαρά
+                                                    </td>
+                                                    <td id="fatsModalpc">                                                       
+                                                    </td>
+                                                    <td id="fatsModal">
+                                                        
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table  Line2  -->
+                                                <!--  DiatrofikiAnalysi Table  Line3  -->
+                                                <tr>
+                                                    <td>
+                                                        &emsp;&nbsp;
+                                                        εκ των οποίων Κορεσμένα
+
+                                                    </td>
+                                                    <td id="saturatedModalpc">
+                                                    </td>
+                                                    <td id="saturatedModal">
+
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line3  -->
+                                                <!--  DiatrofikiAnalysi Table  Line4  -->
+                                                <tr>
+                                                    <td>
+                                                        Υδατάνθρακες
+                                                    </td>
+                                                    <td id="hydrosModalpc">
+                                                    </td>
+                                                    <td id="hydrosModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line4  -->
+                                                <!--  DiatrofikiAnalysi Table  Line5  -->
+                                                <tr>
+                                                    <td>
+                                                        &emsp;&nbsp;
+                                                        εκ των οποίων Απλά Σάκχαρα
+                                                    </td>
+                                                    <td id="sugarsModalpc">
+                                                    </td>
+                                                    <td id="sugarsModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line5  -->
+                                                <!--  DiatrofikiAnalysi Table  Line6  -->
+                                                <tr>
+                                                    <td>
+                                                        Φυτικές Ίνες
+                                                    </td>
+                                                    <td id="fiberModalpc">
+                                                    </td>
+                                                    <td id="fiberModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line6  -->
+                                                <!--  DiatrofikiAnalysi Table  Line7  -->
+                                                <tr>
+                                                    <td>
+                                                        Πρωτεΐνες
+                                                    </td>
+                                                    <td id="proteinModalpc">
+                                                    </td>
+                                                    <td id="proteinModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line7  -->
+                                                <!--  DiatrofikiAnalysi Table  Line8  -->
+                                                <tr>
+                                                    <td>
+                                                        Αλάτι
+                                                    </td>
+                                                    <td id="saltModalpc">
+                                                    </td>
+                                                    <td id="saltModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line8  -->
+                                            </tbody>
+                                            <!--  / DiatrofikiAnalysi Table  BODY -->
+                                        </table>
+
+                         </div>
+
+                     </div>
+                 </div>
+                 <!--  / DiatrofikiAnalysi /Table -->
+
+
+                 <!-- DiatrofikoiIsxurismoi Table -->
+                 <div class="col-lg-12">
+
+                     <div class="box">
+
+                         <!-- PanelHeading -->
+                         <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                             <h2>
+                                 <i class="fa fa-info" style="color: white;"></i>
+                                 <span class="break"></span>
+                                 Ιχνοστοιχεία και Βιταμίνες
+                             </h2>
+                             <div class="box-icon">
+                                 <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                 <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                             </div>
+                         </div>
+                         <!-- /PanelHeading -->
+
+                         <!-- Panel Content -->
+                         <div class="box-content clearfix" style="display: none;">
+                                        <table class="table table-striped table-bordered" id="DiatrofikoiIsxurismoi">
+                                            <!--  DiatrofikoiIsxurismoi Table  HEADING  -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-4"><!-- gia stoixish sto kentro style="text-align: center;" -->
+                                                        Μέση Ανάλυση Θρ. Συστατικών
+                                                    </th>
+                                                    <th class="col-lg-4">
+                                                        Ανά 100g Πιάτου (ΠΠΑ%(*) ανά 100gr)
+                                                    </th>
+                                                    <th class="col-lg-4">
+                                                        Ανά Μερίδα (ΠΠΑ%(*) ανά μερίδα)
+                                                    </th>
+                                                </tr>
+                                            </thead>   
+                                            <!--  / DiatrofikoiIsxurismoi Table  HEADING  -->
+
+                                            <!--  DiatrofikoiIsxurismoi Table  BODY  -->
+                                            <tbody>
+                                                <!--  DiatrofikoiIsxurismoi Table Line1  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη K
+                                                    </td>
+                                                    <td id="vitkModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="vitkModal">
+                                                       
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line1  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line2  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη C
+                                                    </td>
+                                                    <td id="vitcModalpc">
+                                                        
+                                                    </td>
+                                                    <td id="vitcModal">
+                                                       
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line2  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line3  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη D
+                                                    </td>
+                                                    <td id="vitdModalpc">
+                                                      
+                                                    </td>
+                                                    <td id="vitdModal">
+                                                        
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line3  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line4  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη E
+                                                    </td>
+                                                    <td id="viteModalpc">
+                                                        
+                                                    </td>
+                                                    <td id="viteModal">
+                                                        
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line4  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line5  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B1
+                                                    </td>
+                                                    <td id="thiaminModalpc">
+                                                        
+                                                    </td>
+                                                    <td id="thiaminModal">
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line5  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line6  -->
+                                                <tr>
+                                                    <td>
+                                                        Φυλλικό οξύ
+                                                    </td>
+                                                    <td  id="folateModalpc">
+                                                       
+                                                    </td>
+                                                    <td  id="folateModal">
+
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line6  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line7  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B2
+                                                    </td>
+                                                    <td  id="riboflavinModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="riboflavinModal">                                                        
+                                                    </td>             
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη A
+                                                    </td>
+                                                    <td  id="vitaminaModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="vitaminaModal">                                                        
+                                                    </td>             
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Νιασίνη
+                                                    </td>
+                                                    <td  id="niacinModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="niacinModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B6
+                                                    </td>
+                                                    <td  id="b6Modalpc">
+                                                       
+                                                    </td>
+                                                    <td id="b6Modal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B12
+                                                    </td>
+                                                    <td  id="b12Modalpc">
+                                                       
+                                                    </td>
+                                                    <td id="b12Modal">                                                        
+                                                    </td>             
+                                                </tr>   
+                                                <tr>
+                                                    <td>
+                                                        Παντοθενικό Οξύ
+                                                    </td>
+                                                    <td  id="pantothenicModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="pantothenicModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr>
+                                                    <td>
+                                                        Κάλιο
+                                                    </td>
+                                                    <td  id="potassiumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="potassiumModal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr>
+                                                    <td>
+                                                        Ασβέστιο
+                                                    </td>
+                                                    <td  id="calciumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="calciumModal">                                                        
+                                                    </td>             
+                                                </tr>     
+                                                <tr>
+                                                    <td>
+                                                        Φωσφόρος
+                                                    </td>
+                                                    <td  id="phosphorusModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="phosphorusModal">                                                        
+                                                    </td>             
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Μαγνήσιο
+                                                    </td>
+                                                    <td  id="magnesiumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="magnesiumModal">                                                        
+                                                    </td>             
+                                                </tr>   
+                                                <tr>
+                                                    <td>
+                                                        Σίδηρος
+                                                    </td>
+                                                    <td  id="ironModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="ironModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr>
+                                                    <td>
+                                                        Ψευδάργυρος
+                                                    </td>
+                                                    <td  id="zincModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="zincModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr>
+                                                    <td>
+                                                        Χαλκός
+                                                    </td>
+                                                    <td  id="copperModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="copperModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr>
+                                                    <td>
+                                                        Μαγγάνιο
+                                                    </td>
+                                                    <td  id="maganeseModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="maganeseModal">                                                        
+                                                    </td>             
+                                                </tr>        
+                                                <tr>
+                                                    <td>
+                                                        Σελήνιο
+                                                    </td>
+                                                    <td  id="seleniumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="seleniumModal">                                                        
+                                                    </td>             
+                                                </tr>                                                       
+                                                <!--  / DiatrofikoiIsxurismoi Table Line7  -->                                           
+                                            </tbody>
+                                            <!--  / DiatrofikoiIsxurismoi Table  BODY -->
+                                        </table>
+* Οι τιμές έχουν υπολογισθεί με βάση το <a style="color:#0000EE" href="https://fnic.nal.usda.gov/dietary-guidance/dietary-reference-intakes" target="_blank"> DRI </a>
+                         </div>
+
+                     </div>
+                 </div>
+                 <!-- /DiatrofikoiIsxurismoi /Table -->
+
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Κλείσιμο</button>
+                 <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+             </div>
+         </div><!-- /.modal-content -->
+     </div><!-- /.modal-dialog -->
+ </div>
+ <!-- / - - - - - - /.modal 1 - - - - - - - -->
+}

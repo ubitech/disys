@@ -1,0 +1,114 @@
+@main("ΔΙΣΥΣ - Καταστηματάρχης - Οι Συνταγές Μου", "OWNER", "owner", "OWNER_RECIPES") {
+                <!-- start: Content -->
+                <div id="content" class="col-lg-10 col-sm-11 ">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#" style="text-decoration: none;">
+                                &nbsp;ΔΙΣΥΣ
+                            </a>
+                        </li>
+                        <li class="active">
+                            Συνταγές
+                        </li>
+                    </ol>
+
+
+                    <!--  panel   -->
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="box">
+
+                                <!-- PanelHeading -->
+                                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                    <h2>
+                                        <i class="fa fa-book" style="color: white;"></i>
+                                        <span class="break"></span>
+                                        Συνταγές
+                                    </h2>
+                                    <div class="box-icon">
+                                        <!--<a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>-->
+                                    </div>
+                                </div>
+                                <!-- /PanelHeading -->
+
+                                <!-- Panel Content -->
+                                <div class="box-content clearfix">
+
+                                    <br>
+
+                                    <div class="text-center">
+
+                                        <div class="row">
+
+                                            <div class="col-lg-1">&nbsp;</div>
+
+                                            <div class="col-lg-5">
+                                                <a class="quick-button" href="@routes.Owner.ownerNewRecipe()">
+                                                    <i class="fa fa-edit"></i>
+                                                    <p>
+                                                        <strong>
+                                                            Νέα Συνταγή
+                                                        </strong>
+                                                    </p>
+                                                </a>
+                                                <br>
+                                            </div>
+
+                                            <div class="col-lg-5">
+                                                <a class="quick-button" href="@routes.Owner.ownerNewCombo()">
+                                                    <i class="fa fa-puzzle-piece"></i>
+                                                    <p>
+                                                        <strong>
+                                                            Νέο Combo
+                                                        </strong>
+                                                    </p>
+                                                </a>
+                                                <br>
+                                            </div>
+
+                                            <div class="col-lg-1">&nbsp;</div>
+
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-1">&nbsp;</div>
+
+                                            <div class="col-lg-10">
+                                                <a class="quick-button"href="@routes.Owner.ownerMyRecipes">
+                                                    <i class="fa fa-files-o"></i>
+                                                    <p>
+                                                        <strong>
+                                                            Οι Συνταγές Μου
+                                                        </strong>
+                                                    </p>
+                                                </a>
+                                                <br>
+                                            </div>
+
+                                            <div class="col-lg-1">&nbsp;</div>
+
+                                        </div>
+
+                                    </div><!-- /text-center -->
+
+                                </div>
+                                <!-- Panel Content -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--  /panel /  -->
+
+
+
+                </div>
+            </div><!--/col-->
+
+        </div>
+}

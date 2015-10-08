@@ -1,0 +1,148 @@
+import models.user.Profile;
+
+dialect "mvel"
+
+rule "hydrocarbonate"
+when
+	$u : Profile()
+then
+	$u.hydrocarbonate = ($u.calories/4.0)*0.5
+	System.out.println("Hydrocarbonate Intake: " + $u.hydrocarbonate);
+end
+
+rule "simple Sugars"
+when
+	$u : Profile()
+then
+	$u.sugars = ($u.calories/4.0)*0.1
+	System.out.println("Simple Sugars Intake: " + $u.sugars);
+end
+
+rule "Fats"
+when
+	$u : Profile()
+then
+	$u.fats = ($u.calories/9.0)*0.3
+	System.out.println("Fat Intake: " + $u.fats);
+end
+
+rule "Polyunsaturated Fats"
+when
+	$u : Profile()
+then	
+	$u.polyunsaturated_fats = ($u.calories/9.0)*0.07
+	System.out.println("Polyunsaturated Fats: " + $u.polyunsaturated_fats);
+end
+
+
+rule "Protein"
+when
+	$u : Profile()
+then
+	$u.protein = ($u.calories/4.0)*0.2
+	System.out.println("Protein Intake: " + $u.protein);
+end
+
+rule "Sodium"
+when
+	$u : Profile()
+then
+	$u.sodium = 2.3
+	System.out.println("Sodium Intake: " + 2.3);
+end
+
+rule "Salt"
+when
+	$u : Profile()
+then
+	$u.salt = 6
+	System.out.println("Salt Intake: " + $u.salt);
+end
+
+rule "Fiber medical conditions"
+when
+	$u : Profile(hasHypertension == true || hasHypercholesterolemia == true || hasDiabetes == true || hasConstipation == true)
+then
+	$u.fiber = 0.02*$u.calories
+	System.out.println("Fiber Intake: " + $u.fiber);
+end
+
+rule "Fiber normal"
+when
+	$u : Profile(hasHypertension == false && hasHypercholesterolemia == false && hasDiabetes == false && hasConstipation == false)
+then
+	$u.fiber = 0.014*$u.calories
+	System.out.println("Fiber Intake: " + $u.fiber);
+end
+
+rule "Saturated Fats medical conditions"
+when
+	$u : Profile(hasHypertension == true || hasHypercholesterolemia == true ||  hasConstipation == true)
+then
+	$u.saturated_fats = 0.06*$u.calories
+	System.out.println("Saturated Fats Intake: " + $u.saturated_fats);
+end
+
+rule "Saturated Fats  normal"
+when
+	$u : Profile(hasHypertension == false && hasHypercholesterolemia == false &&  hasConstipation == false)
+then
+	$u.saturated_fats = 0.09*$u.calories
+	System.out.println("Saturated Fats Intake: " + $u.saturated_fats );
+end
+
+rule "Cholesterol medical conditions"
+when
+	$u : Profile(hasHypertension == true || hasHypercholesterolemia == true ||  hasConstipation == true)
+then
+	$u.cholesterol = 150
+	System.out.println("Cholesterol medical conditions: " + $u.cholesterol);
+end
+
+rule "Cholesterol normal"
+when
+	$u : Profile(hasHypertension == false && hasHypercholesterolemia == false &&  hasConstipation == false)
+then
+	$u.cholesterol = 300
+	System.out.println("Cholesterol normal: " + 300);
+end
+
+rule "Alcohol men"
+when
+	$u : Profile(gender.getId() == 1)
+then
+	$u.alcohol = 30
+	System.out.println("Alcohol Intake: " + $u.alcohol);
+end
+
+rule "Alcohol women"
+when
+	$u : Profile(gender.getId() == 2 && pregnant == false)
+then
+	$u.alcohol = 15
+	System.out.println("Alcohol Intake: " + 15);
+end
+
+rule "Alcohol women pregnant"
+when
+	$u : Profile(gender.getId() == 1 && pregnant == true)
+then
+	$u.alcohol = 0
+	System.out.println("Alcohol Intake: " + 0);
+end
+
+rule "Caffeine"
+when
+	$u : Profile(pregnant == false)
+then
+	$u.caffeine = 400
+	System.out.println("Caffeine Intake: " + 400);
+end
+
+rule "Caffeine pregnancy"
+when
+	$u : Profile(pregnant == true)
+then
+	$u.caffeine = 300
+	System.out.println("Caffeine Intake" + 300);
+end

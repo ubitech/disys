@@ -1,0 +1,83 @@
+package com.examples.drools
+ 
+import models.PersonBean;
+import models.DishBean;
+ 
+dialect "mvel"
+ 
+/*RULES FOR explanations*/
+
+/*RULES FOR DIETARY FIBER*/
+/*
+ * Set for the following rules:
+ * 1 Εαν το προϊόν δεν περιέχει περισσότερα από 0,5 g λιπαρών/100 g ή 100 ml τότε το προϊόν δεν έχει λιπαρά (χωρίς λιπαρά).
+ * 2 Εαν το προϊόν δεν περιέχει περισσότερα από 0,5 g σακχάρων/100 g ή 100 ml τότε το προϊόν δεν περιέχει σάκχαρα (χωρίς σάκχαρα).
+ * 3 Εαν το προϊόν δεν περιέχει περισσότερα από 0,3 g αλατιού/100 g ή 100 ml τότε το προϊόν έχει χαμηλή περιεκτικότητα σε αλάτι
+ * 4 Εαν το προϊόν δεν περιέχει περισσότερα από 0,1 g αλατιού/100 g ή 100 ml τότε το προϊόν έχει πολύ χαμηλή περιεκτικότητα σε αλάτι. (Ο ισχυρισμός αυτός δεν χρησιμοποιείται για τα φυσικά μεταλλικά νερά και τα άλλα νερά).
+ * 5 Εαν το προϊόν δεν περιέχει περισσότερα από 0,0125 g αλατιού/100 g  τότε το προϊόν δεν περιέχει αλάτι (χωρίς αλάτι).
+ * 6 Εαν το προϊόν περιέχει τουλάχιστον 3 g φυτικών ινών/100 g ή τουλάχιστον 1,5 g φυτικών ινών/ 100 kcal τότε το προϊόν είναι πηγή φυτικών ινών.
+ * 7 Εαν το προϊόν περιέχει τουλάχιστον 6 g φυτικών ινών/100 g ή τουλάχιστον 3 g φυτικών ινών/100 kcal τότε το προϊόν έχει υψηλή περιεκτικότητα σε φυτικές ίνες.
+*/
+rule "1 χωρίς λιπαρά"
+    when
+        $p : Dish($fats_per_100 : fats_per_100, 
+					$fats_per_100 <= 0.5)
+    then
+    	$p.getExplanations().put("Tο προϊόν δεν έχει λιπαρά ", 1.0)
+        System.out.println("Rule χωρίς λιπαρά ");    
+end
+
+rule "2 χωρίς σάκχαρα"
+    when
+        $p : Dish($sugars_per_100 : sugars_per_100, 
+					$sugars_per_100 <= 0.5)
+    then
+    	$p.getExplanations().put("Tο προϊόν δεν περιέχει σάκχαρα ", 1.0)
+        System.out.println("Rule χωρίς σάκχαρα ");    
+end
+
+rule "3 χαμηλή περιεκτικότητα σε αλάτι"
+    when
+        $p : Dish($salt_per_100: salt_per_100, 
+					$salt_per_100 <= 0.3 && $salt_per_100 > 0.1 )
+    then
+    	$p.getExplanations().put("Tο προϊόν έχει χαμηλή περιεκτικότητα σε αλάτι ", 1.0)
+        System.out.println("Rule χαμηλή περιεκτικότητα σε αλάτι ");    
+end
+
+rule "4 πολύ χαμηλή περιεκτικότητα σε αλάτι"
+    when
+        $p : Dish($salt_per_100: salt_per_100, 
+					$salt_per_100 <= 0.1 && $salt_per_100 > 0.0125 )
+    then
+    	$p.getExplanations().put("Tο προϊόν έχει πολύ χαμηλή περιεκτικότητα σε αλάτι ", 1.0)
+        System.out.println("Rule πολύ χαμηλή περιεκτικότητα σε αλάτι ");    
+end
+
+rule "5 δεν περιέχει αλάτι"
+    when
+        $p : DishBean($salt_per_100 : salt_per_100,
+        	$salt_per_100 <= 0.0125 )               
+    then
+    	$p.getExplanations().put("Tο προϊόν δεν περιέχει αλάτι.", 1.0)
+        System.out.println("Rule δεν περιέχει αλάτι ");    
+end
+
+rule "6 πηγή φυτικών ινών"
+    when
+        $p : DishBean($fibers_per_100gr : fibers_per_100gr, $fibers_per_100kcal : fibers_per_100kcal,
+        	($fibers_per_100gr > 3 && $fibers_per_100gr <= 6) || (fibers_per_100kcal > 1.5 && fibers_per_100kcal <= 3))                
+    then
+    	$p.getExplanations().put("Tο προϊόν είναι πηγή φυτικών ινών.", 1.0)
+        System.out.println("Rule πηγή φυτικών ινών ");    
+end
+
+rule "7 υψηλή περιεκτικότητα σε φυτικές ίνες"
+    when
+        $p : DishBean($fibers_per_100gr : fibers_per_100gr, $fibers_per_100kcal : fibers_per_100kcal,
+        	($fibers_per_100gr > 6) || (fibers_per_100kcal > 3))               
+    then
+    	$p.getExplanations().put("Tο προϊόν έχει υψηλή περιεκτικότητα σε φυτικές ίνες.", 1.0)
+        System.out.println("Rule υψηλή περιεκτικότητα σε φυτικές ίνες ");    
+end
+

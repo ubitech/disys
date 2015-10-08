@@ -1,0 +1,27 @@
+@import models.user._
+@(profile: Profile)
+@main("customer", "CUSTOMER", "customer", "CUSTOMER_ACCOUNT_SETTINGS") {
+                <!-- start: Content -->
+                <div id="content" class="col-lg-10 col-sm-11 ">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#" style="text-decoration: none;">
+                                &nbsp;ΔΙΣΥΣ
+                            </a>
+                        </li>
+                        <li class="active">
+                            Προφίλ
+                        </li>
+                    </ol>
+
+@profilepanel.communicationdetails(profile)
+@profilepanel.customerpersonaldata(profile)
+@profilepanel.customerrecommendations(profile)
+
+                </div><!-- /end: Content -->
+
+            </div>
+
+        </div>
+}

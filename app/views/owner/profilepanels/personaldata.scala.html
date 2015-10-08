@@ -1,0 +1,272 @@
+@import models.user._
+@(user: User)
+
+<script>
+$(function(){
+	$('#surnamebox').editable({
+		url: "@routes.Owner.ownerUpdatePersonalDataSurname()",
+		send: 'always'
+	});
+	$('#firstnamebox').editable({
+		url: "@routes.Owner.ownerUpdatePersonalDataName()",
+		send: 'always'
+	});
+	$('#mailbox').editable({
+		url: "@routes.Owner.ownerUpdatePersonalDataMail()",
+		send: 'always'
+	});
+	$('#phonenumberbox').editable({
+		url: "@routes.Owner.ownerUpdatePersonalDataPhone()",
+		send: 'always'
+	});	
+});
+function changePassword() {
+	$.ajax({
+		type: 'POST',
+		url: "@routes.Owner.checkPassword()",
+		data: {"password" : $("#OLDpassword").val()},
+		datatype: 'json',
+		success: function(response) {
+			if (response == "not_found") {
+				//$("#wrongPasswordDiv").attr("style", "");
+				bootbox.alert("Εισάγατε λάθος κωδικό");
+				return;
+			} else if (response == "found") {
+				//$("#wrongPasswordDiv").attr("style", "display:none");
+				if ( $("#NEWpassword1").val() != $("#NEWpassword2").val()) {
+					//$("#mismatchedPasswordDiv").attr("style", "");
+					bootbox.alert("Τα δύο συνθηματικά δεν ταιριάζουν");
+					return;
+				} else if ($("#NEWpassword1").val().length < 1) {
+					bootbox.alert("password too short");
+					return;
+				} else {
+					$.ajax({
+						type: 'POST',
+						url: "@routes.Owner.changePassword()",
+						data: {"password" : $("#NEWpassword1").val()},
+						datatype: 'json',
+						success: function(response) {
+							bootbox.alert("Το password ενημερώθηκε με επιτυχία");
+							//$("#passwordChangeSuccessDiv").attr("style", "");
+						},
+						error: function() {
+							bootbox.alert("The server responed with unknown error while parsing your request");
+						}
+							
+					});
+				}
+			}
+		},
+		error: function() {
+			alert("The server responed with unknown error while parsing your request");
+		}
+	});	
+}
+</script>
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="box">
+
+                <!-- PanelHeading -->
+                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                    <h2>
+                        <i class="fa fa-credit-card" style="color: white;"></i>
+                        <span class="break"></span>
+                        Προσωπικά Στοιχεία
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                    </div>
+                </div>
+                <!-- /PanelHeading -->
+
+                <!-- Panel Content -->
+             
+                <div class="box-content clearfix" style="display: none;">
+
+                    <div class="row">&nbsp;</div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Επίθετο Χρήστη
+                            </label>
+                            <div class="controls row">
+                                <div class="input-group col-sm-12">	
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>&nbsp;
+                                    <a href="#" id="surnamebox" data-type="text" data-pk="1" data-original-title="Enter surname">
+                                        @user.getSurname()
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                            
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Όνομα Χρήστη
+                            </label>
+                            <div class="controls row">
+                                <div class="input-group col-sm-12">	
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>&nbsp;
+                                    <a href="#" id="firstnamebox" data-type="text" data-pk="1" data-original-title="Enter firstname">
+                                        @user.getName()
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">&nbsp;<!--
+                        <div class="form-group">
+                            <label class="control-label">
+                                Ψευδώνυμο
+                            </label>
+                            <div class="controls row">
+                                <div class="input-group col-sm-12">	
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>&nbsp;
+                                    <a href="#" id="username" data-type="text" data-pk="1" data-original-title="Enter username">
+                                        k.ledopoulos
+                                    </a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="row">&nbsp;</div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="input-group col-lg-4">	
+                                <label class="control-label">
+                                    Διεύθυνση ηλεκτρονικού ταχυδρομίου
+                                </label>
+                                <div class="controls row">
+                                    <div class="input-group col-sm-12">	
+                                        <span class="input-group-addon">@@</span>&nbsp;
+                                        <a href="#" id="mailbox" data-type="text" data-pk="1" data-original-title="Enter mail">
+                                            @user.getEmail()
+                                        </a>
+                                    </div>	
+                                </div>
+                            </div>	
+
+                            <div class="input-group col-lg-4">	
+                                <label class="control-label">
+                                    Τηλέφωνο
+                                </label>
+                                <div class="controls row">
+                                    <div class="input-group col-sm-12">	
+                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>&nbsp;
+                                        <a href="#" id="phonenumberbox" data-type="text" data-pk="1" data-original-title="Enter phonenumber">
+                                            @user.getPhone()
+                                        </a>
+                                    </div>	
+                                </div>
+                            </div>	
+
+
+                            <!--  Personal Information - ChangePASSWORD  -->
+                            <div class="col-lg-4">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion7" href="#collapseSeven" style="cursor: pointer; text-decoration: none;">
+                                    <h3 class="btn btn-sm">
+                                        <span style="color: hsla(0,0%,0%,1.00); font-size: 15px">
+                                            <b>
+                                                <em>
+                                                    Αλλαγή Κωδικού Πρόσβασης
+                                                </em>
+                                            </b>
+                                        </span>
+                                        &nbsp;
+                                        <i class="fa fa-chevron-down"></i>
+                                    </h3>
+                                </a>
+                            </div>
+
+                        </div><!--  /col-lg-12  -->
+                    </div><!--  /row  -->
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="collapseSeven" class="accordion-body collapse">
+                                <div class="accordion-inner">
+
+                                    <div class="text-left">
+
+                                        <div class="row">&nbsp;</div>
+
+                                        <div class="col-lg-4">
+                                            <label class="control-label">Παλιός Κωδικός</label>
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">	
+                                                    <input type="password" class="form-control" id="OLDpassword"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-key"></i>
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <label class="control-label">Νέος Κωδικός</label>
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">	
+                                                    <input type="password" class="form-control" id="NEWpassword1"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-key"></i>
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <label class="control-label">Επανάληψη Νέου Κωδικού</label>
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">	
+                                                    <input type="password" class="form-control" id="NEWpassword2"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-check"></i>
+                                                        <!-- <i class="fa fa-times"></i> -->
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+                            <div class="col-lg-12">
+                                <div class="text-right">
+                                    <div class="btn btn-primary" onclick="changePassword()" style="margin-bottom: 10px; width: 150px;">
+                                        <strong>
+                                            Αποθήκευση
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div> 
+                                    </div><!--  /text-left  -->
+
+                                </div><!-- /accordion-inner -->
+
+                               
+                            </div><!-- /accordion-body -->
+
+
+
+                            <p></p>
+
+
+
+                        </div>
+                        <!-- Panel Content -->
+
+                    </div>
+                </div>            
+            </div>
+
+        </div>
+    </div>

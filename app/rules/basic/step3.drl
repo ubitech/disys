@@ -1,0 +1,43 @@
+import models.user.Profile;
+
+dialect "mvel"
+
+rule "BMR Woman"
+when 
+	$u : Profile(gender.getId()==2 && bmi < 25)
+then
+	$u.setBmr((655 + ( 9.6 * $u.weight) + ( 1.8 * $u.height) - ( 4.7 * $u.age)))
+	$u.setCalories($u.getBmr()*$u.activity)
+	System.out.println("BMR: " + (655 + ( 9.6 * $u.weight) + ( 1.8 * $u.height) - ( 4.7 * $u.age)));
+end
+
+rule "Rule Basal Rate Man"
+when 
+	$u : Profile(gender.getId()==1 && bmi < 25)
+then
+	$u.setBmr((66 + ( 13.7 * $u.weight) + ( 5 * $u.height) - ( 6.8 * $u.age)))
+	$u.setCalories($u.getBmr()*$u.activity)
+	System.out.println("BMR: " + (66 + ( 13.7 * $u.weight) + ( 5 * $u.height) - ( 6.8 * $u.age)));
+end
+
+rule "BMR Woman Overweight"
+when 
+	$u : Profile(gender.getId()==2 && bmi >= 25)
+then
+	$u.setIdealWeight(45.2+($u.height-152)*0.89)
+	$u.setAdjustedWeight($u.idealWeight + ($u.weight-$u.idealWeight)/2.0)
+	$u.setBmr((655 + ( 9.6 * $u.idealWeight) + ( 1.8 * $u.height) - ( 4.7 * $u.age)))
+	$u.setCalories($u.getBmr()*$u.activity)
+	System.out.println("BMR Woman OverWeight: " + (655 + ( 9.6 * $u.weight) + ( 1.8 * $u.height) - ( 4.7 * $u.age)));
+end
+
+rule "BMR Man Overweight"
+when 
+	$u : Profile(gender.getId()==1 && bmi >= 25)
+then
+	$u.setIdealWeight(48+($u.height-152)*1.06)
+	$u.setAdjustedWeight($u.idealWeight + ($u.weight-$u.idealWeight)/2.0)
+	$u.setBmr((655 + ( 9.6 * $u.weight) + ( 1.8 * $u.height) - ( 4.7 * $u.age)))
+	$u.setCalories($u.getBmr()*$u.activity)
+	System.out.println("BMR Man Overweight: " + (655 + ( 9.6 * $u.weight) + ( 1.8 * $u.height) - ( 4.7 * $u.age)));
+end

@@ -1,0 +1,57 @@
+import models.user.Profile;
+
+dialect "mvel"
+
+rule "HEA Lose weight Overweight"
+when
+	$u : Profile(goal == 1 && bmi >19 )
+then
+	$u.calories = $u.calories - 500; 
+	System.out.println("Hea Lose weight Overweight Calories: " + $u.calories);
+end
+
+rule "HEA Keep weight "
+when
+	$u : Profile(goal == 2 )
+then
+	System.out.println("HEA Keep weight Calories: " +$u.calories);
+end
+
+rule "HEA Thilasmos"
+when
+	$u : Profile(thilasmos == true )
+then
+	$u.calories = $u.calories + 500; 
+	System.out.println("HEA Thilasmos Calories: " +$u.calories);
+end
+
+rule "Pregnancy 1st Trimester"
+when
+	$u : Profile(pregnancy == 1 )
+then
+	System.out.println("Pregnancy 1st Trimester Calories: " +$u.calories);
+end
+
+rule "Pregnancy 2nd Trimester"
+when
+	$u : Profile(pregnancy == 2 )
+then
+	$u.calories = $u.calories + 340; 
+	System.out.println("Pregnancy 2nd Trimester Calories: " +$u.calories);
+end
+
+rule "Pregnancy 3rd Trimester"
+when
+	$u : Profile(pregnancy == 3 && bmi < 25 )
+then
+	$u.calories = $u.calories + 500
+	System.out.println("Pregnancy 3rd Trimester Calories: " +$u.calories);
+end
+
+rule "Pregnancy 3rd Overweight"
+when
+	$u : Profile(pregnancy == 3 && bmi > 25 )
+then
+	$u.calories = $u.calories + 340
+	System.out.println("Pregnancy 3rd Overweight Calories: " +$u.calories);
+end

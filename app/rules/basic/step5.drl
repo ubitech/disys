@@ -1,0 +1,723 @@
+import models.user.Profile;
+
+dialect "mvel"
+
+rule "Vitamin A woman pregnant"
+when
+	$u : Profile(pregnant == true && gender.getId() == 2)
+then
+	$u.vitamin_A = $u.vitamin_A + 770
+	System.out.println("Vitamin A: " + 770);
+end
+
+rule "Vitamin A woman breastfeeding"
+when
+	$u : Profile(breastfeeding == true && gender.getId() == 2)
+then
+	$u.vitamin_A = $u.vitamin_A + 1300
+	System.out.println("Vitamin A: " + 1300);
+end
+
+rule "Vitamin A woman"
+when
+	$u : Profile(gender.getId() == 2)
+then
+	$u.vitamin_A = $u.vitamin_A + 700
+	System.out.println("Vitamin A: " + 700);
+end
+
+rule "Vitamin A man"
+when
+	$u : Profile(gender.getId() == 1)
+then
+	$u.vitamin_A = $u.vitamin_A + 900
+	System.out.println("Vitamin A: " + 900);
+end
+
+rule "Vitamin D"
+when
+	$u : Profile()
+then
+	$u.vitamin_D = $u.vitamin_D + 15
+	System.out.println("Vitamin D: " + 15);
+end
+
+rule "Vitamin E breastfeeding"
+when
+	$u : Profile(breastfeeding == true)
+then
+	$u.vitamin_E = $u.vitamin_E + 19
+	System.out.println("Vitamin E: " + 19);
+end
+
+rule "Vitamin E"
+when
+	$u : Profile( (gender.getId() == 1 || gender.getId() == 2) && breastfeeding == false)
+then
+	$u.vitamin_E = $u.vitamin_E + 15
+	System.out.println("Vitamin E: " + 15);
+end
+
+rule "Vitamin K women"
+when
+	$u : Profile(gender.getId() == 2)
+then
+	$u.vitamin_K = $u.vitamin_K + 90
+	System.out.println("Vitamin K: " + 90);
+end
+
+rule "Vitamin K men"
+when
+	$u : Profile(gender.getId() == 1)
+then
+	$u.vitamin_K = $u.vitamin_K + 120
+	System.out.println("Vitamin K: " + 120);
+end
+
+rule "Vitamin C woman pregnant"
+when
+	$u : Profile(pregnant == true)
+then
+	$u.vitamin_C = $u.vitamin_C + 85
+	System.out.println("Vitamin C: " + 85);
+end
+
+rule "Vitamin C woman breastfeeding"
+when
+	$u : Profile(breastfeeding == true)
+then
+	$u.vitamin_C = $u.vitamin_C + 120
+	System.out.println("Vitamin C: " + 120);
+end
+
+rule "Vitamin C woman"
+when
+	$u : Profile(gender.getId() == 2 && breastfeeding == false && pregnant == false)
+then
+	$u.vitamin_C = $u.vitamin_C + 75
+	System.out.println("Vitamin C: " + 75);
+end
+
+rule "Vitamin C man"
+when
+	$u : Profile(gender.getId() == 1)
+then
+	$u.vitamin_C = $u.vitamin_C + 90
+	System.out.println("Vitamin C: " + 90);
+end
+
+rule "Thiamin pregnant or breastfeeding"
+when
+	$u : Profile($u.pregnant == true || breastfeeding == true)
+then
+	$u.thiamin = $u.thiamin + 1.4
+	System.out.println("Thiamin pregnant or breastfeeding: " + 1.4);
+end
+
+rule "Thiamin woman"
+when
+	$u : Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.thiamin = $u.thiamin + 1.1
+	System.out.println("Thiamin woman: " + 1.1);
+end
+
+rule "Thiamin man"
+when
+	$u : Profile(gender.getId() == 1)
+then
+	$u.thiamin = $u.thiamin + 1.2
+	System.out.println("Thiamin man: " + 1.2);
+end
+
+rule "Riboflavin men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.riboflavin = $u.riboflavin + 1.3
+	System.out.println("Riboflavin Intake: " + 1.3);
+end
+
+rule "Riboflavin women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.riboflavin = $u.riboflavin + 1.1
+	System.out.println("Riboflavin Intake: " + 1.1);
+end
+
+rule "Riboflavin women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.riboflavin = $u.riboflavin + 1.6
+	System.out.println("Riboflavin Intake: " + 1.6);
+end
+
+rule "Riboflavin women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.riboflavin = $u.riboflavin + 1.4
+	System.out.println("Riboflavin Intake: " + 1.4);
+end
+
+rule "b-6 men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.vitamin_B6 = $u.vitamin_B6 + 1.7
+	System.out.println("B-6 Intake: " + 1.7);
+end
+
+rule "b-6 women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.vitamin_B6 = $u.vitamin_B6 + 1.5
+	System.out.println("B-6 Intake: " + 1.5);
+end
+
+rule "b-6 women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.vitamin_B6 = $u.vitamin_B6 + 2.0
+	System.out.println("B-6 Intake: " + 2.0);
+end
+
+rule "b-6 women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.vitamin_B6 = $u.vitamin_B6 + 1.9
+	System.out.println("B-6 Intake: " + 1.9);
+end
+
+rule "Nef men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.vitamin_B3 = $u.vitamin_B3 + 16
+	System.out.println("Nef Intake: " + 16);
+end
+
+rule "Nef women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.vitamin_B3 = $u.vitamin_B3 + 14
+	System.out.println("Nef Intake: " + 14);
+end
+
+rule "Nef women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.vitamin_B3 = $u.vitamin_B3 + 18
+	System.out.println("Nef Intake: " + 18);
+end
+
+rule "Nef women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.vitamin_B3 = $u.vitamin_B3 + 17
+	System.out.println("Nef Intake: " + 17);
+end
+
+rule "Folate men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.folate = $u.folate + 400
+	System.out.println("Folate Intake: " + 400);
+end
+
+rule "Folate women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.folate = $u.folate + 400
+	System.out.println("Folate Intake: " + 400);
+end
+
+rule "Folate women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.folate = $u.folate + 600
+	System.out.println("Folate Intake: " + 600);
+end
+
+rule "Folate women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.folate = $u.folate + 500
+	System.out.println("Folate Intake: " + 500);
+end
+
+rule "B12 men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.vitamin_B12 = $u.vitamin_B12 + 2.4
+	System.out.println("B12 Intake: " + 2.4);
+end
+
+rule "B12 women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.vitamin_B12 = $u.vitamin_B12 + 2.4
+	System.out.println("B12 Intake: " + 2.4);
+end
+
+rule "B12 women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.vitamin_B12 = $u.vitamin_B12 + 2.6
+	System.out.println("B12 Intake: " + 2.6);
+end
+
+rule "B12 women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.vitamin_B12 = $u.vitamin_B12 + 2.8
+	System.out.println("B12 Intake: " + 2.8);
+end
+
+rule "Pantothenic men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.pantothenic = $u.pantothenic + 5.0
+	System.out.println("Pantothenic Intake: " + 5.0);
+end
+
+rule "Pantothenic women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.pantothenic = $u.pantothenic + 5.0
+	System.out.println("Pantothenic Intake: " + 5.0);
+end
+
+rule "Pantothenic women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.pantothenic = $u.pantothenic + 6.0
+	System.out.println("Pantothenic Intake: " + 6.0);
+end
+
+rule "Pantothenic women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.pantothenic = $u.pantothenic + 7.0
+	System.out.println("Pantothenic Intake: " + 7.0);
+end
+
+rule "Biotin men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.biotin = $u.biotin + 30
+	System.out.println("Biotin Intake: " + 30);
+end
+
+rule "Biotin women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.biotin = $u.biotin + 30
+	System.out.println("Biotin Intake: " + 30);
+end
+
+rule "Biotin women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.biotin = $u.biotin + 30
+	System.out.println("Biotin Intake: " + 30);
+end
+
+rule "Biotin women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.biotin = $u.biotin + 35
+	System.out.println("Biotin Intake: " + 35);
+end
+
+rule "Choline  men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.choline = $u.choline+ 550
+	System.out.println("Choline Intake: " + 550);
+end
+
+rule "Choline women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.choline = $u.choline+ 425
+	System.out.println("Choline Intake: " + 425);
+end
+
+rule "Choline women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.choline = $u.choline+ 450
+	System.out.println("Choline Intake: " + 450);
+end
+
+rule "Choline women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.choline = $u.choline+ 550
+	System.out.println("Choline Intake: " + 550);
+end
+
+rule "Magnesium  men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.magnesium = $u.magnesium + 420
+	System.out.println("Magnesium Intake: " + 420);
+end
+
+rule "Magnesium women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.magnesium = $u.magnesium + 320
+	System.out.println("Magnesium Intake: " + 320);
+end
+
+rule "Magnesium women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.magnesium = $u.magnesium + 350
+	System.out.println("Magnesium Intake: " + 350);
+end
+
+rule "Magnesium women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.magnesium = $u.magnesium + 310
+	System.out.println("Magnesium Intake: " + 310);
+end
+
+rule "Calcium"
+when
+	$u: Profile()
+then
+	$u.calcium = $u.calcium + 1000
+	System.out.println("Calcium Intake" + 1000);
+end
+
+rule "Phosphorus"
+when
+	$u: Profile()
+then
+	$u.phosphorus = $u.phosphorus + 700
+	System.out.println("Phosphorus Intake" + 700);
+end
+
+rule "Iron men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.iron = $u.iron + 8
+	System.out.println("Iron Intake: " + 8);
+end
+
+rule "Iron women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.iron = $u.iron + 8
+	System.out.println("Iron Intake: " + 8);
+end
+
+rule "Iron women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.iron = $u.iron + 27
+	System.out.println("Iron Intake: " + 27);
+end
+
+rule "Iron women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.iron = $u.iron + 9
+	System.out.println("Iron Intake: " + 9);
+end
+
+rule "Zinc men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.zinc = $u.zinc + 11
+	System.out.println("Zinc Intake: " + 11);
+end
+
+rule "Zinc women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.zinc = $u.zinc + 8
+	System.out.println("Zinc Intake: " + 8);
+end
+
+rule "Zinc women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.zinc = $u.zinc + 11
+	System.out.println("Zinc Intake: " + 11);
+end
+
+rule "Zinc women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.zinc = $u.zinc + 12
+	System.out.println("Zinc Intake: " + 12);
+end
+
+rule "Iodine men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.iodine = $u.iodine + 150
+	System.out.println("Iodine Intake: " + 150);
+end
+
+rule "Iodine women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.iodine = $u.iodine + 150
+	System.out.println("Iodine Intake: " + 150);
+end
+
+rule "Iodine women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.iodine = $u.iodine + 220
+	System.out.println("Iodine Intake: " + 220);
+end
+
+rule "Iodine women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.iodine = $u.iodine + 290
+	System.out.println("Iodine Intake: " + 290);
+end
+
+rule "Selenium men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.selenium = $u.selenium + 55
+	System.out.println("Selenium Intake: " + 55);
+end
+
+rule "Selenium women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.selenium = $u.selenium + 55
+	System.out.println("Selenium Intake: " + 55);
+end
+
+rule "Selenium women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.selenium = $u.selenium + 60
+	System.out.println("Selenium Intake: " + 60);
+end
+
+rule "Selenium women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.selenium = $u.selenium + 70
+	System.out.println("Selenium Intake: " + 70);
+end
+
+rule "Fluoride men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.fluoride = $u.fluoride + 4
+	System.out.println("Fluoride Intake: " + 4);
+end
+
+rule "Fluoride women"
+when
+	$u: Profile(gender.getId() == 2)
+then
+	$u.fluoride = $u.fluoride + 3
+	System.out.println("Fluoride Intake: " + 3);
+end
+
+rule "Manganese men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.manganese = $u.manganese + 2.3
+	System.out.println("Manganese Intake: " + 2.3);
+end
+
+rule "Manganese women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.manganese = $u.manganese + 1.8
+	System.out.println("Manganese Intake: " + 1.8);
+end
+
+rule "Manganese women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.manganese = $u.manganese + 2.0
+	System.out.println("Manganese Intake: " + 2.0);
+end
+
+rule "Manganese women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.manganese = $u.manganese + 2.6
+	System.out.println("Manganese Intake: " + 2.6);
+end
+
+rule "Molybdenum men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.molybdenum = $u.molybdenum + 45
+	System.out.println("Molybdenum Intake: " + 45);
+end
+
+rule "Molybdenum women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.molybdenum = $u.molybdenum + 45
+	System.out.println("Molybdenum Intake: " + 45);
+end
+
+rule "Molybdenum women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.molybdenum = $u.molybdenum + 50
+	System.out.println("Molybdenum Intake: " + 50);
+end
+
+rule "Molybdenum women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.molybdenum = $u.molybdenum + 50
+	System.out.println("Molybdenum Intake: " + 50);
+end
+
+rule "Chromium men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.chromium = $u.chromium + 35
+	System.out.println("Chromium Intake: " + 35);
+end
+
+rule "Chromium women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.chromium = $u.chromium + 25
+	System.out.println("Chromium Intake: " + 25);
+end
+
+rule "Chromium women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.chromium = $u.chromium + 30
+	System.out.println("Chromium Intake: " + 30);
+end
+
+rule "Chromium women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.chromium = $u.chromium + 45
+	System.out.println("Chromium Intake: " + 45);
+end
+
+rule "Copper men"
+when
+	$u: Profile(gender.getId() == 1)
+then
+	$u.copper = $u.copper + 900
+	System.out.println("Copper Intake: " + 900);
+end
+
+rule "Copper women"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == false)
+then
+	$u.copper = $u.copper + 900
+	System.out.println("Copper Intake: " + 900);
+end
+
+rule "Copper women pregnant"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == true && breastfeeding == false)
+then
+	$u.copper = $u.copper + 1000
+	System.out.println("Copper Intake: " + 1000);
+end
+
+rule "Copper women breastfeeding"
+when
+	$u: Profile(gender.getId() == 2 && pregnant == false && breastfeeding == true)
+then
+	$u.copper = $u.copper + 1300
+	System.out.println("Copper Intake: " + 1300);
+end
+
+rule "Potassium "
+when
+	$u: Profile(breastfeeding == true)
+then
+	$u.potassium = $u.potassium + 4700
+	System.out.println("Potassium Intake: " + 4700);
+end
+
+rule "Potassium women pregnant"
+when
+	$u: Profile(breastfeeding == false)
+then
+	$u.potassium = $u.potassium + 5100
+	System.out.println("Potassium Intake: " + 5100);
+end

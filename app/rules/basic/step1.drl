@@ -1,0 +1,16 @@
+import models.user.Profile;
+ 
+dialect "mvel"
+
+rule "GENDER MALE"
+when 
+	$u : Profile(gender.getId()==1)
+then
+	System.out.println("Male");
+end
+rule "GENDER FEMALE"
+when 
+	$u : Profile(gender.getId()==2)
+then
+	System.out.println("Female");
+end

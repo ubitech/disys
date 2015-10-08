@@ -1,0 +1,1088 @@
+@import models.restaurant._
+@import models.user._
+@(
+cousines: List[models.lists.Hcousine], 
+licences: List[models.lists.Hrestaurantlicence],
+restaurantcategories: List[models.lists.Hrestaurantcategory],
+prices: List[models.lists.Hpricerange])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("ΔΙΣΥΣ - Πελάτης - Εγγραφή Καταστηματάρχη", "none", "Registration", "OWNER_REGISTRATION") {
+<!-- start: Content -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>   
+<script>
+function submit_data() {
+	
+}
+                  
+var geocoder;
+var map;
+var marker;
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+function codeAddress() {
+	  var address = "";
+	  if ( $("#RestaurantCity").val().length > 4) {
+		  address=$("#RestaurantCity").val();
+	  }
+	  if ( $("#RestaurantStreet").val().length > 4) {
+		  address += " " + $("#RestaurantStreet").val() + " " + $("#RestaurantStreetNumber").val(); 
+	  }
+	  geocoder.geocode( { 'address': address}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		      map.setCenter(results[0].geometry.location);
+		      marker.setMap(null);
+		      marker = new google.maps.Marker({
+		          map: map,
+		          position: results[0].geometry.location		          
+		      });
+			  $("#lat").val(results[0].geometry.location.lat());
+			  $("#lng").val(results[0].geometry.location.lng());		      
+		    } else {
+		      //alert('Geocode was not successful for the following reason: ' + status);
+		    }
+		  });	
+}
+$(function() {
+	marker = new google.maps.Marker(null);
+	function initialize() {
+		  autocomplete = new google.maps.places.Autocomplete(
+			      /** type {HTMLInputElement} */(document.getElementById('RestaurantCity')),
+			      { types: ['geocode'] });
+			  // When the user selects an address from the dropdown,
+			  // populate the address fields in the form.
+			  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+			    fillInAddress();
+			  });		
+		geocoder = new google.maps.Geocoder();
+		var myLatlng = new google.maps.LatLng(
+				38.00, 23.75);
+		var mapOptions = {
+			zoom : 8,
+			center : myLatlng
+		};
+		function placeMarker(location) {
+			marker.setMap(null);
+			marker = new google.maps.Marker({
+				position : location,
+				map : map
+			});
+			$("#lat").val(location.lat());
+			$("#lng").val(location.lng());
+			
+			//reverse geo
+			var lat = parseFloat(location.lat());
+			var lng = parseFloat(location.lng());	
+			var latlng = new google.maps.LatLng(lat, lng);
+			geocoder.geocode({'latLng': latlng}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					//alert(JSON.stringify(results[0]["address_components"][0]["long_name"]));
+					//console.log(JSON.stringify(results[0]));
+					for (var i = 0; i < results[0]["address_components"].length; i++) {
+						//alert(JSON.stringify(results[0]["address_components"][0]["long_name"]));
+						if (results[0]["address_components"][i]["types"][0] == "street_number") {
+							$("#RestaurantStreetNumber").val(results[0]["address_components"][i]["long_name"]);
+						}
+						if (results[0]["address_components"][i]["types"][0] == "route") {
+							//alert(results[0]["address_components"][i]["long_name"]);
+							$("#RestaurantStreet").val(results[0]["address_components"][i]["long_name"]);
+						}
+						if (results[0]["address_components"][i]["types"][0] == "locality") {
+							$("#RestaurantCity").val(results[0]["address_components"][i]["long_name"]);
+						}
+						if (results[0]["address_components"][i]["types"][0] == "postal_code") {
+							$("#RestaurantPostcode").val(results[0]["address_components"][i]["long_name"]);
+						}							
+					}
+				}
+			});
+		}
+		map = new google.maps.Map(document
+				.getElementById("map-canvas"),
+				mapOptions);
+		google.maps.event.addListener(map, 'click',
+				function(event) {
+					placeMarker(event.latLng);
+				});
+	}
+	google.maps.event.addDomListener(window,
+			'load', initialize);
+
+	$("#picture").change(function(){
+		readURL(this);
+	});
+	$("#RestaurantImage").hide();
+	//$(window).trigger('resize');
+});
+
+
+function fillInAddress() {
+	//alert("fillInAddress");
+	// Get the place details from the autocomplete object.
+	var place = autocomplete.getPlace();
+	for (var i = 0; i < place["address_components"].length; i++) {
+		//alert(JSON.stringify(results[0]["address_components"][0]["long_name"]));
+		if (place["address_components"][i]["types"][0] == "street_number") {
+			$("#RestaurantStreetNumber").val(place["address_components"][i]["long_name"]);
+		}
+		if (place["address_components"][i]["types"][0] == "route") {
+			//alert(results[0]["address_components"][i]["long_name"]);
+			$("#RestaurantStreet").val(place["address_components"][i]["long_name"]);
+		}
+		if (place["address_components"][i]["types"][0] == "locality") {
+			$("#RestaurantCity").val(place["address_components"][i]["long_name"]);
+		}
+		if (place["address_components"][i]["types"][0] == "postal_code") {
+			$("#RestaurantPostcode").val(place["address_components"][i]["long_name"]);
+		}	
+		codeAddress();
+	}	
+	console.log(JSON.stringify(place));
+}
+
+function geolocate() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var geolocation = new google.maps.LatLng(
+					position.coords.latitude, position.coords.longitude);
+			var circle = new google.maps.Circle({
+				center : geolocation,
+				radius : position.coords.accuracy
+			});
+			autocomplete.setBounds(circle.getBounds());
+		});
+	}
+}
+var inserted_user = false;
+$(function() {
+	$('#MyWizard').on('change', function(e, data) {
+		var valid = true;
+		var err_msg="";
+		if (data.step===1 && data.direction==='next') {
+			//validate step 1
+			if ($.trim($("#UserSurname").val()) == '') {
+				valid = false;
+				err_msg += "Πρέπει να εισάγετε επίθετο χρήστη\n";
+			}
+			if ($.trim($("#UserFirstName").val()) == '') {
+				valid = false;
+				err_msg += "Πρέπει να εισάγετε όνομα χρήστη\n";
+			}
+			if ($.trim($("#email_1").val()) == '') {
+				valid = false;
+				err_msg += "Πρέπει να εισάγετε email χρήστη\n";
+			}	
+			var english = /^[A-Za-z0-9.@@-]*$/;
+			if ( ! english.test($.trim($("#email_1").val())) ) {
+				valid = false;
+				err_msg += "Πρέπει να εισάγετε αγγλικούς χαρακτήρες στο πεδίο email χρήστη";
+			}
+			if($("#email_1").val() != $("#email_2").val()) {
+				valid=false;
+				err_msg += "Τα email δεν ταιριάζουν\n";
+			}
+			if ($.trim($("#phone_1").val()) == '') {
+				valid = false;
+				err_msg += "Πρέπει να εισάγετε τηλέφωνο\n";
+			}	
+			if($("#phone_1").val() != $("#phone_2").val()) {
+				valid = false;
+				err_msg += "Τα τηλέφωνα δεν ταιριάζουν\n";
+			}	
+			if ($.trim($("#password1").val()) == '') {
+				valid = false;
+				err_msg += "Πρέπει να συνθηματικό\n";
+			}	
+			if($("#password1").val() != $("#password2").val()) {
+				valid = false;
+				err_msg += "Τα συνθηματικά δεν ταιριάζουν\n";
+			}	
+			if(! ($("#UseOfTerms").attr('checked')) ) {
+				valid = false;
+				err_msg += "Πρέπει να αποδεχτείτε τους όρους χρήσης\n";
+			}				
+		}  else if (data.step===2 && data.direction==='next') {
+			if (!inserted_user) {
+			$.ajax({
+				type: 'POST',
+				url: "@routes.Registration.insertOwner()",
+				data: jQuery("#insertOwnerForm").serialize(),
+				datatype: 'json',
+				success: function() {
+					//document.getElementById("insertion_success_div").setAttribute("style", "");
+					//location.reload();
+					//alert("ok");
+					//postBackInsert = 1;
+				},
+				error: function() {
+					bootbox.alert("Κάτι δεν πήγε καλά κατά την εγγραφή. Παρακαλώ επικοινωνήστε με το διαχειριστή συστήματος");
+				}				
+			});
+			inserted_user = true;
+			}
+		} 
+		if (!valid) {
+			bootbox.alert(err_msg);
+		}
+		return valid;
+	});
+	$('#MyWizard').on('finished', function(e, data) {
+		window.location.href = "@routes.Owner.welcomeScreen()";
+	});	
+	$("#ImgUpload").change(function(){
+		readURL(this);
+	});
+});
+</script>
+<div id="content" class="col-lg-10 col-sm-11" style="width: 100%">
+
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                &nbsp;ΔΙΣΥΣ
+            </a>
+        </li>
+        <li class="active" >
+            Εγγραφή Χρήστη
+        </li>                    
+    </ol>
+
+
+
+    <!-- panel 1 -->
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="box">
+
+                <!-- PanelHeading -->
+                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                    <h2>
+                        <i class="fa fa-user" style="color: white;"></i>
+                        <span class="break"></span>
+                        Εγγραφή Νέου Χρήστη
+                    </h2>
+                </div>
+                <!--  /PanelHeading  -->
+
+                <div class="box-content clearfix">
+
+
+                    <div class="col-lg-12">
+                        <div id="MyWizard" class="wizard">
+                            <ul class="steps">
+                                <li data-target="#step1" class="active"><span class="badge badge-info">1</span><span class="chevron"></span>Step 1</li>
+                                <li data-target="#step2"><span class="badge">2</span><span class="chevron"></span>Step 2</li>
+                                <li data-target="#step3"><span class="badge">3</span>Step 3</li>
+                                <!--<li data-target="#step5"><span class="badge">5</span>Step 5</li>-->
+                            </ul>
+                            <div class="actions" style="padding: 0px;">
+                                <button type="button" class="btn btn-prev" style="width: 100px;">&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Prev&nbsp;&nbsp;</button>
+                                <button type="button" class="btn btn-info btn-next" data-last="Finish" style="width: 100px;">&nbsp;&nbsp;Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;</button>
+                            </div>
+                        </div>
+
+                        <div class="step-content">
+<form id="insertOwnerForm" method="POST" action="@routes.Registration.insertOwner()">
+                            <!--  S T E P  (1)  -->
+                            <div class="step-pane active" id="step1">
+                                <form class="form-horizontal register" action="#" method="post">
+                                    <fieldset class="col-lg-12">
+
+                                        <div class="text-center">
+                                            <h2>
+                                                <em>
+                                                    <b>
+                                                        Προσωπικά Στοιχεία
+                                                    </b>        
+                                                </em>
+                                            </h2>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-4">
+                                                <label class="control-label">
+                                                    Επίθετο Χρήστη
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-user"></i>
+                                                        </span>
+                                                        <input class="form-control focused" id="UserSurname" name="UserSurname" type="text" placeholder="Surname">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <label class="control-label">
+                                                    Όνομα Χρήστη
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-user"></i>
+                                                        </span>                                            
+                                                        <input class="form-control focused" name="UserFirstName" id="UserFirstName" type="text" placeholder="First Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                &nbsp;
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-lg-4" style="height: 74px;">	
+                                                <label class="control-label">
+                                                    Διεύθυνση ηλεκτρονικού ταχυδρομίου
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <strong>
+                                                                @@
+                                                            </strong>
+                                                        </span>
+                                                        <input type="email" class="form-control" name="email" id="email_1" placeholder="address@@email.com"/>
+                                                    </div>	
+                                                </div>
+                                            </div>	
+
+                                            <div class="input-group col-lg-4" style="height: 74px;">	
+                                                <label class="control-label">
+                                                    Επιβεβαίωση ηλεκτρονικού ταχυδρομίου
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <strong>
+                                                                @@
+                                                            </strong>
+                                                        </span>
+                                                        <input type="email" class="form-control" id="email_2" placeholder="confirmation@@email.com"/>
+                                                    </div>	
+                                                </div>
+                                            </div>	
+
+                                            <div class="input-group col-lg-2" style="height: 74px;">	
+                                                <label class="control-label">
+                                                    Τηλέφωνο
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-phone"></i>
+                                                        </span>
+                                                        <input type="text" name="phone" id="phone_1" class="form-control" />
+                                                    </div>	
+                                                </div>
+                                            </div>	
+
+                                            <div class="input-group col-lg-2" style="height: 74px;">	
+                                                <label class="control-label">
+                                                    Επιβεβαίωση
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-phone"></i>
+                                                        </span>
+                                                        <input type="text" id="phone_2" class="form-control" />
+                                                    </div>	
+                                                </div>
+                                            </div>	
+
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-lg-3" style="height: 74px;">	
+                                                <label class="control-label">
+                                                    Κωδικός Πρόσβασης
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-key"></i>
+                                                        </span>
+                                                        <input type="password" name="password" class="form-control" id="password1"/>
+                                                    </div>	
+                                                </div>
+                                            </div>	
+
+                                            <div class="input-group col-lg-3" style="height: 74px;">	
+                                                <label class="control-label">
+                                                    Επανάληψη Κωδικού
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12">	
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-key"></i>
+                                                        </span>
+                                                        <input type="password" class="form-control" id="password2"/>
+                                                    </div>	
+                                                </div>
+                                            </div>	
+
+                                            <div class="col-lg-1">&nbsp;</div>
+
+                                            <div class="input-group col-lg-5" style="height: 74px;">
+                                                <label class="control-label">
+                                                    &nbsp;
+                                                </label>
+                                                <div class="controls row" style="margin-left: 0px;">
+                                                    <label class="checkbox inline">
+                                                        <input type="checkbox" id="UseOfTerms" value="option1">
+                                                        Συμφωνώ και αποδέχομαι τους <a href="#" style="color: #28993c; text-decoration: underline;">όρους χρήσης</a>.
+                                                        <span style="color:red">
+                                                            &nbsp;*
+                                                        </span>
+                                                    </label>
+                                                </div>	
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+                                        <p>&nbsp;</p>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <span style="color:red">
+                                                    &nbsp;*
+                                                </span>
+                                                <em>
+                                                    Υποχρεωτικά πεδία για τη Δημιουργία Νέου Χρήστη
+                                                </em>
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                    </fieldset>	
+                                </form>
+                            </div>
+                            <!--  / S T E P  (1)  -->
+
+                            <!--  S T E P  (2)  -->
+                            <div class="step-pane" id="step11">
+                                <form class="form-horizontal">
+                                    <fieldset class="col-sm-12">
+
+                                        <div class="text-center">
+                                            <h2>
+                                                <b>
+                                                    <em>
+                                                        Προσθήκη Καταστήματος
+                                                    </em>
+                                                </b>
+                                            </h2>
+                                        </div>
+
+                                        <br>
+
+                        <div class="row">
+
+                            <div class="col-lg-7">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Όνομα Καταστήματος
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-lg-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-cutlery"></i>
+                                                </span>
+                                                <input class="form-control focused" name = "RestaurantNameInput" id="RestaurantNameInput" type="text" placeholder="Όνομα Καταστήματος">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Επωνυμία Εταιρείας
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-building-o"></i>
+                                                </span>
+                                                <input class="form-control focused" name="OrganizationName" id="OrganizationName" type="text" placeholder="Επωνυμία Εταιρείας">
+                                            </div>
+                                        </div>                                                                        
+                                    </div>
+
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <label class="control-label">
+                                            Κατηγορία Καταστήματος Βάσει Άδειας Λειτουργίας
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="SelectStorelisence" name="SelectStorelisence" class="form-control">
+                                                <option value="-1">
+
+                                                </option>
+@for(licence <- licences) {
+<option value="@licence.getId()">
+	@licence.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="control-label" id="RestaurantPrice">
+                                            Εύρος Τιμής ανά άτομο
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="PriceSelect" name="PriceSelect" class="form-control">
+                                                <option value="-1"></option>
+@for(price <- prices) {
+<option value="@price.getId()">
+	@price.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>                                                                    
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Είδος Καταστήματος
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="SelectStoreKind" name="SelectStoreKind" class="form-control" multiple data-rel="chosen">
+@for(restaurantcategory <- restaurantcategories) {
+<option value="@restaurantcategory.getId()">
+	@restaurantcategory.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label" id="RestaurantCuisine">
+                                            Ειδος Κουζίνας
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="selectcuisine" name="selectcuisine" class="form-control" multiple data-rel="chosen">
+@for(cousine <- cousines) {
+<option value="@cousine.getId()">
+	@cousine.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="control-label">
+                                            Επιπλέον Πληροφορίες
+
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-lg-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-info"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantInfoInsert" id="RestaurantInfoInsert" type="text" placeholder="Αναφέρετε εάν το κατάστημά σας βρίσκεται σε εμπορικό κέντρο, πλοίο κτλ.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <label class="control-label">
+                                            Δήμος
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-globe"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantCity" id="RestaurantCity" type="text" placeholder="City" onchange="codeAddress()" onfocus="geolocate()" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <label class="control-label">
+                                            T.K.
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-location-arrow"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantPostcode" id="RestaurantPostcode" type="text" placeholder="Postcode">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">&nbsp;</div>-->                                                        
+
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <label class="control-label">
+                                            Οδός
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-road"></i>
+                                                </span>                                            
+                                                <input class="form-control focused" name="RestaurantStreet" id="RestaurantStreet" type="text" placeholder="Street" onchange="codeAddress()">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <label class="control-label">
+                                            Αριθμός
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantStreetNumber" id="RestaurantStreetNumber" type="text" placeholder="Str Number" onchange="codeAddress()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <label class="control-label">
+                                            Ονοματεπώνυμο Υπεύθυνου Καταστήματος
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>                                            
+                                                <input class="form-control focused" name="PersonInCharge" id="PersonInCharge" type="text" placeholder="Person In Charge">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>                                                        
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">
+                                            Τηλέφωνο Σταθερό
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantPhone" id="RestaurantPhone" type="text" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="control-label">
+                                            Τηλέφωνο Κινητό
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-mobile-phone"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantCellPhone" id="RestaurantCellPhone" type="text" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="control-label">
+                                            Fax
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-phone-square"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantFax" id="RestaurantFax" type="text" placeholder="Fax">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">&nbsp;</div>-->                                                        
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            e-mail
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-envelope-o"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantEmail" id="RestaurantEmail" type="text" placeholder="e-mail">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Site Εταιρείας
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-globe"></i>
+                                                </span>
+                                                <input class="form-control focused" name="OrganizationWebPage" id="OrganizationWebPage" type="text" placeholder="Web Page">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <br>
+                                        <label class="control-label">
+                                            Μεταφόρτωση Λογότυπου
+                                        </label>
+                                        <div class="controls" style="width: 350px;">
+                                            <div id="dropzone">
+                                                <div class="fallback">
+                                                    <input id="picture" name="RestaurantPicture" type="file" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="smallstat box" style="margin-bottom: 0px;">
+                                            <div class="text-center">
+                                                <img  id="RestaurantImage" src="#" alt="" style="max-height: 171px; max-width: 250px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div><!-- /col-lg-7 -->
+                            
+<div id="map-canvas" style="width:350px;height:450px"></div>                            
+
+
+                            <div class="row">&nbsp;</div>
+                            <div class="row">&nbsp;</div>
+
+                            <!--
+                            <div class="col-lg-12">
+                                <div class="text-right">
+                                    <div class="btn btn-primary" style="margin-bottom: 10px;">
+                                        <strong>
+                                            Προσθήκη Καταστήματος
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+
+                            <p></p>
+
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <div class="alert alert-success" id="insertion_success_div" style="display:none">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <i class="fa fa-thumbs-up"></i>
+                                        &nbsp;
+                                        <strong>
+                                            Συγχαρητήρια!
+                                        </strong>
+                                        Το νέο σας Κατάστημα προστέθηκε επιτυχώς.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <div class="alert alert-danger" style="display:none">
+                                        <button type="button" class="close" data-dismiss="alert" style="display:none">×</button>
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        &nbsp;
+                                        <strong>
+                                            Προσοχή!
+                                        </strong>
+                                        Πρέπει να συμπληρώσετε όλα τα υποχρεωτικά πεδία.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <div class="alert alert-dismissable alert-danger" style="font-family:arial;display:none">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        &nbsp;
+                                        <strong>
+                                            Συγγνώμη!
+                                        </strong>
+                                        <a class="alert-link" style="text-decoration: none;">
+                                            Τα στοιχεία που συμπληρώσατε είναι εσφαλμένα.
+                                        </a>
+                                        <em>
+                                            Παρακαλούμε εισάγετε ξανά τα απαιτούμενα στοιχεία!
+                                        </em>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                                    </fieldset>	
+                                </form>
+                            </div>
+                            <!-- / S T E P  (2)  -->
+
+                            <!-- S T E P  (3)  -->                                                            
+                            <div class="step-pane" id="step2">
+                                <fieldset class="col-sm-12">
+                                    <form class="form-horizontal">
+
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <h2>
+                                                    <b>
+                                                        <em>
+                                                            Ρυθμίσεις Αποστολής Ειδοποιήσεων
+                                                        </em>
+                                                    </b>
+                                                </h2>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="form-group" style="padding-left: 15px; padding-top: 5px;">
+                                            <label class="control-label">
+                                                Πώς θα θέλατε να ενημερώνεστε;
+                                            </label>
+                                            <div class="controls">
+                                                <div class="checkbox inline">
+                                                    <input type="checkbox" id="eidopoihseis1" value="option1">
+                                                    Αποστολή e-mail
+                                                </div>
+                                                <div class="checkbox inline">
+                                                    <input type="checkbox" id="eidopoihseis2" value="option2">
+                                                    Αποστολή γραπτών μηνυμάτων sms
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>	
+                                </fieldset>	
+                            </div>
+                            <!-- /S T E P  (3)  -->                                                            
+
+                            <!-- S T E P  (4)  -->                            
+                            <div class="step-pane" id="step3">
+                                <form class="form-horizontal">
+                                    <fieldset class="col-sm-12">
+
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <h2>
+                                                    <b>
+                                                        <em>
+                                                            Έχετε εγγραφεί επιτυχώς στο σύστημα. Πατήστε "Finish" για να εισέλθετε στο Σύστημα
+                                                        </em>
+                                                    </b>
+                                                </h2>
+                                            </div>
+                                        </div>
+
+                                        <br><br>
+
+                                        <div class="text-left" style="display:none">
+                                            <strong>Ένα τελευταίο βήμα...</strong>
+                                            <br><br>
+                                            Ένα μήνυμα ηλεκτρονικού ταχυδρομείου έχει αποσταλεί στην διεύθυνσή σας. Ακολουθείστε τον σύνδεσμο για την ενεργοποίηση του λογαριασμού σας.
+                                            <br>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="alert alert-success" style="display:none">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <div class="text-center">
+                                                <i class="fa fa-thumbs-up"></i>
+                                                &nbsp;
+                                                <strong>Συγχαρητήρια!</strong>
+                                                Η εγγραφή σας πραγματοποιήθηκε με επιτυχία.
+                                                <br>
+                                            </div>
+
+                                            <br><br>
+
+                                            <div class="col-lg-12">
+                                                <div class="text-center" style="color:black">
+                                                    <b>
+                                                        Θέλετε να προσθέσετε νέο κατάστημα;
+                                                    </b>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">&nbsp;</div>
+
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="DISYS_Katastimatarxis_OthoniYpodoxis.html">
+                                                        <div class="btn btn-success" style="color: white; margin-bottom: 10px;">
+                                                            <strong>
+                                                                Επιστροφή Στην Εφαρμογή
+                                                            </strong>
+                                                        </div>
+                                                    </a>
+                                                    &nbsp;
+                                                    <a href="DISYS_Katastimatarxis_Katasthmata.html">
+                                                        <div class="btn btn-primary" style="color: white; margin-bottom: 10px;">
+                                                            <strong>
+                                                                Προσθήκη Νέου Καταστήματος
+                                                            </strong>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div><!--  /alert  -->
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <!-- / S T E P  (4)  -->                                                            
+
+</form>
+                        </div>
+
+                    </div>
+
+
+                    <br>
+                    <div class="row">&nbsp;</div>
+                    <br>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /panel 1 -->
+
+
+
+</div>
+}

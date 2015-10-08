@@ -1,0 +1,11 @@
+import models.user.Profile;
+
+dialect "mvel"
+
+rule "BMI"
+when $u : Profile(gender.getId()==1 || gender.getId()==2)
+	
+then
+	$u.setBmi($u.weight/($u.height/100*$u.height/100));
+	System.out.println("BMI: "+$u.weight/($u.height/100*$u.height/100));
+end

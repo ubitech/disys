@@ -1,0 +1,547 @@
+ @import models.user._
+ @(profile: Profile)
+ 
+ <script>
+ $(function() {
+	 @if(profile.getGender().getId() == 1) {
+		$("#genderselect").val("male");
+	}
+	@if(profile.getGender().getId() == 2) {
+		$("#genderselect").val("female");
+		$("#egkumosuni").val("@profile.getPregnancyStatus.getId()");
+		jQuery("#iffemale").show();
+	}
+	$('#CustomerWeightbox').editable({
+		url: "@routes.UpdateCustomerMethods.updateWeight()",
+		send: 'always'
+	});	
+	$('#CustomerHeightbox').editable({
+		url: "@routes.UpdateCustomerMethods.updateHeight()",
+		send: 'always'
+	});	
+	$('#day').editable({
+		url: "@routes.UpdateCustomerMethods.updateDateDay()",
+		send: 'always'		
+	});
+	$('#month').editable({
+		url: "@routes.UpdateCustomerMethods.updateDateMonth()",
+		send: 'always'		
+	});
+	$('#year').editable({
+		url: "@routes.UpdateCustomerMethods.updateDateYear()",
+		send: 'always'		
+	});	
+	 @for(profileCondition <- profile.getProfileConditions()) {
+		 $("#inlineCheckbox@profileCondition.getMedicalcondition().getId()").prop('checked', true);
+	 }	
+	 $("#activitylevelselect").val("@profile.getPhysicalactivity().getId()");
+	 $("#dietlevelselect").val("@profile.getDiet.getId()");
+	 
+	 var excludedingridients = [];
+	 @for(profileCategories <- profile.getProfileIngredientCategories) {
+		 excludedingridients.push(@profileCategories.getHingredientcategoryid());
+	 }
+	 @if(profile.getWatchcalories()==1) {
+		 $("#nutrient1").prop('checked', true);
+	 }
+	 @if(profile.getWatchhydros()==1) {
+		 $("#nutrient2").prop('checked', true);
+	 }
+	 @if(profile.getWatchsugars()==1) {
+		 $("#nutrient3").prop('checked', true);
+	 }
+	 @if(profile.getWatchfiber()==1) {
+		 $("#nutrient4").prop('checked', true);
+	 }
+	 @if(profile.getWatchprotein()==1) {
+		 $("#nutrient5").prop('checked', true);
+	 }
+	 @if(profile.getWatchfat()==1) {
+		 $("#nutrient6").prop('checked', true);
+	 }
+	 @if(profile.getWatchsaturated()==1) {
+		 $("#nutrient7").prop('checked', true);
+	 }
+	 @if(profile.getWatchmonosaturated()==1) {
+		 $("#nutrient8").prop('checked', true);
+	 }
+	 @if(profile.getWatchpolysaturated()==1) {
+		 $("#nutrient9").prop('checked', true);
+	 }
+	 @if(profile.getWatchcholesterol()==1) {
+		 $("#nutrient10").prop('checked', true);
+	 }
+	 @if(profile.getWatchmetals()==1) {
+		 $("#nutrient11").prop('checked', true);
+	 }
+	 @if(profile.getWatchvitamins()==1) {
+		 $("#nutrient12").prop('checked', true);
+	 }
+	 @if(profile.getWatchantioxidants()==1) {
+		 $("#nutrient13").prop('checked', true);
+	 }	 
+	 $('#notdailyselect').chosen('destroy').val(excludedingridients).chosen();
+	 var date = "@profile.getDateofbirth()";
+	 var day = date.split(" ")[2];
+	 var month = getMonthFromString(date.split(" ")[1]);
+	 var year = date.split(" ")[5];
+	 $("#day").html(day);
+	 $("#month").html(month);
+	 $("#year").html(year);	 
+	 
+ });
+
+ function submit_form() {
+	 $("#UpdatePersonalDataForm").submit();
+ }
+ </script>
+ <!--  panel 2 - Προσωπικά Στοιχεία  -->
+ <form method="post" action="@routes.Customer.updateCustomerPersonalData()" id="UpdatePersonalDataForm">
+ <div class="row">
+     <div class="col-lg-12">
+
+         <div class="box">
+
+             <!-- PanelHeading -->
+             <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                 <h2>
+                     <i class="fa fa-credit-card" style="color: white;"></i>
+                     <span class="break" style="color: white;"></span>
+                     Προσωπικά Στοιχεία
+                 </h2>
+                 <div class="box-icon">
+                     <a href="#"  id="ProswpikaStoixeia" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                     <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                 </div>
+             </div>
+             <!-- /PanelHeading -->
+
+             <!-- Panel Content -->
+             <div class="box-content clearfix" style="display: none;">
+
+                 <p></p>
+
+                 <div class="col-lg-3">	
+                     <label class="control-label">
+                         Φύλλο
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls">
+                         <select onchange="test(this)" class="form-control" id="genderselect" name="gender">
+                             <option value="none">
+                                 επιλέξτε φύλλο...
+                             </option>
+                             <option value="male">
+                                 Άνδρας
+                             </option>
+                             <option value="female">
+                                 Γυναίκα
+                             </option>
+                         </select>
+                     </div>
+                 </div>	
+
+                 <div class="col-lg-3"><!-- na emfanizetai mono an fullo=gynaika -->	
+                     <div style="display: none;" id="iffemale">
+                         <label class="control-label">
+                             Επιλέξτε ένα από τα παρακάτω
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <div class="controls">
+                             <select class="form-control" id="egkumosuni" name="egkymosuni">
+                                 <option value="1">
+                                     Εγκυμοσύνη: 1ο τρίμηνο
+                                 </option>
+                                 <option value="2">
+                                     Εγκυμοσύνη: 2ο τρίμηνο
+                                 </option>
+                                 <option value="3">
+                                     Εγκυμοσύνη: 3ο τρίμηνο
+                                 </option>
+                                 <option value="4">
+                                     Θηλασμός
+                                 </option>
+                                 <option value="5">
+                                     κανένα από τα παραπάνω
+                                 </option>
+                             </select>
+                         </div>
+                     </div>
+                 </div>	
+
+                 <div class="col-lg-3">
+                     <div class="form-group">
+                         <label class="control-label" id="Weight">
+                             Βάρος (kg)
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <div class="controls">
+                             <div class="input-group" style="width: 100%">
+                                 <a href="#" id="CustomerWeightbox" data-type="text" data-pk="1" data-original-title="Enter weight">
+                                     @profile.getWeight()
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>                                            
+
+                 <div class="col-lg-3">
+                     <div class="form-group">
+                         <label class="control-label" id="UserHeight">
+                             Ύψος (cm)
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <div class="controls">
+                             <div class="input-group" style="width: 100%">	
+                                 <a href="#" id="CustomerHeightbox" data-type="text" data-pk="1" data-original-title="Enter height">
+                                     @profile.getHeight()
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>    
+                 <br/>
+                 <br/>
+                 <div class="row">&nbsp;</div>
+                 <div class="row">
+
+
+<script>
+function getMonthFromString(mon){
+
+	   var d = Date.parse(mon + "1, 2012");
+	   if(!isNaN(d)){
+	      return new Date(d).getMonth() + 1;
+	   }
+	   return -1;
+	 }
+
+</script>                                                                
+                 <div class="col-lg-3">
+                     <div class="form-group">
+                         <label class="control-label" id="UserDate">
+                             Ημερομηνία Γέννησης
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <div class="controls">
+                             <div class="input-group" style="width: 100%">	
+    <a href="#" id="day"  data-type="text" data-pk="1" data-original-title="DD"></a> /              
+    <a href="#" id="month"  data-type="text" data-pk="1" data-original-title="MM"></a>/
+    <a href="#" id="year"  data-type="text" data-pk="1" data-original-title="YYYY"></a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>  
+</div>
+
+                 <div class="row">&nbsp;</div>
+                 <br><br>
+
+                 <div class="row" style="margin: 0px;">
+
+                     <div class="col-lg-12">
+                         <label class="control-label">
+                             Θα σας ενδιέφερε οι συστάσεις και επιλογές των μενού/ τροφίμων να λαμβάνουν υπόψη τους κάποια από τα παρακάτω;
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition1" id="inlineCheckbox1" value="1">Αναιμία
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition2" id="inlineCheckbox2" value="2">Διαβήτη τύπου 2
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition3" id="inlineCheckbox3" value="3">Δυσκοιλιότητα
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition4" id="inlineCheckbox4" value="4">Κοιλιοκάκη
+                             &nbsp;
+                             <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Κοιλιοκάκη" data-content="δυσανεξία στη γλουτένη">
+                                 (i)
+                             </a>
+                         </label>
+                     </div>
+
+                     <br>
+
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition5" id="inlineCheckbox5" value="5">Υπερουριχαιμία
+                             &nbsp;
+                             <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Υπερουριχαιμία" data-content="αυξημένα επίπεδα ουρικού οξέος">
+                                 (i)
+                             </a>
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition6" id="inlineCheckbox6" value="6">Υπέρταση
+                             &nbsp;
+                             <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Υπέρταση" data-content="υψηλή αρτηριακή πίεση">
+                                 (i)
+                             </a>
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" name="condition7" id="inlineCheckbox7" value="7">Υπερχοληστερολαιμία
+                             &nbsp;
+                             <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Υπερχοληστερολαιμία" data-content="αυξημένα επίπεδα χοληστερόλης ή/και τριγλυκεριδίων">
+                                 (i)
+                             </a>
+                         </label>
+                     </div>
+
+                 </div>
+
+                 <br><br>
+
+                 <div class="row" style="margin: 0px;">
+
+                     <div class="col-lg-6">
+                         <label class="control-label" id="WorkOutIntensity">
+                             <i class="fa fa-heart" style="font-weight: bold;"></i>
+                             &nbsp;
+                             Επίπεδο Σωματικής Δραστηριότητας
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <br>
+                         <div class="controls">
+                             <select class="form-control" id="activitylevelselect" name="activitylevelselect">
+                                 <option value="1" title="Περιλαμβάνει καθιστική εργασία με ελάχιστη ή καμία δυνατότητα μετακίνησης μέσα στο χώρο εργασίας, και ελάχιστες ή καθόλου δραστηριότητες/κινήσεις στον ελεύθερο χρόνο (συμπεριλαμβάνονται δραστηριότητες όπως ύπνος, κάθισμα στο καναπέ ή στέκομαι για λίγη ώρα όρθιος και ελαφριές δραστηριότητες στο σπίτι)." data-rel="tooltip">
+                                     Καθιστική Ζωή 
+                                 </option>
+                                 <option value="2" title="Περιλαμβάνει καθιστική εργασία με ελάχιστη ή καμία δυνατότητα μετακίνησης μέσα στο χώρο εργασίας, και μικρές ή ελαφριές δραστηριότητες/ κινήσεις που δεν απαιτούν μεγάλη προσπάθεια στον ελεύθερο χρόνο (συμπεριλαμβάνονται δραστηριότητες όπως ζωγραφική, οδήγηση, δακτυλογράφηση, ράψιμο, σιδέρωμα, μαγείρεμα, επιτραπέζια παιχνίδια, ενασχόληση με μουσικό όργανο και ήπιο περπάτημα τουλάχιστον 3 φορές/ εβδομάδα)." data-rel="tooltip">
+                                     Ήπια σωματική δραστηριότητα
+                                 </option>
+                                 <option value="3" title="Περιλαμβάνει καθιστική εργασία με ελάχιστη ή καμία δυνατότητα μετακίνησης μέσα στο χώρο εργασίας, και μέτριας έντασης ελεύθερες δραστηριότητες στην καθημερινότητα (συμπεριλαμβάνονται δραστηριότητες όπως σχεδόν καθημερινό περπάτημα σε ευθεία πορεία 4-5km/ώρα, επαγγέλματα που περιλαμβάνουν π.χ. ηλεκτρολογικές, ξυλουργικές εργασίες, εργασία σε γκαράζ, δουλειές του σπιτιού, φροντίδα παιδιών, εξυπηρέτηση σε εστιατόρια, οικοκυρικά καθώς και δραστηριότητες στην καθημερινότητα όπως γκολφ, ιστιοπλοΐα, πινγ πονκ κα.)." data-rel="tooltip">
+                                     Mέτρια σωματική δραστηριότητα
+                                 </option>
+                                 <option value="4" title="Περιλαμβάνει καθιστική εργασία με δυνατότητα μετακίνησης μέσα στο χώρο εργασίας καθώς και όλες τις εργασίες που περιλαμβάνουν έντονη κίνηση, και ελεύθερο χρόνο που εμπεριέχει έντονη ορθοστασία, έντονες δραστηριότητες 3-5 φορές την εβδομάδα όπως περπάτημα 5,5-6,5 km/ ώρα, μεταφορά φορτίων, ποδηλασία, τένις, χορός, ή/και εβδομαδιαία ενασχόληση με αθλητικές δραστηριότητες." data-rel="tooltip">
+                                     Έντονη σωματική δραστηριότητα
+                                 </option>
+                             </select>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-6">
+                         <label class="control-label">
+                             <i class="fa fa-leaf" style="font-weight: bold;"></i>
+                             &nbsp;
+                             Τι διατροφή ακολουθείς αυτό το διάστημα;
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <br>
+                         <div class="controls">
+                             <select class="form-control" id="dietlevelselect" name="dietlevelselect">
+                                 <option value="1">
+                                     Απώλεια Βάρους 
+                                 </option>
+                                 <option value="2">
+                                     Διατήρηση Βάρους 
+                                 </option>
+                                 <option value="3">
+                                     Αύξηση Βάρους
+                                 </option>
+                             </select>
+                         </div>
+                     </div>
+
+                 </div>
+
+                 <br>
+
+                 <div class="row"  style="margin: 0px;">
+                     <div class="col-lg-12">
+                         <label class="control-label">
+                             Επιλέξτε ποια από τα παρακάτω συστατικά δεν καταναλώνετε στην καθημερινή σας διατροφή:
+                             <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                         <div class="controls">
+                             <select id="notdailyselect" name="notdailyselect" class="form-control" multiple data-rel="chosen">
+                                 <option value="1">
+                                     Αυγά
+                                 </option>
+                                 <option value="2">
+                                     Αρνί
+                                 </option>
+                                 <option value="3">
+                                     Γάλα
+                                 </option>
+                                 <option value="4">
+                                     Σκληρό Τυρί
+                                 </option>
+                                 <option value="5">
+                                     Φέτα
+                                 </option>
+                                 <option value="6">
+                                     Μοσχάρι
+                                 </option>
+                                 <option value="7">
+                                     Όστρακα/Μαλάκια
+                                 </option>
+                                 <option value="8">
+                                     Χοιρινό
+                                 </option>
+                                 <option value="9">
+                                     Ψάρι
+                                 </option>
+                                 <option value="10">
+                                     Σιτάρι
+                                 </option>
+                                 <option value="11">
+                                     Ψωμί
+                                 </option>
+                                 <option value="12">
+                                     Σόγια
+                                 </option>
+                                 <option value="13">
+                                     Σπόροι
+                                 </option>
+                             </select>
+                         </div>
+                     </div>
+                 </div>
+                 <br/>
+                 <div class="row" style="margin: 0px;">
+                     <div class="col-lg-12">
+                         <label class="control-label">
+                             Κατά την επιλογή των γευμάτων σας επιθυμείτε να ενημερώνεστε για τα παρακάτω:                                                                    <span style="color:red">
+                                 &nbsp;*
+                             </span>
+                         </label>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient1" name="nutrient1" value="1" >Θερμίδες
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient2" name="nutrient2" >Υδατάνθρακες
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient3" name="nutrient3" value="3">Απλά σάκχαρα
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient4" name="nutrient4" value="4">Φυτικές ίνες
+                         </label>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient5" name="nutrient5" value="5" >Πρωτεΐνες
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient6" name="nutrient6" value="6" >Λιπαρά
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient7" name="nutrient7" value="7">Λίπος Κορεσμένο
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient8" name="nutrient8" value="8">Λίπος Μονοακόρεστο
+                         </label>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient9" name="nutrient9" value="9">Λίπος Πολυακόρεστο
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient10" name="nutrient10" value="10" >Χοληστερόλη
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient11" name="nutrient11" value="11">Μέταλλα/Ιχνοστοιχεία
+                         </label>
+                     </div>
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient12" name="nutrient12" value="12">Βιταμίνες
+                         </label>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="col-lg-3">
+                         <label class="checkbox inline">
+                             <input type="checkbox" id="nutrient13" name="nutrient13" value="13">Αντιοξειδωτικά
+                         </label>
+                     </div>
+                     <div class="col-lg-9">
+                         &nbsp;
+                     </div>
+                 </div>                 
+
+                 <br>
+
+                 <!-- Αποθήκευση Αλλαγών -->
+                 <div class="col-lg-12">
+                     <div class="text-right">
+                         <div class="btn btn-primary" style="margin-bottom: 10px; width: 160px;" onclick="submit_form()">
+                             <strong>
+                                 Αποθήκευση
+                             </strong>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- /Αποθήκευση Αλλαγών  -->
+
+             </div>
+             <!-- Panel 3 Content -->
+
+         </div>
+     </div>
+ </div>
+ </form>
+ <!--  /panel 2 - /Προσωπικά Στοιχεία  -->
+
+
+
+ 

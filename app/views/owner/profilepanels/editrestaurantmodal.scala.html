@@ -1,0 +1,446 @@
+@(cousines: List[models.lists.Hcousine], 
+licences: List[models.lists.Hrestaurantlicence],
+restaurantcategories: List[models.lists.Hrestaurantcategory],
+prices: List[models.lists.Hpricerange])        
+        <!--   UPDATE M O D A L  -->
+<form id="updateRestaurantForm" method="POST" action="@routes.Owner.updateRestaurant()">        
+        <div class="modal fade" id="editModal">
+            <div class="modal-dialog"> 
+<input type="hidden" name="latModal" id="latModal">
+<input type="hidden" name="lngModal" id="lngModal">   
+<input type="hidden" name="restaurantIdModal" id="restaurantIdModal">    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Διαμόρφωση Στοιχείων Καταστήματος</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-lg-7">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Όνομα Καταστήματος
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-lg-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-cutlery"></i>
+                                                </span>
+                                                <input class="form-control focused" name = "RestaurantNameInputModal" id="RestaurantNameInputModal" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Επωνυμία Εταιρείας
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-building-o"></i>
+                                                </span>
+                                                <input class="form-control focused" name="OrganizationNameModal" id="OrganizationNameModal" type="text" placeholder="">
+                                            </div>
+                                        </div>                                                                        
+                                    </div>
+
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <label class="control-label">
+                                            Κατηγορία Καταστήματος Βάσει Άδειας Λειτουργίας
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="SelectStorelisenceModal" name="SelectStorelisenceModal" class="form-control">
+@for(licence <- licences) {
+<option value="@licence.getId()">
+	@licence.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="control-label" id="RestaurantPrice">
+                                            Εύρος Τιμής ανά άτομο
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="PriceSelectModal" name="PriceSelectModal" class="form-control">
+@for(price <- prices) {
+<option value="@price.getId()">
+	@price.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>                                                                    
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Είδος Καταστήματος βάσει εμπορικού προφίλ
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="SelectStoreKindModal" name="SelectStoreKindModal" class="form-control" multiple data-rel="chosen">
+@for(restaurantcategory <- restaurantcategories) {
+<option value="@restaurantcategory.getId()">
+	@restaurantcategory.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label" id="RestaurantCuisine">
+                                            Ειδος Κουζίνας
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="selectcuisineModal" name="selectcuisineModal" class="form-control" multiple data-rel="chosen">
+@for(cousine <- cousines) {
+<option value="@cousine.getId()">
+	@cousine.getDescription()
+</option>
+}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="control-label">
+                                            Επιπλέον Πληροφορίες
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-lg-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-info"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantInfoModal" id="RestaurantInfoModal" type="text" placeholder="Αναφέρετε εάν το κατάστημά σας βρίσκεται σε εμπορικό κέντρο, πλοίο κτλ.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <label class="control-label">
+                                            Δήμος
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-globe"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantCityModal" id="RestaurantCityModal" type="text" placeholder="" onfocus="geolocateModal()">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <label class="control-label">
+                                            T.K.
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>                                            
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-location-arrow"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantPostcodeModal" id="RestaurantPostcodeModal" type="text" placeholder="Postcode">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">&nbsp;</div>-->                                                        
+
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <label class="control-label">
+                                            Οδός
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-road"></i>
+                                                </span>                                            
+                                                <input class="form-control focused" name="RestaurantStreetModal" id="RestaurantStreetModal" type="text" placeholder="Street">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <label class="control-label">
+                                            Αριθμός
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantStreetNumberModal" id="RestaurantStreetNumberModal" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <label class="control-label">
+                                            Ονοματεπώνυμο Υπεύθυνου Καταστήματος
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>                                            
+                                                <input class="form-control focused" name="PersonInChargeModal" id="PersonInChargeModal" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>                                                        
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">
+                                            Τηλέφωνο Σταθερό
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantPhoneModal" id="RestaurantPhoneModal" type="text" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="control-label">
+                                            Τηλέφωνο Κινητό
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-mobile-phone"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantCellPhoneModal" id="RestaurantCellPhoneModal" type="text" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="control-label">
+                                            Fax
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-phone-square"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantFaxModal" id="RestaurantFaxModal" type="text" placeholder="Fax">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">&nbsp;</div>-->                                                        
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            e-mail
+                                            <span style="color:red">
+                                                &nbsp;*
+                                            </span>
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-envelope-o"></i>
+                                                </span>
+                                                <input class="form-control focused" name="RestaurantEmailModal" id="RestaurantEmailModal" type="text" placeholder="e-mail">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="control-label">
+                                            Site Εταιρείας
+                                        </label>
+                                        <div class="controls row">
+                                            <div class="input-group col-sm-12">	
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-globe"></i>
+                                                </span>
+                                                <input class="form-control focused" name="OrganizationWebPageModal" id="OrganizationWebPageModal" type="text" placeholder="Web Page">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <br>
+                                        <label class="control-label">
+                                            Μεταφόρτωση Λογότυπου
+                                        </label>
+                                        <div class="controls" style="width: 350px;">
+                                            <div id="dropzone">
+                                                <div class="fallback">
+                                                    <input name="file" type="file" multiple="" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="smallstat box" style="margin-bottom: 0px;">
+                                            <div class="text-center">
+                                                <img src="#" id="imageModal" alt="" style="max-height: 171px; max-width: 250px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div><!-- /col-lg-7 -->
+                            
+<div id="map-canvasModal" style="width:350px;height:450px"></div>                            
+
+
+                            <div class="row">&nbsp;</div>
+                            <div class="row">&nbsp;</div>
+
+                            <!--
+                            <div class="col-lg-12">
+                                <div class="text-right">
+                                    <div class="btn btn-primary" style="margin-bottom: 10px;">
+                                        <strong>
+                                            Προσθήκη Καταστήματος
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+
+                            <p></p>
+
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <div class="alert alert-success" id="insertion_success_div" style="display:none">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <i class="fa fa-thumbs-up"></i>
+                                        &nbsp;
+                                        <strong>
+                                            Συγχαρητήρια!
+                                        </strong>
+                                        Το νέο σας Κατάστημα προστέθηκε επιτυχώς.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <div class="alert alert-danger" style="display:none">
+                                        <button type="button" class="close" data-dismiss="alert" style="display:none">×</button>
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        &nbsp;
+                                        <strong>
+                                            Προσοχή!
+                                        </strong>
+                                        Πρέπει να συμπληρώσετε όλα τα υποχρεωτικά πεδία.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <div class="alert alert-dismissable alert-danger" style="font-family:arial;display:none">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        &nbsp;
+                                        <strong>
+                                            Συγγνώμη!
+                                        </strong>
+                                        <a class="alert-link" style="text-decoration: none;">
+                                            Τα στοιχεία που συμπληρώσατε είναι εσφαλμένα.
+                                        </a>
+                                        <em>
+                                            Παρακαλούμε εισάγετε ξανά τα απαιτούμενα στοιχεία!
+                                        </em>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="width: 180px;" onclick=""><strong>Ακύρωση</strong></button>
+                        <button type="button" class="btn btn-primary" style="width: 180px;" onclick="updateRestaurant()"><strong>Προσθήκη</strong></button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+</form>        
+        <!--   UPDATE M O D A L  -->       

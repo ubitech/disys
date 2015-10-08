@@ -1,0 +1,21 @@
+import models.user.Profile;
+import models.restaurant.Dish;
+ 
+dialect "mvel"
+ 
+/*RULES FOR 7ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules excludes dishes due to pregnancy 
+ */
+rule "AGNUS CASTUS exclusion for pregnant women"
+    when
+       $u : Profile(gender.getId()==2, pregnant==true)
+       $dish : Dish()
+   	   eval($dish.getListOfIngredientConditionsArrayStr() contains "1")   
+    then
+    	$dish.exclude = true;
+        System.out.println("Rule (AGNUS CASTUS exclusion for pregnant women): " + $dish.exclude);    
+end
+
+

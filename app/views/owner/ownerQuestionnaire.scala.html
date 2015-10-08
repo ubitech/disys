@@ -1,0 +1,385 @@
+@main("ΔΙΣΥΣ - Καταστηματάρχης -  Ερωτηματολόγιο", "OWNER", "owner", "OWNER_QUESTIONNAIRE") {
+                <!-- start: Content -->
+                <div id="content" class="col-lg-10 col-sm-11 ">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#" style="text-decoration: none;">
+                                &nbsp;ΔΙΣΥΣ
+                            </a>
+                        </li>
+                        <li class="active">
+                            Αρχική Σελίδα
+                        </li>
+                    </ol>
+
+
+                    <!--  panel   -->
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="box">
+
+                                <!-- PanelHeading -->
+                                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                    <h2>
+                                        <i class="fa fa-question" style="color: white;"></i>
+                                        <span class="break"></span>
+                                        Ερωτηματολόγιο
+                                    </h2>
+                                    <div class="box-icon">
+                                        <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                    </div>
+                                </div>
+                                <!-- /PanelHeading -->
+
+<form action="@routes.Owner.fillOwnerQuestionnaire()" method="post" id="form">
+                                <!-- Panel Content -->
+                                <div class="box-content clearfix">
+
+                                    <div class="form-group" style="padding-left: 15px; padding-top: 5px;">
+                                        <div class="row">&nbsp;</div>
+                                        <br>
+
+                                        <label>1. Πόσο εύχρηστη είναι η εφαρμογή αυτή;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>2. Πόσο γρήγορη είναι στην παροχή πληροφοριών;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios2" id="optionsRadios2" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios2" id="optionsRadios2" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios2" id="optionsRadios2" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios2" id="optionsRadios2" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios2" id="optionsRadios2" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>3. Πόσο κατανοητός είναι ο τρόπος λειτουργίας της;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios3" id="optionsRadios3" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios3" id="optionsRadios3" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios3" id="optionsRadios3" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios3" id="optionsRadios3" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios3" id="optionsRadios3" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>4. Πόσο ευχάριστος είναι ο σχεδιασμός της;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios4" id="optionsRadios4" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios4" id="optionsRadios4" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios4" id="optionsRadios4" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios4" id="optionsRadios4" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios4" id="optionsRadios4" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>5. Πόσο εύκολη ήταν η καταχώρηση των στοιχείων της εταιρίας/ επιχείρησης;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios5" id="optionsRadios5" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios5" id="optionsRadios5" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios5" id="optionsRadios5" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios5" id="optionsRadios5" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios5" id="optionsRadios5" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>6. Πόσο εύκολη ήταν η καταχώρηση των συνταγών/menu;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios6" id="optionsRadios6" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios6" id="optionsRadios6" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios6" id="optionsRadios6" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios6" id="optionsRadios6" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios6" id="optionsRadios6" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>7. Πόσο εύκολη ήταν η αναζήτηση των συστατικών της συνταγής από τη βάση δεδομένων;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios7" id="optionsRadios7" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios7" id="optionsRadios7" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios7" id="optionsRadios7" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios7" id="optionsRadios7" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios7" id="optionsRadios7" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>8. Σε ποιο βαθμό πιστεύετε ότι γίνεται μια αξιόπιστη διατροφική ανάλυση;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios8" id="optionsRadios8" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios8" id="optionsRadios8" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios8" id="optionsRadios8" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios8" id="optionsRadios8" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios8" id="optionsRadios8" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>9. Με ποιόν τρόπο πιστεύετε ότι σας είναι χρήσιμη αυτή η διατροφική ανάλυση;</label>
+                                        (επιλέξτε όσα ισχύουν)<br>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox1" value="1">
+                                            Θα αυξήσει την εμπιστοσύνη των πελατών μας στο κατάστημα και τα προϊόντα που χρησιμοποιούμε
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox2" value="1">
+                                            Αποτελεί ένα είδος διαφήμισης γενικά για το κατάστημα
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox3" value="1">
+                                            Υποστηρίζει τις προσπάθειές μας να προωθήσουμε υγιεινές ή αυθεντικές συνταγές
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox4" value="1">
+                                            Υποστηρίζει τις προσπάθειές μας να προωθήσουμε τις ποιοτικές πρώτες ύλες που χρησιμοποιούμε
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox5" value="1">
+                                            Άλλο
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox6" value="1">
+                                            Δεν είναι χρήσιμη αυτή η ανάλυση
+                                        </div>
+                                        <br>
+
+                                        <label>10. Σε ποιο βαθμό είναι κατανοητά τα GDA’s και τα ΠΠΑ%;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios10" id="optionsRadios10" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios10" id="optionsRadios10" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios10" id="optionsRadios10" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios10" id="optionsRadios10" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios10" id="optionsRadios10" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+
+                                        <label>11. Σε ποιο βαθμό πιστεύετε ότι οι πελάτες σας θα εκτιμήσουν αυτά που τους προσφέρετε μέσω αυτής της εφαρμογής;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios11" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios11" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios11" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios11" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios11" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>12. Με ποιόν τρόπο πιστεύετε ότι η εφαρμογή αυτή θα αυξήσει την πελατεία σας;</label>
+                                        (επιλέξτε όσα ισχύουν)<br>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox7" value="1">
+                                            Θα αυξήσει την πελατεία μου - θα φέρει περισσότερους πελάτες που ψάχνουν υγιεινά γεύματα
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox8" value="1">
+                                            Θα αυξήσει την πελατεία μου – θα φέρει περισσότερους πελάτες που ψάχνουν αυθεντικά γεύματα και συστατικά
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox9" value="1">
+                                            Θα αυξήσει την πελατεία μου -  θα φέρει περισσότερους πελάτες που αποφεύγουν συγκεκριμένα συστατικά
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox10" value="1">
+                                            Θα αυξήσει τα έσοδά μου μέσω μεγαλύτερης κατανάλωσης ανά πελάτη
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox11" value="1">
+                                            Θα διευρύνει το πελατολόγιο μας
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox12" value="1">
+                                            Δεν θα αυξήσει την πελατεία μου
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox13" value="1">
+                                            Θα μειώσει την πελατεία μου
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox14" value="1">
+                                            Άλλο...
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox15" value="1">
+                                            Δεν είμαι σίγουρος/η
+                                        </div>
+                                        <br><br>
+
+                                        <label>13. Πιστεύετε ότι η εφαρμογή καλύπτει όλη τη γκάμα των πελατών σας;</label>
+                                        <br>
+                                        <input type="radio" name="optionsRadios13" id="optionsRadios13" value="1" checked="">
+                                        Καθόλου
+                                        <input type="radio" name="optionsRadios13" id="optionsRadios13" value="2" checked="">
+                                        Λίγο
+                                        <input type="radio" name="optionsRadios13" id="optionsRadios13" value="3" checked="">
+                                        Μέτρια
+                                        <input type="radio" name="optionsRadios13" id="optionsRadios13" value="4" checked="">
+                                        Αρκετά
+                                        <input type="radio" name="optionsRadios13" id="optionsRadios13" value="5" checked="">
+                                        Πολύ
+                                        <br><br>
+
+                                        <label>14. Πιστεύετε ότι η εφαρμογή μπορεί να αποτελέσει αφορμή για να αναπροσαρμόσετε των συνταγών σας;</label>
+                                        (επιλέξτε όσα ισχύουν)<br>
+
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox16" value="1">
+                                            Ναι για να αυξηθεί η περιεκτικότητα σε μακροθρεπτικά
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox17" value="1">
+                                            Ναι, για να μειωθεί η θερμιδική τους αξία.
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox18" value="1">
+                                            Ναι, για να επιλέξω πιο υγιεινά συστατικά
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox19" value="1">
+                                            Ναι, για να επιλέξω συστατικά καλύτερης ποιότητας
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox20" value="1">
+                                            Ίσως
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox21" value="1">
+                                            Όχι, είναι χρονοβόρο να αλλάξω τις συνταγές μου
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox22" value="1">
+                                            Όχι είναι ακριβό να αλλάξω τις συνταγές μου
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox23" value="1">
+                                            Όχι, δεν έχω το προσωπικό που θα ασχοληθεί με αυτό
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox24" value="1">
+                                            Όχι, το να ψάξω για νέους προμηθευτές είναι δύσκολο
+                                        </div>
+                                        <div class="controls">
+                                            <input type="checkbox" name="inlineCheckbox25" value="1">
+                                            Ναι, άλλο – Παρακαλώ αναπτύξτε λεπτομερώς...
+                                        </div>
+                                        <input type="text" class="form-control"  name="competitors" id="input14" placeholder="Παρακαλώ αναπτύξτε">
+                                        <div class="controls">
+                                            <input type="checkbox" id="inlineCheckbox26" value="1">
+                                            Δεν γνωρίζω
+                                            <div>
+                                                <br>
+
+                                                <label>15. Ποιο από τα παρακάτω σας φαίνεται ποιο ταιριαστό για την εμπορική ονομασία της εφαρμογής;</label>
+                                                <br>
+                                                <input type="radio" name="optionsRadios15" id="optionsRadios15" value="1" checked="">
+                                                “Nutrily”
+                                                <input type="radio" name="optionsRadios15" id="optionsRadios15" value="2" checked="">
+                                                “MenuPlan”
+                                                <input type="radio" name="optionsRadios15" id="optionsRadios15" value="3" checked="">
+                                                “Healthily”
+                                                <input type="radio" name="optionsRadios15" id="optionsRadios15" value="4" checked="">
+                                                “NutriPlan”
+                                                <input type="radio" name="optionsRadios15" id="optionsRadios15" value="5" checked="">
+                                                κανένα
+                                                Αλλο...
+                                                <input type="text" class="form-control" id="inputSuccess" name="commercialname" placeholder="Παρακαλώ αναπτύξτε">
+
+                                                <label>16. Ποια από τα παρακάτω χαρακτηριστικά θεωρείτε πώς είναι σχετικά με την εφαρμογή;</label>
+                                                (επιλέξτε όσα ισχύουν)<br>
+                                                <input type="checkbox" name="inlineCheckbox27" value="1">
+                                                Ευχάριστη
+                                                <input type="checkbox" name="inlineCheckbox28" value="1">
+                                                Χρήσιμη
+                                                <input type="checkbox" name="inlineCheckbox29" value="1">
+                                                Απαραίτητη
+                                                <input type="checkbox" name="inlineCheckbox30" value="1">
+                                                Βοηθητική
+                                                <input type="checkbox" name="inlineCheckbox31" value="1">
+                                                Βολική
+                                                <input type="checkbox" name="inlineCheckbox32" value="1">
+                                                Γρήγορη
+                                                <input type="checkbox" name="inlineCheckbox33" value="1">
+                                                Αποτελεσματική
+                                                <input type="checkbox" name="inlineCheckbox34" value="1">
+                                                Φιλική
+                                                <input type="checkbox" name="inlineCheckbox35" value="1">
+                                                Χωρίς προβλήματα
+                                                <input type="checkbox" name="inlineCheckbox36" value="1">
+                                                Προωθεί την στρατηγική μας ως κατάστημα
+                                                <br>
+
+                                                <label>17.  Παρατηρήσεις-Υποδείξεις</label>
+                                                <textarea id="limit" name="suggestions" rows="6" style="width:100%"></textarea>
+                                                <br>
+                                                <br>
+                                                <div class="text-right">
+                                                    <div class="btn btn-primary btn-setting" style="margin-bottom: 10px;" onclick='document.getElementById("form").submit()'>
+                                                        <strong>
+                                                            Υποβολή Απαντήσεων
+                                                        </strong>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- Panel Content -->
+                                    </div>
+                                </div>
+</form>                                
+                            </div>
+                            <!--  /panel /  -->
+
+                        </div>
+
+                    </div>
+                </div><!--/col-->
+            </div>
+        </div>
+}

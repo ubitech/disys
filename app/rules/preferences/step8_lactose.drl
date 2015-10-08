@@ -1,0 +1,28 @@
+import models.user.Profile;
+import models.restaurant.Dish;
+ 
+dialect "mvel"
+ 
+/*RULES FOR 8ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules Includes dishes based on preferences for lactose  
+ */
+
+rule "Includes/ Excludes dishes based on preferences for lactose"
+    when $u : Profile(wantLactose==2)
+   		$dish : Dish()
+   		eval($dish.getListOfIngredientCategoriesArrayStr() contains "3")
+    then
+    	$dish.priority = 2;
+        System.out.println("Rule (user LIKES lactose): " + $dish.priority);    
+end
+
+rule "Excludes dishes based on preferences for lactose"
+    when $u : Profile(wantLactose==1)
+     	$dish : Dish()
+   		eval($dish.getListOfIngredientCategoriesArrayStr() contains "3")
+    then
+    	$dish.exclude = true;
+        System.out.println("Rule (user DOES NOT LIKE lactose): " + $dish.exclude);    
+end

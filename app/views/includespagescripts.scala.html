@@ -1,0 +1,966 @@
+@(page: String)
+@if(page == "CUSTOMER_SEARCHMEAL") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/fullcalendar.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-editable.js")"></script>
+        <script src="@routes.Assets.at("assets/js/moment.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.hotkeys.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-wysiwyg.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-colorpicker.min.js")"></script>	
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/widgets.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/table.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-wizard.js")"></script>
+
+        <script type="text/javascript">
+
+            function test(sel) {
+                //alert(sel.value);
+                if (sel.value === "female") {
+                    jQuery("#iffemale").show();
+                    //jQuery("#iffemale").prop('disabled',true);
+                }
+                else {
+                    jQuery("#iffemale").hide();
+                    //jQuery("#iffemale").prop('disabled',false);
+                }
+            }
+
+        </script>
+
+        <style type="text/css">
+
+            .pagination
+            {
+                min-width: 205px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 300px;
+                max-height: 120px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-results
+            {
+                height: 120px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 300px;
+                max-height: 120px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+        </style>
+
+        <!-- end: JavaScript-->
+}
+@if(page == "OWNER_PROFILE") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/fullcalendar.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-editable.js")"></script>
+        <script src="@routes.Assets.at("assets/js/moment.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.hotkeys.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-wysiwyg.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-colorpicker.min.js")"></script>	
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable-demo.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/widgets.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/table.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-wizard.js")"></script>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 270px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 270px;
+            }
+			.pac-container {
+			    background-color: #FFF;
+			    z-index: 20;
+			    position: fixed;
+			    display: inline-block;
+			    float: left;
+			}
+			.modal{
+			    z-index: 20;   
+			}
+			.modal-backdrop{
+			    z-index: 10;        
+			}
+        </style>
+
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+​
+        <!-- end: JavaScript-->
+}
+
+@if(page == "OWNER_NEW_RECIPE") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.easy-pie-chart.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/index.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/table.js")"></script>
+
+
+        <style type="text/css">
+
+            .pagination
+            {
+                min-width: 205px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 200px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 200px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+        </style>
+		<style type="text/css">
+			.chosen-container chosen-container-single
+			{
+				min-width: 225px;
+			}
+		</style>
+		<style type="text/css">
+			.chosen-single
+			{
+				min-width: 225px;
+			}
+		</style>   
+<style>
+/* highlight results */
+.ui-autocomplete span.hl_results {
+    background-color: #ffff66;
+}
+ 
+/* loading - the AJAX indicator */
+.ui-autocomplete-loading {
+    background: white url('../img/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+ 
+/* scroll results */
+.ui-autocomplete {
+    max-height: 250px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding for vertical scrollbar */
+    padding-right: 5px;
+}
+ 
+.ui-autocomplete li {
+    font-size: 16px;
+}
+ 
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+    height: 250px;
+}
+</style>		     
+}
+@if(page == "CUSTOMER_ACCOUNT_SETTINGS") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/fullcalendar.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-editable.js")"></script>
+        <script src="@routes.Assets.at("assets/js/moment.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.hotkeys.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-wysiwyg.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-colorpicker.min.js")"></script>	
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable-demo.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+
+        <script type="text/javascript">
+
+            function test(sel) {
+                //alert(sel.value);
+                if (sel.value === "female") {
+                    jQuery("#iffemale").show();
+                    //jQuery("#iffemale").prop('disabled',true);
+                }
+                else {
+                    jQuery("#iffemale").hide();
+                    //jQuery("#iffemale").prop('disabled',false);
+                }
+            }
+
+        </script>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 700px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 700px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+            
+        </style>
+
+        <!-- end: JavaScript-->
+}
+@if(page == "OWNER_RESTAURANTS") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/pages/table.js")"></script>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 300px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 300px;
+            }
+        </style>
+        <!-- end: JavaScript-->
+}
+@if(page == "OWNER_RECIPES") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/table.js")"></script>
+
+        <!-- end: JavaScript-->
+}
+@if(page == "CUSTOMER_TRACKING") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/fullcalendar.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.easy-pie-chart.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-editable.js")"></script>
+        <script src="@routes.Assets.at("assets/js/moment.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.hotkeys.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-wysiwyg.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-colorpicker.min.js")"></script>	
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable-demo.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/index.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <script>
+            $(function() {
+                $("#datepicker").datepicker();
+            });
+        </script>    
+        <style type="text/css">
+
+            .pagination
+            {
+                min-width: 205px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 200px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 200px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+        </style>
+		<style type="text/css">
+			.chosen-container chosen-container-single
+			{
+				min-width: 225px;
+			}
+		</style>
+		<style type="text/css">
+			.chosen-single
+			{
+				min-width: 225px;
+			}
+		</style>               
+}
+@if(page == "CUSTOMER_REGISTRATION") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-wizard.js")"></script>
+
+        <script type="text/javascript">
+
+            function test(sel) {
+                //alert(sel.value);
+                if (sel.value === "female") {
+                    jQuery("#iffemale").show();
+                    //jQuery("#iffemale").prop('disabled',true);
+                }
+                else {
+                    jQuery("#iffemale").hide();
+                    //jQuery("#iffemale").prop('disabled',false);
+                }
+            }
+
+        </script>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 700px;
+                max-height: 120px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-results
+            {
+                height: 120px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 700px;
+                max-height: 120px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+.datefield input { 
+    width: 3.0em; 
+    padding: 0 0.4em; 
+    border: none; 
+    font-size: 100%; 
+    background: none;
+    color: #000;            
+}
+
+.datefield input#year { width:2.5em; }
+.datefield input:focus { outline:none; }            
+        </style>
+        
+
+        <!-- end: JavaScript-->
+}
+@if(page == "OWNER_COMBO") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+
+        <script type="text/javascript">
+
+        </script>
+
+        <style type="text/css">
+
+            .pagination
+            {
+                min-width: 205px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 200px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 200px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+        </style>
+		<style type="text/css">
+			.chosen-container chosen-container-single
+			{
+				min-width: 225px;
+			}
+		</style>
+		<style type="text/css">
+			.chosen-single
+			{
+				min-width: 225px;
+			}
+		</style>    
+        <!-- end: JavaScript-->
+}
+
+@if(page == "OWNER_REGISTRATION") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/fullcalendar.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-editable.js")"></script>
+        <script src="@routes.Assets.at("assets/js/moment.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.dataTables.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/dataTables.bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/wizard.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.hotkeys.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-wysiwyg.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-colorpicker.min.js")"></script>	
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable-demo.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-x-editable.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/widgets.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/table.js")"></script>
+        <script src="@routes.Assets.at("assets/js/pages/form-wizard.js")"></script>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 270px;
+            };
+.google-map-canvas,
+.google-map-canvas * { .box-sizing(content-box); }            
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 270px;
+            }
+
+        </style>
+
+        <!-- end: JavaScript-->
+}
+@if(page == "OWNER_WELCOME") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+
+        <!-- end: JavaScript-->
+}
+
+@if(page == "CUSTOMER_TRACKING_DIARY") {
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/Chart.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.easy-pie-chart.min.js")"></script>
+
+
+        <script>
+            $(function() {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
+        <!-- end: JavaScript-->
+}
+@if(page == "CUSTOMER_QUESTIONNAIRE") {
+<link href="@routes.Assets.at("assets/bootstrap-star-rating-master/css/star-rating.css")" rel="stylesheet" type="text/css" />
+        <!-- page scripts -->
+        <script src="@routes.Assets.at("assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.ui.touch-punch.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.sparkline.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.chosen.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.cleditor.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.maskedinput.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.inputlimiter.1.3.1.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/fullcalendar.min.js")"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="@routes.Assets.at("assets/js/excanvas.min.js")"></script><![endif]-->
+        <script src="@routes.Assets.at("assets/js/jquery.flot.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.pie.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.stack.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.resize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.flot.time.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.autosize.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.placeholder.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/jquery.mockjax.min.js")"></script>
+
+        <script src="@routes.Assets.at("assets/js/jquery.hotkeys.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-wysiwyg.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/bootstrap-colorpicker.min.js")"></script>	
+
+        <!-- theme scripts -->
+        <script src="@routes.Assets.at("assets/js/custom.min.js")"></script>
+        <script src="@routes.Assets.at("assets/js/core.min.js")"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="@routes.Assets.at("assets/js/pages/form-elements.js")"></script>
+        <!--<script src="@routes.Assets.at("assets/js/pages/ui-elements.js")"></script>-->
+        <script src="@routes.Assets.at("assets/js/pages/widgets.js")"></script>
+        <script src="@routes.Assets.at("assets/bootstrap-star-rating-master/js/star-rating.js")"></script>
+
+        <!-- end: JavaScript-->
+}

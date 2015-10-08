@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ΔΙΣΥΣ - Σύνδεση στο Σύστημα</title>
+        <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+
+        <!-- start: CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/style.min.css" rel="stylesheet">
+        <link href="assets/css/retina.min.css" rel="stylesheet">
+        <link href="assets/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+        <!-- end: CSS -->
+
+        <!-- start: JavaScript-->
+
+        <!--[if IE]>
+                <script type="text/javascript">
+                window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+                </script>
+        <![endif]-->
+
+        <!--[if !IE]>-->
+        <script src="assets/js/jquery-2.0.3.min.js"></script>
+        <!--<![endif]-->
+
+        <!--[if IE]>
+                <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+
+        <!--[if !IE]>-->
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");</script>
+        <!--<![endif]-->
+
+        <!--[if IE]>
+                <script type="text/javascript">
+                window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+                </script>
+        <![endif]-->
+
+        <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>	
+
+        <!-- page scripts -->
+        <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="assets/js/jquery.sparkline.min.js"></script>
+        <script src="assets/js/fullcalendar.min.js"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/js/excanvas.min.js"></script><![endif]-->
+        <script src="assets/js/jquery.autosize.min.js"></script>
+        <script src="assets/js/jquery.placeholder.min.js"></script>
+        <script src="assets/js/moment.min.js"></script>
+        <script src="assets/js/daterangepicker.min.js"></script>
+        <script src="assets/js/jquery.easy-pie-chart.min.js"></script>
+        <script src="assets/js/jquery.dataTables.min.js"></script>
+        <script src="assets/js/dataTables.bootstrap.min.js"></script>
+
+        <!-- theme scripts -->
+        <script src="assets/js/custom.min.js"></script>
+        <script src="assets/js/core.min.js"></script>
+
+        <!-- end: JavaScript-->
+
+        <script type = "text/javascript">
+
+            function loginSubmit(form)
+
+            {
+                username = new Array("u1", "u2", "u3");
+                password = new Array("p1", "p2", "p3");
+                page = "DISYS_Pelatis_Eggrafi.html";
+                if (form.username.value === username[1] && form.password.value === password[1] || form.username.value === username[2] && form.password.value === password[2] || form.username.value === username[3] && form.password.value === password[3])
+                {
+                    window.self.location.href = page;
+                    return true;
+                }
+                else
+                {
+                    alert("Either the username or password you entered is incorrect.\nPlease try again.");
+                    form.username.focus();
+                }
+                return true;
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+
+
+
+
+        <!-- HeaderBar -->
+        <header class="navbar">
+            <div class="container">
+                <a id="main-menu-toggle" class="hidden-xs open" style="padding-left: 0px; padding-bottom: 0px; padding-top: 0px;">
+                    <img src="NEWNEW4.png" alt="" height="40">&nbsp;
+                </a>		
+                <div class="col-sm-7 col-xs-8 col-lg-6" style="margin:8px; padding-left: 5px; padding-top: 2px;">
+                    <a href="http://www.disys.gr/" target="_blank" style="text-decoration: none">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>
+                            ΔΙΣΥΣ
+                        </strong>
+                        &nbsp;&nbsp;
+                        -
+                        &nbsp;&nbsp;
+                        Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+                    </a>
+                </div>
+
+                <!-- HeaderMenu - -
+                <div class="nav-no-collapse header-nav">
+                    <ul class="nav navbar-nav pull-right">
+
+                    </ul>
+                </div>
+                <!- - /HeaderMenu -->
+
+            </div>	
+        </header>
+        <!-- /HeaderBar -->
+
+
+        <div id="content" class="col-lg-12 full">
+
+            <div class="row">&nbsp;</div>
+
+            <div class="row">
+
+                <div class="col-lg-4">&nbsp;</div>
+
+                <!-- Log In 1-->
+                <div class="col-lg-4">
+
+                    <div class="box">
+                        <div class="box-header" style="background-color: #28993c; border-color: #248936;">
+                            <h2 style="color: white">
+                                Είσοδος Χρήστη
+                            </h2>
+                        </div>
+
+                        <div class="box-content clearfix">
+
+                            <div class="text-center">
+
+                                <h2>
+                                    <em>
+                                        Καλως ήρθατε στο 
+                                        <a href="http://www.disys.gr/" target="_blank" style="text-decoration: none;">
+                                            ΔΙΣΥΣ
+                                        </a>
+                                    </em>
+                                </h2>
+
+                                <a href="http://www.disys.gr/" target="_blank">
+                                    <img src="NEWNEW3.png" height="120" alt="">
+                                </a>
+
+                                <p style="margin: 0px">&nbsp;</p>
+
+                                <div class="text-center">
+                                    <div class="alert alert-dismissable alert-danger" style="font-family: arial">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            ×
+                                        </button>
+                                        <strong>
+                                            Συγγνώμη!
+                                        </strong>
+                                        <a class="alert-link" style="text-decoration: none;">
+                                            Το όνομα χρήστη ή ο κωδικός που πληκτρολογήσατε δεν είναι σωστά.
+                                        </a>
+                                        <em>
+                                            Παρακαλούμε προσπαθήστε ξανά!
+                                        </em>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="alert alert-dismissable alert-info" style="font-family: arial">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            ×
+                                        </button>
+                                        <a class="alert-link" style="text-decoration: none;">
+                                            Έχετε εξέλθει επιτυχώς από το σύστημα.
+                                        </a>
+                                        <p></p>
+                                        <em>
+                                            Για να εισέλθετε ξανά, πληκτρολογήστε εκ νέου τα διαπιστευτήριά σας.
+                                        </em>
+                                    </div>
+                                </div>
+
+                                <form class="form-horizontal login" id="frmLogin" onSubmit="javascript: loginSubmit();" action="#" method="post">
+                                    <fieldset class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">	
+                                                    <input type="text" class="form-control" id="username" placeholder="Όνομα Χρήστη ή e-mail"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12" style="margin-bottom: 0px">	
+                                                    <input type="password" class="form-control" id="password" placeholder="Κωδικός"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-key"></i>
+                                                    </span>
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="confirm" style="padding-bottom: 5px;">
+                                            <div class="col-lg-4" style="padding: 0px; top: 2px;">
+                                                <div class="text-right">
+                                                    <input type="checkbox" name="remember" style="margin-top: 0px"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8" style="padding-left: 5px">
+                                                <div class="text-left">
+                                                    <label>
+                                                        Να Με Θυμάσαι
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>	
+
+                                        <div class="row">
+                                            <button type="submit" value="LogInBTN" id="LogInBTN" class="btn btn-lg btn-primary col-xs-12">
+                                                Είσοδος
+                                            </button>
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+                                    </fieldset>	
+
+                                </form>
+
+                                <a class="pull-left" href="#">
+                                    <strong>
+                                        Ξέχασα τον κωδικό μου.
+                                    </strong>
+                                </a>
+                                <a class="pull-right" href="#" style="color: blue">
+                                    <strong>
+                                        Εγγραφή Νέου Χρήστη!
+                                    </strong>
+                                </a>
+
+                                <div class="clearfix">&nbsp;</div>								
+
+                            </div><!--  /text-center  -->	
+
+                        </div><!--  /box-content  -->
+
+                    </div><!--  /box  -->	
+
+                </div><!--/col-lg-4 -->
+                <!-- /Log In 1-->
+
+                <div class="col-lg-4">&nbsp;</div>
+
+            </div><!-- /row -->
+
+        </div><!--  /col - id="content"  -->
+
+        <div class="clearfix"></div>
+
+        <!-- footer -->
+        <footer style="font-family: arial; height: 63px;">
+            <p>
+                <span style="text-align:left;float:left">
+                    <a href="http://www.disys.gr" style="text-decoration: none; color: white;" target="_blank">
+                        <img src="DISYS FOOTER IMG.png" alt="" height="40">
+                    </a>
+                </span>
+                <span class="hidden-phone" style="text-align: right; float: right; margin-top: 12px;">
+                    <a href="http://www.disys.gr" style="text-decoration: none; color: white;" target="_blank">
+                        Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+                        &nbsp;&nbsp;&nbsp;
+                        -
+                        &nbsp;&nbsp;&nbsp;
+                        ΔΙΣΥΣ
+                        &copy;
+                        &nbsp;
+                        2014
+                        &nbsp;&nbsp;
+                    </a>
+                </span>
+            </p>
+        </footer>
+        <!-- /footer -->
+
+    </body>
+</html>

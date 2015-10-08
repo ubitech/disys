@@ -1,0 +1,731 @@
+@import models.restaurant._
+@import beans._
+@import models.lists._
+@import models.restaurant._
+
+@(restaurants: List[Restaurant], ingredientGroups: ArrayList[IngredientGroup], 
+	ingredients: ArrayList[IngredientHelper],
+	characteristics: List[Hcharacteristic],
+	cousines: List[Hcousine], dishes: List[Dish])
+
+@main("ΔΙΣΥΣ - Καταστηματάρχης - Νέο Combo", "OWNER", "owner", "OWNER_COMBO") {
+<script>
+function validate_step1() {
+	var valid = true;
+	var err_mesg="";
+	var selected_res = 0;
+	$('#selectrestaurant > option:selected').each(function(index, brand){
+		selected_res++;
+    });
+	if (selected_res == 0) {
+		err_mesg+="Πρέπει να επιλέξετε τουλάχιστον ένα εστιατόριο\n";
+		valid = false;
+	}	
+	if ($.trim($('#ComboName').val()).length == 0) {
+		valid = false;
+		err_mesg+="Πρέπει να εισάγετε όνομα για το Combo";
+	}
+	if( $.trim($("#DishPrice").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε τιμή πιάτου\n";
+		valid = false;
+	}		
+	if (!valid) {
+		alert(err_mesg);	
+	}	
+	return valid;
+}
+@if(flash.containsKey("ComboError")){
+	bootbox.alert("Συνέβη σφάλμα κατά την εισαγωγή του Combo");
+}
+$(function() {
+	$('#MyWizard').on('change', function(e, data) {
+		if (validate_step1()) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+	$('#MyWizard').on('finished', function(e, data) {
+		sendCombo();
+	});	
+
+});
+function populateIngredients(el) {
+	var ingredientCat = $("#IngredientCatSelect").val().replace("IngredientCat","");
+	$("#IngredientSelect").html("");
+	$("#MetricSelect").html("");
+	$.ajax({
+		url: "@routes.Owner.fetchIngredientsbyCat()",
+		data: "ingredientCat="+ingredientCat,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			var toks = result.split('|');
+			html+="<option value=\"-1\">επιλέξτε συστατικό...</option>";
+			for (var i = 0; i < toks.length; i++) {
+				var vals = toks[i].split('=');
+				html+="<option value=\""+vals[1]+"\">"+vals[0]+"</option>";
+			}
+			$("#IngredientSelect").html(html);
+			$("#IngredientSelect").chosen().trigger("chosen:updated");	
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+function pickMetric(el) {
+	var ingredientId = $("#IngredientSelect").val();
+	$.ajax({
+		url: "@routes.Owner.fetchMetrics()",
+		data: "ingredientId=" + ingredientId,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			if (result["gmWt_1"] != null) {
+				html+="<option value=\""+1+"\">"+result["gmWt_Desc1"]+"</option>";
+			}
+			if (result["gmWt_2"] != null) {
+				html+="<option value=\""+2+"\">"+result["gmWt_Desc2"]+"</option>";
+			}	
+			html+='<option value="10">Γραμμάρια</option><option value="20">Κιλά</option>';
+			$("#MetricSelect").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+
+var ingredient_counter=1;
+function removeingredient(ingid) {
+	//alert(ingid);
+	$("#ingredientRow"+ingid).remove();
+}
+function addIngredientToDish() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumeric").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε ποσότητα συστατικού\n";
+		valid = false;
+	}
+	if ( ! ($.isNumeric( $.trim($('#SubstanceAmmountNumeric').val()) )) ) {
+		err_mesg+="Η ποσότητα πρέπει να είναι δεκαδικός αριθμός";
+		valid=false;
+	}		
+	if ($("#IngredientCatSelect").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}	
+	if ($("#IngredientSelect").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}
+	if ($("#MetricSelect").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε μονάδα μέτρησης\n";
+		valid = false;
+	}
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+	var functions = '<td> ';
+	functions += '<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredient('+ingredient_counter+')" data-rel="tooltip" style="margin-top: 2px;">';
+	functions += '<i class="fa fa-trash-o"></i></div></div></td>';
+
+	html="<tr id=\"ingredientRow"+ingredient_counter+"\">";
+	html+= "<td id=ingredientToAdd"+$("#IngredientSelect").val()+">" + $("#IngredientSelect option:selected").text() + "</td>";
+	html+="<td id=AmountToAdd"+$("#SubstanceAmmountNumeric").val()+">"+$("#SubstanceAmmountNumeric").val()+"("+$("#MetricSelect option:selected").text()+")</td>";
+	html+="<td style='display:none' id=metricToAdd"+ $("#MetricSelect option:selected").val()+">"+ $("#MetricSelect option:selected").text()+"</td>";
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBody").append(html);
+	ingredient_counter++;
+}
+function addDishToCombo() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumericExistingDish").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε αριθμό πιάτων\n";
+		valid = false;
+	}
+	if ( ! ($.isNumeric( $.trim($('#SubstanceAmmountNumericExistingDish').val()) )) ) {
+		err_mesg+="Η ποσότητα πρέπει να είναι δεκαδικός αριθμός";
+		valid=false;
+	}		
+	if ($("#existingdishselect").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε πιάτο\n";
+		valid = false;
+	}	
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+	var functions = '<td> ';
+	functions += '<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredient('+ingredient_counter+')" data-rel="tooltip" style="margin-top: 2px;">';
+	functions += '<i class="fa fa-trash-o"></i></div></div></td>';
+
+	html="<tr id=\"ingredientRow"+ingredient_counter+"\">";
+	html+= "<td id=dishToAdd"+$("#existingdishselect option:selected").val()+">" + $("#existingdishselect option:selected").text() + "</td>";
+	html+="<td id=dishAmountToAdd"+$("#SubstanceAmmountNumericExistingDish").val()+">"+$("#SubstanceAmmountNumericExistingDish").val()+"</td>";	
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBody").append(html);
+	ingredient_counter++;	
+}
+function sendCombo() {
+    var f = document.createElement('form');
+    f.setAttribute("method", "POST");
+    f.setAttribute("action", "@routes.Owner.ownerAddCombo()");
+    
+    var dishList=$('*[id^="dishToAdd"]');
+    var dishLength = document.createElement('input');
+    dishLength.setAttribute('name', 'dishLength');
+    dishLength.setAttribute('value', dishList.length);
+    f.appendChild(dishLength);    
+    for (var i = 0; i < dishList.length; i++) {
+    	var dish = document.createElement('input');
+    	dish.setAttribute('name', 'dish'+i);
+    	dish.setAttribute('value', $(dishList[i]).attr('id').replace('dishToAdd',''));
+    	f.appendChild(dish);
+    }
+    var dishAmountList = $('*[id^="dishAmountToAdd"]');
+    for (var i = 0; i < dishAmountList.length; i++) {
+    	var dishamount = document.createElement('input');
+    	dishamount.setAttribute('name', 'dishamounts'+i);
+    	dishamount.setAttribute('value', $(dishAmountList[i]).attr('id').replace('dishAmountToAdd',''));
+    	f.appendChild(dishamount);
+    }       
+    
+    var ingredientList = $('*[id^="ingredientToAdd"]');
+    var ingredientsLength = document.createElement('input');
+    ingredientsLength.setAttribute('name', 'ingredientsLength');
+    ingredientsLength.setAttribute('value', ingredientList.length);
+    f.appendChild(ingredientsLength);
+    
+    for (var i = 0; i < ingredientList.length; i++) {
+    	var ingredient = document.createElement('input');
+    	ingredient.setAttribute('name', 'ingredients'+i);
+    	ingredient.setAttribute('value', $(ingredientList[i]).attr('id').replace('ingredientToAdd',''));
+    	f.appendChild(ingredient);
+    }
+    var metricList = $('*[id^="metricToAdd"]');
+    //alert(metricList.length);
+    for (var i = 0; i < metricList.length; i++) {
+    	var metric = document.createElement('input');
+    	metric.setAttribute('name', 'metrics'+i);
+    	metric.setAttribute('value', $(metricList[i]).attr('id').replace('metricToAdd',''));
+    	f.appendChild(metric);
+    }      
+    var amountList = $('*[id^="AmountToAdd"]');
+    for (var i = 0; i < amountList.length; i++) {
+    	var amount = document.createElement('input');
+    	amount.setAttribute('name', 'amounts'+i);
+    	amount.setAttribute('value', $(amountList[i]).attr('id').replace('AmountToAdd',''));
+    	f.appendChild(amount);
+    }    
+    var dishNameTxt=$('#ComboName').val();
+    var dishName = document.createElement('input');
+    dishName.setAttribute('name', 'dishName');
+    dishName.setAttribute('id', 'dishName');
+    dishName.setAttribute('value', dishNameTxt); 
+    f.appendChild(dishName);
+    
+    var selected = [];
+    $('#selectrestaurant > option:selected').each(function(index, brand){
+        selected.push([$(this).attr('value')]);
+    });	    
+    var selectedRestaurants = document.createElement('input');
+    selectedRestaurants.setAttribute('name', 'selectedRestaurants');
+    selectedRestaurants.setAttribute('id', 'selectedRestaurants');
+    selectedRestaurants.setAttribute('value', selected);
+    f.appendChild(selectedRestaurants);
+    
+    var characteristics = [];
+    $('#SelectDishCharacteristic > option:selected').each(function(index, brand){
+    	characteristics.push([$(this).attr('value')]);
+    });	  
+    
+    var selectedCharacteristics = document.createElement('input');
+    selectedCharacteristics.setAttribute('name', 'characteristic');
+    selectedCharacteristics.setAttribute('id', 'characteristic');
+    selectedCharacteristics.setAttribute('value', characteristics);
+
+    f.appendChild(selectedCharacteristics);
+    
+    var cuisine = document.createElement('input');
+    cuisine.setAttribute('name', 'cuisine');
+    cuisine.setAttribute('id', 'cuisine');
+    cuisine.setAttribute('value', $("#cuisine").val());
+    f.appendChild(cuisine);   
+    
+    var dishprice = document.createElement('input');
+    dishprice.setAttribute('name', 'DishPrice');
+    dishprice.setAttribute('id', 'DishPrice');
+    dishprice.setAttribute('value', $("#DishPrice").val());
+    f.appendChild(dishprice);    
+    
+    var comboCategory = document.createElement('input');
+    comboCategory.setAttribute('name', 'comboCategory');
+    comboCategory.setAttribute('id', 'comboCategory');
+    comboCategory.setAttribute('value', $("#SelectComboCategory").val());
+    f.appendChild(comboCategory);     
+        
+    var persons = document.createElement('input');
+    persons.setAttribute('name', 'persons');
+    persons.setAttribute('id', 'persons');
+    persons.setAttribute('value', $("#MenuPersons").val());
+    f.appendChild(persons);     
+        
+    f.submit();
+}
+</script>       
+<!-- start: Content -->
+<div id="content" class="col-lg-10 col-sm-11 ">
+
+    <ol class="breadcrumb">
+        <li>
+            <a href="#" style="text-decoration: none;">
+                &nbsp;ΔΙΣΥΣ
+            </a>
+        </li>
+        <li>
+            Συνταγές
+        </li>
+        <li class="active">
+            Νέο Combo
+        </li>
+    </ol>
+
+
+    <!--  panel   -->
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="box">
+
+                <!-- PanelHeading -->
+                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                    <h2>
+                        <i class="fa fa-puzzle-piece" style="color: white;"></i>
+                        <span class="break"></span>
+                        Νέο Combo
+                    </h2>
+                    <div class="box-icon">
+                        <!--<a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>-->
+                    </div>
+                </div>
+                <!-- /PanelHeading -->
+
+                <!-- Panel Content -->
+                <div class="box-content clearfix">
+
+
+                    <div class="col-lg-12">
+                        <div id="MyWizard" class="wizard">
+                            <ul class="steps">
+                                <li data-target="#step1" class="active"><span class="badge badge-info">1</span><span class="chevron"></span>Βήμα 1</li>
+                                <li data-target="#step2"><span class="badge">2</span>Βήμα 2</li>
+                                <!--<li data-target="#step3"><span class="badge">3</span><span class="chevron"></span>Step 3</li>
+                                <li data-target="#step4"><span class="badge">4</span>Step 4</li>
+                                <li data-target="#step5"><span class="badge">5</span>Step 5</li>-->
+                            </ul>
+                            <div class="actions" style="padding: 0px;">
+                                <button type="button" class="btn btn-prev" style="width: 100px;">&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Prev&nbsp;&nbsp;</button>
+                                <button type="button" class="btn btn-info btn-next" data-last="Finish" style="width: 100px;">&nbsp;&nbsp;Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;</button>
+                            </div>
+                        </div>
+
+                        <div class="step-content">
+
+                            <!-- S T E P  (1)  -->
+                            <div class="step-pane active" id="step1">
+                                <form class="form-horizontal register" action="#" method="post">
+                                    <fieldset class="col-lg-12" style="padding: 0px;">
+
+                                        <div class="col-lg-12">
+                                            <label class="control-label" id="Restaurant">
+                                                Κατάστημα
+                                                <span style="color:red">
+                                                    &nbsp;*
+                                                </span>
+                                            </label>
+                                            <div class="controls" style="width: 45%">
+                                                <select id="selectrestaurant" class="form-control" multiple data-rel="chosen">
+@for(restaurant <- restaurants) {
+<option id="restaurant@restaurant.getId()" value="@restaurant.getId()">
+	@restaurant.getName()
+</option>
+}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="col-lg-3">
+                                            <label class="control-label">
+                                                Όνομα Μενού
+                                                <span style="color:red">
+                                                    &nbsp;*
+                                                </span>
+                                            </label>
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-bullseye"></i>
+                                                    </span>
+                                                    <input class="form-control focused" id="ComboName" name="Combo" type="text" placeholder="Combo">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <label class="control-label" id="ComboCategory">
+                                                Είδος Μενού
+                                                <span style="color:red">
+                                                    &nbsp;*
+                                                </span>
+                                            </label>
+                                            <div class="controls">
+                                                <select id="SelectComboCategory" name="SelectComboCategory" class="form-control">
+                                                    <option value="1">
+                                                        Πρωϊνό
+                                                    </option>
+                                                    <option value="2">
+                                                        Κυρίως Γεύμα
+                                                    </option>
+                                                    <option value="3">
+                                                        Ελαφρύ Γεύμα
+                                                    </option>
+                                                    <option value="4">
+                                                        Δεξίωση
+                                                    </option>
+                                                    <option value="5">
+                                                        Εορταστικό
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <label class="control-label" id="DishCousine">
+                                                Κουζίνα
+                                            </label>
+                                            <div class="controls">
+                                                <select id="cuisine" class="form-control">
+@for(cousine <- cousines) {
+<option id="@cousine.getId()" value="@cousine.getId()">
+	@cousine.getDescription()
+</option>
+}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <label class="control-label" id="DishCharacteristic" >
+                                                                Χαρακτηριστικό Ειδικής Διαίτας
+                                                            </label>
+                                                            <div class="controls">
+                                                                <select id="SelectDishCharacteristic" class="form-control" multiple data-rel="chosen">
+@for(characteristic <- characteristics) {
+<option id="@characteristic.getId()" value="@characteristic.getId()">
+	@characteristic.getDescription()
+</option>
+}
+                                                                </select>
+                                                            </div>
+                                                        </div>   
+                                        <div class="row">&nbsp;</div>                                
+                                        <br>
+
+                                        <div class="col-lg-3">
+                                            <label class="control-label">
+                                                Επιλογή Μενού
+                                                <span style="color:red">
+                                                    &nbsp;*
+                                                </span>
+                                            </label>
+                                            <div class="controls">
+                                                <select id="MenuPersons" name="MenuPersons" class="form-control">
+                                                    <option value="1">
+                                                        Ατομικό
+                                                    </option>
+                                                    <option value="2">
+                                                        2 ατόμων
+                                                    </option>
+                                                    <option value="4">
+                                                        4 ατόμων
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2">
+                                            <label class="control-label">
+                                                Κόστος Μενού
+                                                <span style="color:red">
+                                                    &nbsp;*
+                                                </span>
+                                            </label>
+                                            <div class="controls row">
+                                                <div class="input-group col-sm-12">	
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-euro"></i>
+                                                    </span>
+                                                    <input class="form-control focused" id="DishPrice" type="text" placeholder="Price">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">&nbsp;</div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <!-- / S T E P  (1)  -->
+
+
+                            <!--  S T E P  (2)  -->
+                            <div class="step-pane" id="step2">
+                                <form class="form-horizontal">
+                                    <fieldset class="col-sm-12">
+
+                                        <div class="row">
+                                            <div class="text-center">
+                                                <label style="margin-top: 10px;">
+                                                    Προσθήκη Πιάτων στο Μενού
+                                                </label>
+                                                <br>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row" style="text-decoration: underline">
+                                            <em>
+                                                Προσθέστε πιάτο
+                                            </em>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-3">
+                                                <label class="control-label">
+                                                    Πιάτο
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls">
+                                                    <select class="form-control" id="existingdishselect">
+                                                    <option value="-1" selected>Επιλέξετε πιάτο</option>
+@for(dish <- dishes) {
+<option value="@dish.getId()">
+	@dish.getName()
+</option>
+}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-2">
+                                                <label class="control-label">
+                                                    Ποσότητα
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                                        <input class="form-control focused" id="SubstanceAmmountNumericExistingDish" type="text" placeholder="Ammount" style="padding: 5px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-7">
+                                                <label class="control-label">
+                                                    &nbsp;
+                                                </label>
+                                                <div class="text-left">
+                                                    <div class="btn btn-xs btn-success" title="Προσθήκη στο μενού" data-rel="tooltip" style="margin-top: 5px;" onclick="addDishToCombo()">
+                                                        <i class="fa fa-plus"></i>&nbsp;Προσθήκη στο μενού
+                                                    </div>                                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row" style="text-decoration: underline">
+                                            <em>
+                                                Ή/Και προσθέστε τρόφιμο/ρόφημα
+                                            </em>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-3">
+                                                <label class="control-label" id="IngredientCat">
+                                                    Κατηγορία Συστατικού
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls">
+                                                    <select id="IngredientCatSelect" class="form-control" data-rel="chosen" onchange="populateIngredients(this)">
+                    <option value="-1">
+                        κατηγορία...
+                    </option>                                                                    
+                @for(ingredientGroup <- ingredientGroups) {
+                    <option  value="IngredientCat@ingredientGroup.getId()">
+                        @ingredientGroup.getDescription()
+                    </option>                                                                    
+                }
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <label class="control-label" id="Ingredient">
+                                                    Συστατικό
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls">
+                                                    <select class="form-control" id="IngredientSelect" data-rel="chosen" name="IngredientSelect" onchange="pickMetric(this)">
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-2">
+                                                <label class="control-label">
+                                                    Ποσότητα
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls row">
+                                                    <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                                        <input class="form-control focused" id="SubstanceAmmountNumeric" type="text" placeholder="Ammount" style="padding: 5px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-2">
+                                                <label class="control-label" id="DishSubstancesAmmount">
+                                                    Μονάδα Μέτρησης
+                                                    <span style="color:red">
+                                                        &nbsp;*
+                                                    </span>
+                                                </label>
+                                                <div class="controls">
+                                                    <select id="MetricSelect" class="form-control">
+														<option value="-1">
+														</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-1">
+                                                <label class="control-label">
+                                                    &nbsp;
+                                                </label>
+                                                <div class="text-center">
+                                                    <div class="btn btn-sm btn-success" title="Προσθήκη" data-rel="tooltip" style="margin-top: 2px;" onclick="addIngredientToDish()">
+                                                        <i class="fa fa-plus"></i>
+                                                    </div>                                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <br>
+
+                                        <!-- Table Substances -->
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <label class="control-label" id="DishCategCousine">
+                                                    Όνομα Μενού
+                                                </label>
+                                                - Κατηγορία - Είδος - Κουζίνα
+                                                <table class="table table-striped table-bordered bootstrap-datatable datatable">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-lg-8">
+                                                                Πιάτο
+                                                            </th>
+                                                            <th class="col-lg-2">
+                                                                Ποσότητα
+                                                            </th>
+                                                            <th class="col-lg-2">
+                                                                Επεξεργασία
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody id="IngredientTableBody">
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div> 
+                                        </div>
+                                        <!-- /Table /Substances -->
+
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <!--  / S T E P  (2)  -->
+
+                            <!--  S T E P  (3)  - -
+                            <div class="step-pane" id="step3">
+                                <form class="form-horizontal">
+                                    <fieldset class="col-sm-12">
+
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <!- -  / S T E P  (3)  - ->
+
+                            <!- -  S T E P  (4)  - -
+                            <div class="step-pane" id="step4">
+                                <form class="form-horizontal">
+                                    <fieldset class="col-sm-12">
+
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <!- -  / S T E P  (4)  -->
+
+                            <br>
+                        </div>
+                        <!-- Panel Content -->
+
+                    </div>
+                </div>
+            </div>
+            <!--  /panel /  -->
+
+
+
+        </div>
+    </div><!--/col-->
+
+    </div>
+</div>
+
+<div class="clearfix"></div>
+}

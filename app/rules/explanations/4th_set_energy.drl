@@ -1,0 +1,35 @@
+package com.examples.drools
+ 
+import models.PersonBean;
+import models.DishBean;
+ 
+dialect "mvel"
+ 
+/*RULES FOR explanations*/
+
+/*RULES FOR DIETARY FIBER*/
+/*
+ * Set for the following rules:
+ * 1 Εαν τουλάχιστον το 12% της ενεργειακής αξίας του τροφίμου  (στη μερίδα) παρέχεται από πρωτεϊνες τότε το προϊόν αποτελεί πηγή πρωτεϊνων.
+ * 2 Εαν τουλάχιστον το 20 % της ενεργειακής αξίας του τροφίμου (στη μερίδα)  παρέχεται από πρωτεΐνες τότε το προϊόν έχει υψηλή περιεκτικότητα σε πρωτεΐνες.
+*/
+rule "1 πηγή πρωτεϊνων"
+    when
+        $p : DishBean($protein_percent_in_energy_value : protein_percent_in_energy_value,
+        	$protein_percent_in_energy_value >= 0.12 && $protein_percent_in_energy_value < 0.2)               
+    then
+    	$p.getExplanations().put("Tο προϊόν αποτελεί πηγή πρωτεϊνων.", 1.0)
+        System.out.println("Rule πηγή πρωτεϊνων ");    
+end
+
+rule "2 υψηλή περιεκτικότητα σε πρωτεΐνες"
+    when
+        $p : DishBean($protein_percent_in_energy_value : protein_percent_in_energy_value,
+        	$protein_percent_in_energy_value > 0.2)               
+    then
+    	$p.getExplanations().put("Tο προϊόν έχει υψηλή περιεκτικότητα σε πρωτεΐνες.", 1.0)
+        System.out.println("Rule υψηλή περιεκτικότητα σε πρωτεΐνες ");    
+end
+
+
+

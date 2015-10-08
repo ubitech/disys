@@ -1,0 +1,23 @@
+@(title: String, userType: String, pageCategory: String, activeMenu: String)(content: Html)
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>@title</title> 
+@includes()
+@includespagescripts(activeMenu)
+</head>
+<body>
+	@headers(pageCategory)
+	
+	<div class="container" style="font-family: arial">
+		<div class="row">
+			@mainmenus(userType, activeMenu)
+	
+			@content
+
+	<div class="clearfix"></div>
+	@footer()
+</body>
+</html>

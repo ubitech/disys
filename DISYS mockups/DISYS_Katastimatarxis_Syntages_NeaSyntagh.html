@@ -1,0 +1,2058 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>ΔΙΣΥΣ - Καταστηματάρχης - Νέα Συνταγή</title>
+        <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+
+        <!-- start: CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/style.min.css" rel="stylesheet">
+        <link href="assets/css/retina.min.css" rel="stylesheet">
+        <link href="assets/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+        <!-- end: CSS -->
+
+        <!-- start: JavaScript-->
+        <!--[if !IE]>-->
+
+        <script src="assets/js/jquery-2.0.3.min.js"></script>
+
+        <!--<![endif]-->
+
+        <!--[if IE]>
+        
+                <script src="assets/js/jquery-1.10.2.min.js"></script>
+        
+        <![endif]-->
+
+        <!--[if !IE]>-->
+
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+        </script>
+
+        <!--<![endif]-->
+
+        <!--[if IE]>
+        
+                <script type="text/javascript">
+                window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+                </script>
+                
+        <![endif]-->             
+
+        <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <!-- page scripts -->
+        <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="assets/js/jquery.sparkline.min.js"></script>
+        <script src="assets/js/jquery.chosen.min.js"></script>
+        <script src="assets/js/jquery.cleditor.min.js"></script>
+        <script src="assets/js/jquery.autosize.min.js"></script>
+        <script src="assets/js/jquery.placeholder.min.js"></script>
+        <script src="assets/js/jquery.maskedinput.min.js"></script>
+        <script src="assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/js/excanvas.min.js"></script><![endif]-->
+        <script src="assets/js/jquery.flot.min.js"></script>
+        <script src="assets/js/jquery.flot.pie.min.js"></script>
+        <script src="assets/js/jquery.flot.stack.min.js"></script>
+        <script src="assets/js/jquery.flot.resize.min.js"></script>
+        <script src="assets/js/jquery.flot.time.min.js"></script>
+        <script src="assets/js/jquery.autosize.min.js"></script>
+        <script src="assets/js/jquery.easy-pie-chart.min.js"></script>
+        <script src="assets/js/jquery.placeholder.min.js"></script>
+        <script src="assets/js/jquery.mockjax.min.js"></script>
+        <script src="assets/js/wizard.min.js"></script>
+        <script src="assets/js/jquery.dataTables.min.js"></script>
+        <script src="assets/js/dataTables.bootstrap.min.js"></script>
+
+        <!-- theme scripts -->
+        <script src="assets/js/custom.min.js"></script>
+        <script src="assets/js/core.min.js"></script>
+        <script src="assets/js/pages/form-elements.js"></script>
+        <script src="assets/js/pages/index.js"></script>
+        <script src="assets/js/pages/table.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                $.viewMap1 = {
+                    '0': $([]),
+                    'IngredientCat1': $('#ingredient1'),
+                    'IngredientCat2': $('#ingredient3'),
+                    'IngredientCat3': $('#ingredient6, #ingredient7, #ingredient8, #ingredient9, #ingredient10'),
+                    'IngredientCat4': $('#ingredient2, #ingredient13, #ingredient16'),
+                    'IngredientCat5': $('#ingredient7'),
+                    'IngredientCat6': $('#ingredient26'),
+                    'IngredientCat7': $('#ingredient11, #ingredient12, #ingredient15, #ingredient17, #ingredient27, #ingredient28, #ingredient29'),
+                    'IngredientCat8': $('#ingredient4, #ingredient12, #ingredient22'),
+                    'IngredientCat9': $('#ingredient14, #ingredient13'),
+                    'IngredientCat10': $('#ingredient29, #ingredient19'),
+                    'IngredientCat11': $('#ingredient5, #ingredient30'),
+                    'IngredientCat12': $('#ingredient6'),
+                    'IngredientCat13': $('#ingredient2, #ingredient4, #ingredient19, #ingredient27'),
+                    'IngredientCat14': $('#ingredient1, #ingredient6'),
+                    'IngredientCat15': $('#ingredient1, #ingredient8'),
+                    'IngredientCat16': $('#ingredient3, #ingredient8'),
+                    'IngredientCat17': $('#ingredient3'),
+                    'IngredientCat18': $('#ingredient6, #ingredient8'),
+                    'IngredientCat19': $('#ingredient2, #ingredient6'),
+                    'IngredientCat20': $('#ingredient1, #ingredient3'),
+                    'IngredientCat21': $('#ingredient1, #ingredient3, #ingredient20'),
+                    'IngredientCat22': $('#ingredient3'),
+                    'IngredientCat23': $('#ingredient6'),
+                    'IngredientCat24': $('#ingredient2, #ingredient3'),
+                    'IngredientCat25': $('#ingredient7'),
+                    'IngredientCat26': $('#ingredient6, #ingredient5, #ingredient17'),
+                    'IngredientCat27': $('#ingredient2, #ingredient3, #ingredient30'),
+                    'IngredientCat28': $('#ingredient1, #ingredient8'),
+                    'IngredientCat29': $('#ingredient1, #ingredient6'),
+                    'IngredientCat30': $('#ingredient2, #ingredient3'),
+                    'IngredientCat31': $('#ingredient2, #ingredient3')
+                };
+
+                $('#IngredientCatSelect').change(function() {
+                    // hide all
+                    $.each($.viewMap1, function() {
+                        this.hide();
+                    });
+                    // show current
+                    $.viewMap1[$(this).val()].show();
+                });
+            });
+
+
+
+
+            $(document).ready(function() {
+                $.viewMap2 = {
+                    '1': $([]),
+                    'ingredient1': $('#Ammount1'),
+                    'ingredient2': $('#Ammount3'),
+                    'ingredient3': $('#Ammount6'),
+                    'ingredient4': $('#Ammount2, #Ammount3, #Ammount6'),
+                    'ingredient5': $('#Ammount7'),
+                    'ingredient6': $('#Ammount6'),
+                    'ingredient7': $('#Ammount5, #Ammount6'),
+                    'ingredient8': $('#Ammount4, #Ammount5'),
+                    'ingredient9': $('#Ammount4, #Ammount5'),
+                    'ingredient10': $('#Ammount4, #Ammount5'),
+                    'ingredient11': $('#Ammount3, #Ammount6'),
+                    'ingredient12': $('#Ammount6'),
+                    'ingredient13': $('#Ammount2, #Ammount4, #Ammount6, #Ammount7'),
+                    'ingredient14': $('#Ammount1, #Ammount6'),
+                    'ingredient15': $('#Ammount1, #Ammount8'),
+                    'ingredient16': $('#Ammount3, #Account8'),
+                    'ingredient17': $('#Ammount3'),
+                    'ingredient18': $('#Ammount6, #Ammount8'),
+                    'ingredient19': $('#Ammount2, #Account6'),
+                    'ingredient20': $('#Ammount1, #Ammount3'),
+                    'ingredient21': $('#Ammount1, #Ammount3, #Ammount8'),
+                    'ingredient22': $('#Ammount3'),
+                    'ingredient23': $('#Ammount6'),
+                    'ingredient24': $('#Ammount2, #Ammount3'),
+                    'ingredient25': $('#Ammount7'),
+                    'ingredient26': $('#Ammount6'),
+                    'ingredient27': $('#Ammount2'),
+                    'ingredient28': $('#Ammount1, #Ammount8'),
+                    'ingredient29': $('#Ammount1, #Ammount6'),
+                    'ingredient30': $('#Ammount2, #Ammount3')
+                };
+
+                $('#IngredientSelect').change(function() {
+                    // hide all
+                    $.each($.viewMap2, function() {
+                        this.hide();
+                    });
+                    // show current
+                    $.viewMap2[$(this).val()].show();
+                });
+            });
+
+        </script>
+
+        <style type="text/css">
+
+            .pagination
+            {
+                min-width: 205px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 400px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 400px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+        </style>
+
+        <!-- end: JavaScript-->
+
+    </head>
+
+
+
+    <body>
+
+        <!-- HeaderBar -->
+        <header class="navbar" style="font-family: arial">
+            <div class="container">
+                <a id="main-menu-toggle" class="hidden-xs open" style="padding-left: 0px; padding-bottom: 0px; padding-top: 0px;">
+                    <img src="NEWNEW4.png" alt="" height="40">&nbsp;
+                </a>		
+                <div class="col-sm-7 col-xs-8 col-lg-6" style="margin:8px; padding-left: 5px; padding-top: 2px;">
+                    <a href="http://www.disys.gr/" target="_blank" style="text-decoration: none">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>
+                            ΔΙΣΥΣ
+                        </strong>
+                        &nbsp;&nbsp;
+                        -
+                        &nbsp;&nbsp;
+                        Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+                    </a>
+                </div>
+
+
+                <!-- HeaderMenu -->
+                <div class="nav-no-collapse header-nav">
+                    <ul class="nav navbar-nav pull-right">
+
+                        <!-- HeaderUserDropdown -->
+                        <li class="dropdown">
+                            <a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
+                                <div class="avatar">
+                                </div>
+                                <div class="user">
+                                    <span class="hello">
+                                        Καλώς ήρθατε!
+                                    </span>
+                                    <span class="name">
+                                        Όνομα Χρήστη
+                                    </span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="index.html#">
+                                        <i class="fa fa-cog"></i>
+                                        Ρυθμίσεις προφίλ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="page-login.html">
+                                        <i class="fa fa-sign-out"></i> 
+                                        Αποσύνδεση
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- HeaderUserDropdown -->
+                    </ul>
+                </div>
+                <!-- /HeaderMenu -->
+
+            </div>
+        </header>
+        <!-- /HeaderBar -->
+
+
+        <div class="container" style="font-family: arial">
+            <div class="row">
+
+
+                <!-- start: Main Menu -->
+                <div id="sidebar-left" class="col-lg-2 col-sm-1">
+
+                    <div class="sidebar-nav nav-collapse collapse navbar-collapse">
+
+                        <ul class="nav main-menu">
+
+                            <li>
+                                <a href="DISYS_Katastimatarxis_Profil.html">
+                                    <i class="fa fa-user"></i>
+                                    <span class="hidden-sm text">
+                                        Προφίλ
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="DISYS_Katastimatarxis_Katasthmata.html">
+                                    <i class="fa fa-cutlery"></i>
+                                    <span class="hidden-sm text">
+                                        Καταστήματα
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="DISYS_Katastimatarxis_Syntages.html">
+                                    <i class="fa fa-book"></i>
+                                    <span class="hidden-sm text">
+                                        Συνταγές
+                                    </span>
+                                    <!--<span class="chevron closed"></span>-->
+                                </a>
+                                <!--<ul>
+                                    <li>
+                                        <a class="submenu" href="DISYS_Katastimatarxis_Syntages_NeaSyntagh.html">
+                                            <i class="fa fa-edit"></i>
+                                            <span class="hidden-sm text">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;Νέα Συνταγή
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="submenu" href="DISYS_Katastimatarxis_Syntages_NeoCombo.html">
+                                            <i class="fa fa-puzzle-piece"></i>
+                                            <span class="hidden-sm text">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;Νέο Combo
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="submenu" href="DISYS_Katastimatarxis_Syntages_OiSyntagesMou.html">
+                                            <i class="fa fa-files-o"></i>
+                                            <span class="hidden-sm text">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;Οι Συνταγές μου
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>-->
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <a href="#" id="main-menu-min" class="full visible-md visible-lg">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+
+                </div>
+                <!-- end: Main Menu -->
+
+
+                <!-- start: Content -->
+                <div id="content" class="col-lg-10 col-sm-11 ">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#" style="text-decoration: none;">
+                                &nbsp;ΔΙΣΥΣ
+                            </a>
+                        </li>
+                        <li>
+                            Συνταγές
+                        </li>
+                        <li class="active">
+                            Νέα Συνταγή
+                        </li>
+                    </ol>
+
+
+                    <!--  panel   -->
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="box">
+
+                                <!-- PanelHeading -->
+                                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                    <h2>
+                                        <i class="fa fa-edit" style="color: white;"></i>
+                                        <span class="break"></span>
+                                        Νέα Συνταγή
+                                    </h2>
+                                    <div class="box-icon">
+                                        <!--<a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>-->
+                                    </div>
+                                </div>
+                                <!-- /PanelHeading -->
+
+                                <!-- Panel Content -->
+                                <div class="box-content clearfix">
+
+
+                                    <div class="col-lg-12">
+                                        <div id="MyWizard" class="wizard">
+                                            <ul class="steps">
+                                                <li data-target="#step1" class="active"><span class="badge badge-info">1</span><span class="chevron"></span>Step 1</li>
+                                                <li data-target="#step2"><span class="badge">2</span><span class="chevron"></span>Step 2</li>
+                                                <li data-target="#step3"><span class="badge">3</span><span class="chevron"></span>Step 3</li>
+                                                <li data-target="#step4"><span class="badge">4</span>Step 4</li>
+                                                <!--<li data-target="#step5"><span class="badge">5</span>Step 5</li>-->
+                                            </ul>
+                                            <div class="actions" style="padding: 0px;">
+                                                <button type="button" class="btn btn-prev" style="width: 100px;">&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Prev&nbsp;&nbsp;</button>
+                                                <button type="button" class="btn btn-info btn-next" data-last="Finish" style="width: 100px;">&nbsp;&nbsp;Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="step-content">
+
+                                            <!-- S T E P  (1)  -->
+                                            <div class="step-pane active" id="step1">
+                                                <form class="form-horizontal register" action="#" method="post">
+                                                    <fieldset class="col-lg-12" style="padding: 0px;">
+
+                                                        <div class="col-lg-12">
+                                                            <label class="control-label" id="Restaurant">
+                                                                Κατάστημα
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls" style="width: 45%">
+                                                                <select id="selectrestaurant" class="form-control" multiple data-rel="chosen">
+                                                                    <option selected>
+                                                                    </option>
+                                                                    <option>
+                                                                        Amigos
+                                                                    </option>
+                                                                    <option>
+                                                                        Balux
+                                                                    </option>
+                                                                    <option>
+                                                                        La Pasteria
+                                                                    </option>
+                                                                    <option>
+                                                                        Παράδεισος
+                                                                    </option>
+                                                                    <option>
+                                                                        Noodle Bar
+                                                                    </option>
+                                                                    <option>
+                                                                        Mai Thai
+                                                                    </option>
+                                                                    <option>
+                                                                        La Pitsa
+                                                                    </option>
+                                                                    <option>
+                                                                        Chin Chon
+                                                                    </option>
+                                                                    <option>
+                                                                        Beer School
+                                                                    </option>
+                                                                    <option>
+                                                                        Saslik
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="col-lg-3">
+                                                            <label class="control-label">
+                                                                Όνομα Πιάτου
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls row">
+                                                                <div class="input-group col-sm-12">	
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-bullseye"></i>
+                                                                    </span>
+                                                                    <input class="form-control focused" id="Dish" type="text" placeholder="Dish">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-3">
+                                                            <label class="control-label" id="DishCategory">
+                                                                Κατηγορία
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls">
+                                                                <select id="SelectDishCategory" class="form-control">
+                                                                    <option>
+                                                                        κατηγορία...
+                                                                    </option>
+                                                                    <option>
+                                                                        Ορεκτικό
+                                                                    </option>
+                                                                    <option>
+                                                                        Σαλάτα
+                                                                    </option>
+                                                                    <option>
+                                                                        Κυρίως Πιάτο
+                                                                    </option>
+                                                                    <option>
+                                                                        Επιδόρπιο
+                                                                    </option>
+                                                                    <option>
+                                                                        Πρωϊνό
+                                                                    </option>
+                                                                    <option>
+                                                                        Σνακ
+                                                                    </option>
+                                                                    <option>
+                                                                        Ποτό
+                                                                    </option>
+                                                                    <option>
+                                                                        Ρόφημα
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-3">
+                                                            <label class="control-label" id="DishCharacteristic">
+                                                                Χαρακτηριστικό
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls">
+                                                                <select id="SelectDishCharacteristic" class="form-control">
+                                                                    <option>
+                                                                        χαρακτηριστικό...
+                                                                    </option>
+                                                                    <option>
+                                                                        Νηστίσιμο χωρίς ελαιόλαδο
+                                                                    </option>
+                                                                    <option>
+                                                                        Χορτοφαγικό
+                                                                    </option>
+                                                                    <option>
+                                                                        Διαίτης
+                                                                    </option>
+                                                                    <option>
+                                                                        Παιδικό
+                                                                    </option>
+                                                                    <option>
+                                                                        Παραδοσιακό
+                                                                    </option>
+                                                                    <option>
+                                                                        Χωρίς Γλουτένη
+                                                                    </option>
+                                                                    <option>
+                                                                        Χωρίς Λακτόζη
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-3">
+                                                            <label class="control-label" id="DishCousine">
+                                                                Κουζίνα
+                                                            </label>
+                                                            <div class="controls">
+                                                                <select id="cuisine" class="form-control">
+                                                                    <option>
+                                                                        κουζίνα...
+                                                                    </option>
+                                                                    <option>
+                                                                        Αργεντίνικη
+                                                                    </option>
+                                                                    <option>
+                                                                        Γαλλική
+                                                                    </option>
+                                                                    <option>
+                                                                        Ελληνική
+                                                                    </option>
+                                                                    <option>
+                                                                        Ιαπωνική
+                                                                    </option>
+                                                                    <option>
+                                                                        Ινδική
+                                                                    </option>
+                                                                    <option>
+                                                                        Ιταλική
+                                                                    </option>
+                                                                    <option>
+                                                                        Κινέζικη
+                                                                    </option>
+                                                                    <option>
+                                                                        Μεξικάνικη
+                                                                    </option>
+                                                                    <option>
+                                                                        Μπυραρία
+                                                                    </option>
+                                                                    <option>
+                                                                        Ρώσικη
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">&nbsp;</div>                                
+                                                        <br>
+
+                                                        <div class="col-lg-5">
+                                                            <label class="control-label">
+                                                                Αριθμός Μερίδων που βγάζει η Συνταγή
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls row">
+                                                                <div class="input-group col-sm-12">	
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-th"></i>
+                                                                    </span>
+                                                                    <input class="form-control focused" type="text" placeholder="Αριθμός Μερίδων">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-1">&nbsp;</div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="text-center">
+                                                                <label class="control-label">
+                                                                    Μεταφόρτωση Φωτογραφίας Πιάτου
+                                                                </label>
+                                                                <br>
+                                                                <center>
+                                                                    <div class="controls" style="padding-top: 5px;">
+                                                                        <div id="dropzone">
+                                                                            <div class="fallback">
+                                                                                <input name="file" type="file" multiple="">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </center>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row">&nbsp;</div>                                
+                                                        <br>
+
+                                                        <div class="col-lg-5">
+                                                            <label class="control-label">
+                                                                Μέγεθος Μερίδας που Σερβίρεται στο Εστιατόριο
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls">
+                                                                <select id="selectError" class="form-control">
+                                                                    <option>
+                                                                        επιλογή μερίδας...
+                                                                    </option>
+                                                                    <option>
+                                                                        1/2 (μισή)
+                                                                    </option>
+                                                                    <option>
+                                                                        Κανονική
+                                                                    </option>
+                                                                    <option>
+                                                                        2 ατόμων
+                                                                    </option>
+                                                                    <option>
+                                                                        4 ατόμων
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-2">
+                                                            <label class="control-label">
+                                                                Κόστος Πιάτου
+                                                                <span style="color:red">
+                                                                    &nbsp;*
+                                                                </span>
+                                                            </label>
+                                                            <div class="controls row">
+                                                                <div class="input-group col-sm-12">	
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-euro"></i>
+                                                                    </span>
+                                                                    <input class="form-control focused" id="DishPrice" type="text" placeholder="Price">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-1">&nbsp;</div>
+
+                                                        <div class="col-lg-4">
+                                                            <p style="margin-bottom: 5px"></p>
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion9" href="#collapseNine" style="cursor: pointer; text-decoration:none;">
+                                                                <h3 class="btn btn-sm">
+                                                                    <span style="color: hsla(0,0%,0%,1.00); font-size: 14px">
+                                                                        <b>
+                                                                            <em>
+                                                                                Προσθήκη επιπλέον μεγέθους μερίδας<!-- αν υπάρχει δεύτερο μέγεθος μερίδας  -->
+                                                                            </em>
+                                                                        </b>
+                                                                    </span>
+                                                                    &nbsp;
+                                                                    <i class="fa fa-chevron-down"></i>
+                                                                </h3>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="row">&nbsp;</div>
+
+                                                        <div id="collapseNine" class="accordion-body collapse"><!-- αν υπάρχει δεύτερο μέγεθος μερίδας  -->
+                                                            <div class="accordion-inner">
+
+                                                                <div class="col-lg-5">
+                                                                    <label class="control-label" for="selectError">
+                                                                        Μέγεθος Μερίδας που Σερβίρεται στο Εστιατόριο
+                                                                    </label>
+                                                                    <div class="controls">
+                                                                        <select class="form-control">
+                                                                            <option>
+                                                                                επιλογή μερίδας...
+                                                                            </option>
+                                                                            <option>
+                                                                                1/2 (μισή)
+                                                                            </option>
+                                                                            <option>
+                                                                                Κανονική
+                                                                            </option>
+                                                                            <option>
+                                                                                2 ατόμων
+                                                                            </option>
+                                                                            <option>
+                                                                                4 ατόμων
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <label class="control-label">
+                                                                        Κόστος Πιάτου
+                                                                    </label>
+                                                                    <div class="controls row">
+                                                                        <div class="input-group col-sm-12">	
+                                                                            <span class="input-group-addon">
+                                                                                <i class="fa fa-euro"></i>
+                                                                            </span>
+                                                                            <input class="form-control focused" id="DishPrice2" type="text" placeholder="Price">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-1">&nbsp;</div>
+
+                                                                <div class="col-lg-4">
+                                                                    <p style="margin-bottom: 5px"></p>
+                                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion10" href="#collapseTen" style="cursor: pointer; text-decoration:none;">
+                                                                        <h3 class="btn btn-sm">
+                                                                            <span style="color: hsla(0,0%,0%,1.00); font-size: 14px">
+                                                                                <b>
+                                                                                    <em>
+                                                                                        Προσθήκη επιπλέον μεγέθους μερίδας<!-- αν υπάρχει τρίτο μέγεθος μερίδας  -->
+                                                                                    </em>
+                                                                                </b>
+                                                                            </span>
+                                                                            &nbsp;
+                                                                            <i class="fa fa-chevron-down"></i>
+                                                                        </h3>
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="row">&nbsp;</div>
+
+                                                                <div id="collapseTen" class="accordion-body collapse"><!-- αν υπάρχει τρίτο μέγεθος μερίδας  -->
+                                                                    <div class="accordion-inner">
+
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label" for="selectError">
+                                                                                Μέγεθος Μερίδας που Σερβίρεται στο Εστιατόριο
+                                                                            </label>
+                                                                            <div class="controls">
+                                                                                <select class="form-control">
+                                                                                    <option>
+                                                                                        επιλογή μερίδας...
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        1/2 (μισή)
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        Κανονική
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        2 ατόμων
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        4 ατόμων
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-lg-2">
+                                                                            <label class="control-label">
+                                                                                Κόστος Πιάτου
+                                                                            </label>
+                                                                            <div class="controls row">
+                                                                                <div class="input-group col-sm-12">	
+                                                                                    <span class="input-group-addon">
+                                                                                        <i class="fa fa-euro"></i>
+                                                                                    </span>
+                                                                                    <input class="form-control focused" id="DishPrice3" type="text" placeholder="Price">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!-- / S T E P  (1)  -->
+
+
+                                            <!--  S T E P  (2)  -->
+                                            <div class="step-pane" id="step2">
+                                                <form class="form-horizontal">
+                                                    <fieldset class="col-sm-12">
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-3">
+                                                                <label class="control-label" id="IngredientCat">
+                                                                    Κατηγορία Συστατικού
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select id="IngredientCatSelect" class="form-control">
+                                                                        <option value="0">
+                                                                            κατηγορία...
+                                                                        </option>
+                                                                        <option value="IngredientCat1">
+                                                                            Λίπη και Έλαια
+                                                                        </option>
+                                                                        <option value="IngredientCat2">
+                                                                            Χοιρινό και Προϊόντα του
+                                                                        </option>
+                                                                        <option value="IngredientCat3">
+                                                                            Μοσχαρίσιο και Προϊόντα του
+                                                                        </option>
+                                                                        <option value="IngredientCat4">
+                                                                            Ψάρια
+                                                                        </option>
+                                                                        <option value="IngredientCat5">
+                                                                            Οστρακοειδή και Προϊόντα τους
+                                                                        </option>
+                                                                        <option value="IngredientCat6">
+                                                                            Αμνοερίφια, Βοδινό και Κυνήγι
+                                                                        </option>
+                                                                        <option value="IngredientCat7">
+                                                                            Φαγητά
+                                                                        </option>
+                                                                        <option value="IngredientCat8">
+                                                                            Ορεκτικά
+                                                                        </option>
+                                                                        <option value="IngredientCat9">
+                                                                            Συνοδευτικά
+                                                                        </option>
+                                                                        <option value="IngredientCat10">
+                                                                            Ορεκτικά
+                                                                        </option>
+                                                                        <option value="IngredientCat11">
+                                                                            Συνοδευτικά
+                                                                        </option>
+                                                                        <option value="IngredientCat12">
+                                                                            Τυπικά Εδέσματα Εστιατορίου
+                                                                        </option>
+                                                                        <option value="IngredientCat13">
+                                                                            Πουλερικά και Προϊόντα τους
+                                                                        </option>
+                                                                        <option value="IngredientCat14">
+                                                                            Σούπες και Σάλτσες
+                                                                        </option>
+                                                                        <option value="IngredientCat15">
+                                                                            Λαχανικά και Προϊόντα τους
+                                                                        </option>
+                                                                        <option value="IngredientCat16">
+                                                                            Φρούτα και Φρουτοχυμοί
+                                                                        </option>
+                                                                        <option value="IngredientCat17">
+                                                                            Εθνικά Προϊόντα των Ινδιάνων και της Αλάσκας
+                                                                        </option>
+                                                                        <option value="IngredientCat18">
+                                                                            Αλλαντικά
+                                                                        </option>
+                                                                        <option value="IngredientCat19">
+                                                                            Γαλακτοκομικά και Αυγά
+                                                                        </option>
+                                                                        <option value="IngredientCat20">
+                                                                            Αρτύματα (Μπαχαρικά και Βότανα)
+                                                                        </option>
+                                                                        <option value="IngredientCat21">
+                                                                            Παιδικές Τροφές
+                                                                        </option>
+                                                                        <option value="IngredientCat22">
+                                                                            Δημητριακά Πρωινού
+                                                                        </option>
+                                                                        <option value="IngredientCat23">
+                                                                            Καρποί
+                                                                        </option>
+                                                                        <option value="IngredientCat24">
+                                                                            Σπόροι και Προϊόντα τους
+                                                                        </option>
+                                                                        <option value="IngredientCat25">
+                                                                            Ποτά και Ροφήματα
+                                                                        </option>
+                                                                        <option value="IngredientCat26">
+                                                                            Όσπρια και Προϊόντα τους
+                                                                        </option>
+                                                                        <option value="IngredientCat27">
+                                                                            Προϊόντα Φούρνου
+                                                                        </option>
+                                                                        <option value="IngredientCat28">
+                                                                            Γλύκίσματα
+                                                                        </option>
+                                                                        <option value="IngredientCat29">
+                                                                            Σιτηρά και Ζυμαρικά
+                                                                        </option>
+                                                                        <option value="IngredientCat30">
+                                                                            Fast Food
+                                                                        </option>
+                                                                        <option value="IngredientCat31">
+                                                                            Σνακ
+                                                                        </option>
+                                                                        <option value="IngredientCat32">
+                                                                            Παραδοσιακά Ελληνικά Εδέσματα
+                                                                        </option>
+                                                                        <option value="IngredientCat33">
+                                                                            Παραδοσιακά Κυπριακά Εδέσματα
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-4">
+                                                                <label class="control-label" id="Ingredient">
+                                                                    Συστατικό
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select class="form-control" id="IngredientSelect" name="IngredientSelect">
+                                                                        <option value="1">επιλέξτε συστατικό</option>
+                                                                        <option id="ingredient1" value="ingredient1" style="display: none;">
+                                                                            Βούτυρο, με αλάτι
+                                                                        </option>
+                                                                        <option id="ingredient2" value="ingredient2" style="display: none;">
+                                                                            Τυρί, blue
+                                                                        </option>
+                                                                        <option id="ingredient3" value="ingredient3" style="display: none;">
+                                                                            Τυρί, brick
+                                                                        </option>
+                                                                        <option id="ingredient4" value="ingredient4" style="display: none;">
+                                                                            Τυρί, camembert
+                                                                        </option>
+                                                                        <option id="ingredient5" value="ingredient5" style="display: none;">
+                                                                            Τυρί, mozzarella, μερικώς αποβουτυρωμένο
+                                                                        </option>
+                                                                        <option id="ingredient6" value="ingredient6" style="display: none;">
+                                                                            Αυγό, ολόκληρο, ωμό, φρέσκο 
+                                                                        </option>
+                                                                        <option id="ingredient7" value="ingredient7" style="display: none;">
+                                                                            Αυγό, ολόκληρο, μαγειρεμένο, ποσέ
+                                                                        </option>
+                                                                        <option id="ingredient8" value="ingredient8" style="display: none;">
+                                                                            πιπέρι, μαύρο
+                                                                        </option>
+                                                                        <option id="ingredient9" value="ingredient9" style="display: none;">
+                                                                            μαϊντανός, αποξηραμένος
+                                                                        </option>
+                                                                        <option id="ingredient10" value="ingredient10" style="display: none;">
+                                                                            μοσχοκάρυδο, τριμμένο
+                                                                        </option>
+                                                                        <option id="ingredient11" value="ingredient11" style="display: none;">
+                                                                            Δύοσμος, φρέσκος
+                                                                        </option>
+                                                                        <option id="ingredient12" value="ingredient12" style="display: none;">
+                                                                            Κοτόπουλο, broilers ή fryers, πόδι, κρέας και δέρμα, μαγειρεμένο, βραστό
+                                                                        </option>
+                                                                        <option id="ingredient13" value="ingredient13" style="display: none;">
+                                                                            σούπα, κρέμα πατάτας, κονσερβοποιημένο, υγροποιημένο
+                                                                        </option>
+                                                                        <option id="ingredient14" value="ingredient14" style="display: none;">
+                                                                            σούπα, ζωμός, βοδινό, σπιτικά παρασκευασμένο
+                                                                        </option>
+                                                                        <option id="ingredient15" value="ingredient15" style="display: none;">
+                                                                            CAMPBELL'S, κρέμα μανιταριών σούπα, υγροποιημένο
+                                                                        </option>
+                                                                        <option id="ingredient16" value="ingredient16" style="display: none;">
+                                                                            σούπα, ζωμός κοτόπουλου, κονσερβοποιημένο, παρασκευασμένο με ίσου όγκου νερό
+                                                                        </option>
+                                                                        <option id="ingredient17" value="ingredient17" style="display: none;">
+                                                                            Χοιρινό and turkey sausage, pre-cooked
+                                                                        </option>
+                                                                        <option id="ingredient18" value="ingredient18" style="display: none;">
+                                                                            Μήλα, φρέσκα, χωρίς τη φλούδα, μαγειρεμένα, βρασμένα
+                                                                        </option>
+                                                                        <option id="ingredient19" value="ingredient19" style="display: none;">
+                                                                            Βερίκοκα, αποξηραμένα, και θειαφισμένα, μη μαγειρεμένα
+                                                                        </option>
+                                                                        <option id="ingredient20" value="ingredient20" style="display: none;">
+                                                                            Χοιρινό, καπνιστό, μπέικον, μη παρασκευασμένο
+                                                                        </option>
+                                                                        <option id="ingredient21" value="ingredient21" style="display: none;">
+                                                                            Σπαράγγια, ωμά
+                                                                        </option>
+                                                                        <option id="ingredient22" value="ingredient22" style="display: none;">
+                                                                            Σπαράγγια, κατεψυγμένα, μη παρασκευασμένα
+                                                                        </option>
+                                                                        <option id="ingredient23" value="ingredient23" style="display: none;">
+                                                                            Πικραλίδα, χόρτα, ωμά
+                                                                        </option>
+                                                                        <option id="ingredient24" value="ingredient24" style="display: none;">
+                                                                            Πιπεριές, γλυκιές, κόκκινες, σοταρισμένες
+                                                                        </option>
+                                                                        <option id="ingredient25" value="ingredient25" style="display: none;">
+                                                                            Cocktail, Whiskey sour, με νερό, ουίσκι και Μίγμα σε σκόνη
+                                                                        </option>
+                                                                        <option id="ingredient26" value="ingredient26" style="display: none;">
+                                                                            Παγωτό, σοκολάτα
+                                                                        </option>
+                                                                        <option id="ingredient27" value="ingredient27" style="display: none;">
+                                                                            Γαρνιτούρα, ανανάς
+                                                                        </option>
+                                                                        <option id="ingredient28" value="ingredient28" style="display: none;">
+                                                                            Ρύζι, λευκό, Γλασέ, ωμό
+                                                                        </option>
+                                                                        <option id="ingredient29" value="ingredient29" style="display: none;">
+                                                                            Βοδινό, Αυστραλιανό, φυτοφάγο,  εξωτερικό λίπος, ωμό
+                                                                        </option>
+                                                                        <option id="ingredient30" value="ingredient30" style="display: none;">
+                                                                            Μακαρόνια και τυρί, κουτί με μείγμα από σάλτσα τυριού, μη παρασκευασμένο
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-2">
+                                                                <label class="control-label">
+                                                                    Ποσότητα
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                                                        <input class="form-control focused" id="SubstanceAmmountNumeric" type="text" placeholder="Ammount" style="padding: 5px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-2" style="padding-right: 0px;">
+                                                                <label class="control-label" id="DishSubstancesAmmount">
+                                                                    Μονάδα Μέτρησης
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select class="form-control">
+                                                                        <option id="0" value="0">
+                                                                            επιλέξτε μονάδα μέτρησης
+                                                                        </option>
+                                                                        <option id="Ammount1" value="Ammount1" style="display: none;">
+                                                                            Συσκευασία
+                                                                        </option>
+                                                                        <option id="Ammount2" value="Ammount2" style="display: none;">
+                                                                            Τεμάχιο
+                                                                        </option>
+                                                                        <option id="Ammount3" value="Ammount3" style="display: none;">
+                                                                            Μερίδα
+                                                                        </option>
+                                                                        <option id="Ammount4" value="Ammount4" style="display: none;">
+                                                                            Κουτ. Γλυκού
+                                                                        </option>
+                                                                        <option id="Ammount5" value="Ammount5" style="display: none;">
+                                                                            Κουτ. Σούπας
+                                                                        </option>
+                                                                        <option id="Ammount6" value="Ammount6" style="display: none;">
+                                                                            1 φλιτζ.
+                                                                        </option>
+                                                                        <option id="Ammount7" value="Ammount7" style="display: none;">
+                                                                            1 σπιρτόκουτο
+                                                                        </option>
+                                                                        <option id="Ammount8" value="Ammount8" style="display: none;">
+                                                                            1 φέτα
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-1">
+                                                                <label class="control-label">
+                                                                    &nbsp;
+                                                                </label>
+                                                                <div class="text-center">
+                                                                    <div class="btn btn-sm btn-success" title="Προσθήκη στην συνταγή" data-rel="tooltip" style="margin-top: 2px;">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </div>                                                                    
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <br><br>
+
+                                                        <!-- Table Substances -->
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                                <hr width="100%" style="margin-top: 0px;">
+                                                                <label class="control-label" id="DishCategCousine">
+                                                                    Όνομα Πιάτου
+                                                                </label>
+                                                                - Κατηγορία - Κουζίνα
+                                                                <br>
+                                                                <table class="table table-striped table-bordered bootstrap-datatable datatable" id="SyntagiPiatou">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="col-lg-6">
+                                                                                Συστατικό
+                                                                            </th>
+                                                                            <th class="col-lg-2">
+                                                                                Ποσότητα
+                                                                            </th>
+                                                                            <th class="col-lg-3">
+                                                                                Μονάδα Μέτρησης
+                                                                            </th>
+                                                                            <th class="col-lg-1">
+                                                                                Επεξεργασία
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+                                                                        <tr><!-- line 1 - substance 1 -->
+                                                                            <td>
+                                                                                Χοιρινό, καπνιστό, μπέικον, μη παρασκευασμένο
+                                                                            </td>
+                                                                            <td>
+                                                                                1
+                                                                            </td>
+                                                                            <td>
+                                                                                Μερίδα
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-center">
+                                                                                    <div class="btn btn-xs btn-primary" title="Διαμόρφωση"  data-rel="tooltip" style="margin-top: 2px;">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </div>
+                                                                                    <div class="btn btn-xs btn-danger" title="Διαγραφή"  data-rel="tooltip" style="margin-top: 2px;">
+                                                                                        <i class="fa fa-trash-o"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr><!-- line 1 - substance 3 -->
+                                                                            <td>
+                                                                                Ρύζι, λευκό, Γλασέ, ωμό
+                                                                            </td>
+                                                                            <td>
+                                                                                1
+                                                                            </td>
+                                                                            <td>
+                                                                                Συσκευασία
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-center">
+                                                                                    <div class="btn btn-xs btn-primary" title="Διαμόρφωση"  data-rel="tooltip" style="margin-top: 2px;">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </div>
+                                                                                    <div class="btn btn-xs btn-danger" title="Διαγραφή"  data-rel="tooltip" style="margin-top: 2px;">
+                                                                                        <i class="fa fa-trash-o"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr><!-- line 1 - substance 3 -->
+                                                                            <td>
+                                                                                μοσχοκάρυδο, τριμμένο
+                                                                            </td>
+                                                                            <td>
+                                                                                2
+                                                                            </td>
+                                                                            <td>
+                                                                                Κουτ. Σούπας
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-center">
+                                                                                    <div class="btn btn-xs btn-primary" title="Διαμόρφωση"  data-rel="tooltip" style="margin-top: 2px;">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </div>
+                                                                                    <div class="btn btn-xs btn-danger" title="Διαγραφή"  data-rel="tooltip" style="margin-top: 2px;">
+                                                                                        <i class="fa fa-trash-o"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+
+                                                            </div> 
+                                                        </div>
+                                                        <!-- /Table /Substances -->
+
+                                                        <br>
+                                                        <div class="text-right">
+                                                            <div class="btn btn-primary" style="margin-top: 2px;">
+                                                                <strong>Αποθήκευση</strong>
+                                                            </div>
+                                                        </div>
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!--  / S T E P  (2)  -->
+
+                                            <!--  S T E P  (3)  -->
+                                            <div class="step-pane" id="step3">
+                                                <form class="form-horizontal">
+                                                    <fieldset class="col-lg-12">
+
+                                                        <div class="text-left">
+                                                            Μπορεί να υπάρχει έστω και σε ίχνη κάποιο από τα παρακάτω αλλεργιογόνα συστατικά στη συνταγή;
+                                                            <br>
+                                                            <h2>
+                                                                <em>
+                                                                    Παρακαλώ ελέγξτε αν κάποια από τα σύνθετα συστατικά της συνταγής σας έχουν κάποιο αλλεργιογόνο συστατικό.
+                                                                </em>
+                                                            </h2>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="control-label" id="DimitriakaMeGlouteni">
+                                                                    Δημητριακά με γλουτένη
+                                                                    &nbsp;
+                                                                    <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Δημητριακά με γλουτένη" data-content="Επιλέξτε αυτή την κατηγορία εάν η συνταγή σας περιέχει κάποιο δημητριακό όπως σιτάρι, σίκαλη, κριθάρι, βρώμη, όλυρα, σιτηρό kamut, προϊόντα τους ή υβριδικές ποικιλίες τους
+                                                                       Εξαιρούνται τα εξής υλικά:
+                                                                       α) σιρόπια γλυκόζης με βάση το σιτάρι, συμπεριλαμβανομένης της δεξτρόζης (1)
+                                                                       β) μαλτοδεξτρίνες με βάση το σιτάρι (1)
+                                                                       γ) σιρόπια γλυκόζης με βάση το κριθάρι
+                                                                       δ) σιτηρά που χρησιμοποιούνται για την παραγωγή αλκοολούχων αποσταγμάτων, συμπεριλαμβανομένης της αιθυλικής αλκοόλης γεωργικής προέλευσης.
+                                                                       ">
+                                                                        (i)
+                                                                    </a>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select id="selectdimitriakaglouteni" class="form-control" multiple data-rel="chosen">
+                                                                        <option selected>
+                                                                        </option>
+                                                                        <option>
+                                                                            Σιτάρι
+                                                                        </option>
+                                                                        <option>
+                                                                            Σίκαλη
+                                                                        </option>
+                                                                        <option>
+                                                                            Κριθάρι
+                                                                        </option>
+                                                                        <option>
+                                                                            Βρώμη 
+                                                                        </option>
+                                                                        <option>
+                                                                            Όλυρα 
+                                                                        </option>
+                                                                        <option>
+                                                                            Σιτηρό kamut ή υβριδικές ποικιλίες τους
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox1" value="option1">
+                                                                        Καρκινοειδή και προϊόντα με βάση τα καρκινοειδή (π.χ. Γαρίδες, καραβίδες, αστακοί, καβούρια κ.α.)
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox2" value="option2">
+                                                                        Αυγά και προϊόντα με βάση τα αυγά
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox3" value="option3">
+                                                                        Ψάρια και προϊόντα με βάση τα ψάρια
+                                                                        &nbsp;
+                                                                        <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Ψάρια και προϊόντα με βάση τα ψάρια" data-content="Εξαιρούνται τα εξής:
+                                                                           α) ζελατίνη ψαριών που χρησιμοποιείται ως φορέας σκευασμάτων βιταμινών ή καροτενοειδών
+                                                                           β) ζελατίνη ψαριών ή ιχθυόκολλα που χρησιμοποιείται ως διαυγαστικό μέσο σε μπίρες και οίνους
+                                                                           ">
+                                                                            (i)
+                                                                        </a>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox4" value="option4">
+                                                                        Αραχίδες (φιστίκια) και προϊόντα με βάση τις αραχίδες (π.χ. φυστικοβούτυρο, φυστικέλαιο)
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox5" value="option5">
+                                                                        Σόγια και προϊόντα με βάση τη σόγια 
+                                                                        &nbsp;
+                                                                        <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Σόγια και προϊόντα με βάση τη σόγια" data-content="Εξαιρούνται τα εξής:
+                                                                           α) πλήρως ραφιναρισμένο σογιέλαιο και λίπη που προέρχονται από σόγια (1)
+                                                                           β) τοκοφερόλες που έχουν αναμειχθεί με φυσικό τρόπο (E306), φυσική D-άλφα τοκοφερόλη, φυσική D-άλφα οξική τοκοφερόλη, φυσική D-άλφα ηλεκτρική τοκοφερόλη από σπέρματα σόγιας
+                                                                           γ) φυτοστερόλες και φυτοστερολεστέρες που προέρχονται από φυτικά έλαια από σπέρματα σόγιας
+                                                                           δ) φυτοστανολεστέρα που παράγεται από στερόλες φυτικών ελαίων από σπέρματα σόγιας.
+                                                                           ">
+                                                                            (i)
+                                                                        </a>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox6" value="option6">
+                                                                        Γάλα και προϊόντα με βάση το γάλα (συμπεριλαμβανομένης της λακτόζης) 
+                                                                        &nbsp;
+                                                                        <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Γάλα και προϊόντα με βάση το γάλα" data-content="Εξαιρούνται τα εξής:
+                                                                           α) ορός γάλακτος που χρησιμοποιείται για την παραγωγή αλκοολούχων αποσταγμάτων συμπεριλαμβανομένης της αιθυλικής αλκοόλης γεωργικής προέλευσης·
+                                                                           β) λακτιτόλη 
+                                                                           ">
+                                                                            (i)
+                                                                        </a>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="control-label" id="KarpoiMeKelufos">
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Καρποί με κέλυφος
+                                                                    &nbsp;
+                                                                    <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Καρποί με κέλυφος" data-content="Επιλέξτε αυτή την κατηγορία εάν η συνταγή σας περιέχει συστατικά όπως  αμύγδαλα, φουντούκια, καρύδια, καρύδια κάσιους, καρύδια πεκάν, καρύδια Βραζιλίας, φιστίκια, καρύδια μακαντάμια, καρύδια Κουίνσλαντ ή προϊόντα τους όπως πραλίνα, καρυδέλαιο, μαρσιπάν, αμυγδαλόπαστα κοκ.             
+                                                                       Εξαιρούνται οι καρποί με κέλυφος που χρησιμοποιούνται για την παραγωγή αλκοολούχων αποσταγμάτων συμπεριλαμβανομένης της αιθυλικής αλκοόλης γεωργικής προέλευσης.">
+                                                                        (i)
+                                                                    </a>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select id="selectkarpoi" class="form-control" multiple data-rel="chosen">
+                                                                        <option selected>
+                                                                        </option>
+                                                                        <option>
+                                                                            Αμύγδαλα
+                                                                        </option>
+                                                                        <option>
+                                                                            Φουντούκια
+                                                                        </option>
+                                                                        <option>
+                                                                            Καρύδια
+                                                                        </option>
+                                                                        <option>
+                                                                            Καρύδια κάσιους
+                                                                        </option>
+                                                                        <option>
+                                                                            Καρύδια πεκάν
+                                                                        </option>
+                                                                        <option>
+                                                                            Καρύδια Βραζιλίας
+                                                                        </option>
+                                                                        <option>
+                                                                            Φυστίκια
+                                                                        </option>
+                                                                        <option>
+                                                                            Καρύδια μακαντάμια ή καρύδια Κουίνσλαντ και προϊόντα από αυτά όπως πραλίνα, αμυγδαλόπαστα, καρυδέλαιο, μαρσιπάν κτλ
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox7" value="option7">
+                                                                        Σέλινο και προϊόντα με βάση το σέλινο 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox8" value="option8">
+                                                                        Σινάπι και προϊόντα με βάση το σινάπι (π.χ. μουστάρδα) 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox9" value="option9">
+                                                                        Σπόροι σησαμιού και προϊόντα με βάση τους σπόρους σησαμιού (π.χ. ταχίνι, σησαμέλαιο) 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox10" value="option10">
+                                                                        Το διοξείδιο του θείου
+                                                                        &nbsp;
+                                                                        <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Διοξείδιο του Θείου" data-content="συμπεριλαμβάνονται και οι θειώδεις ενώσεις σε συγκεντρώσεις άνω των 10 mg/Kg ή 10 mg/L εκφρασμένα ως SO2 που υπολογίζονται στα προϊόντα που προσφέρονται έτοιμα για κατανάλωση ή που ανασυστάθηκαν σύμφωνα με τις οδηγίες του κατασκευαστή. Επιπλεόν τα κρασιά, οι φρουτοσαλάτες και τα ξερά φρούτα.">
+                                                                            (i)
+                                                                        </a>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox11" value="option11">
+                                                                        Λούπινο και προϊόντα με βάση το λούπινο 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="controls">
+                                                                    <label class="checkbox inline">
+                                                                        <input type="checkbox" id="inlineCheckbox12" value="option12">
+                                                                        Μαλάκια και προϊόντα με βάση τα μαλάκια 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!--  / S T E P  (3)  -->
+
+                                            <!--  S T E P  (4)  -->
+                                            <div class="step-pane" id="step4">
+                                                <form class="form-horizontal">
+                                                    <fieldset class="col-sm-12">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="text-left">
+                                                                    <h2>
+                                                                        Όνομα Φαγητού:
+                                                                        <b>
+                                                                            Μοσχάρι
+                                                                        </b>
+                                                                        <br><br>
+                                                                        Κατηγορία Φαγητού:
+                                                                        <b>
+                                                                            Κυρίως Πιάτο
+                                                                        </b>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <div class="text-right">
+                                                                    <h2 style="color: blue">
+                                                                        <em>
+                                                                            <a href="#" class="btn btn-info btn-setting">Δείτε <b>εδώ</b> αναλυτικά την διατροφική ανάλυση της συνταγής</a>
+                                                                        </em>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="smallstat box" style="margin-bottom: 0px;">
+                                                                    <div class="text-center">
+                                                                        <img src="Gourmet-Fillet-Mignon-Steak.jpg" alt="" style="max-height: 300px; max-width: 250px">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-lg-8">
+                                                                <div class="row">
+                                                                    <div class="col-lg-11">
+                                                                        <table class="table" id="FoodLabelsTable" style="margin-left: 45px;">
+                                                                            <thead>
+                                                                                <!--  FoodLabelsTable Table  Line1  -->
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div class="text-center">
+                                                                                            <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                                <div class="text-center">
+                                                                                                    <p>&nbsp;</p>
+                                                                                                    <p style="font-size: 12px;">Θερμίδες</p>
+                                                                                                    <p>573kj/140kcal</p>
+                                                                                                    <p style="padding-top: 19px; color: black;">26%</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="text-center">
+                                                                                            <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                                <div class="text-center">
+                                                                                                    <p>&nbsp;</p>
+                                                                                                    <p style="font-size: 12px;">Λιπαρά</p>
+                                                                                                    <p>448g</p>
+                                                                                                    <p style="padding-top: 19px; color: black;">17%</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="text-center">
+                                                                                            <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                                <div class="text-center">
+                                                                                                    <p>&nbsp;</p>
+                                                                                                    <p style="font-size: 12px;">Κορεσμένα</p>
+                                                                                                    <p>586g</p>
+                                                                                                    <p style="padding-top: 19px; color: black;">14%</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </thead>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="col-lg-1">&nbsp;</div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <table class="table" id="FoodLabelsTable2">
+                                                                        <thead>        
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                        <div class="text-center">
+                                                                                            <p>&nbsp;</p>
+                                                                                            <p style="font-size: 12px;">Υδατάνθρακες</p>
+                                                                                            <p>654g</p>
+                                                                                            <p style="padding-top: 19px; color: black;">20%</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                        <div class="text-center">
+                                                                                            <p>&nbsp;</p>
+                                                                                            <p style="font-size: 12px;">Απλά Σάκχαρα</p>
+                                                                                            <p>349g</p>
+                                                                                            <p style="padding-top: 19px; color: black;">31%</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                        <div class="text-center">
+                                                                                            <p>&nbsp;</p>
+                                                                                            <p style="font-size: 12px;">Πρωτεΐνες</p>
+                                                                                            <p>322g</p>
+                                                                                            <p style="padding-top: 19px; color: black;">22%</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div style="background: url(FoodLabel.png); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                                                        <div class="text-center">
+                                                                                            <p>&nbsp;</p>
+                                                                                            <p style="font-size: 12px;">Αλάτι</p>
+                                                                                            <p>401g</p>
+                                                                                            <p style="padding-top: 19px; color: black;">17%</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                </div>
+
+
+
+                                                                <br>
+                                                                <div class="text-center">
+                                                                    <h2 style="margin-bottom: 0px;">
+                                                                        <em>
+                                                                            <b>
+                                                                                Τα παραπάνω ποσοστιαία στοιχεία είναι υπολογισμένα για τη μερίδα φαγητού.
+                                                                            </b>
+                                                                            <br><br>
+                                                                            *Ποσοστό επί της Συνιστώμενης Ημερήσιας Ποσότητας (GDA)
+                                                                        </em>
+                                                                        <br><br><br>
+                                                                        Για μερίδα των 100g η ενέργεια είναι 2343 kcal / 560 kj
+                                                                    </h2>
+                                                                    <br>
+                                                                    Ημερήσια πρόσληψη αναφοράς για έναν μέσο ενήλικα (8400 kJ / 2000 kcal)
+                                                                </div>
+                                                                <br>
+
+                                                            </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!--  / S T E P  (4)  -->
+
+                                            <br>
+                                        </div>
+                                        <!-- Panel Content -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  /panel /  -->
+
+
+                        </div>
+                    </div><!--/col-->
+
+                </div>
+            </div>
+
+            <!-- - - - -  modal  - - - - - -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Διατροφική Ανάλυση πιάτου</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <!--  / DiatrofikiAnalysi /Table -->
+                            <div class="col-lg-12">
+
+                                <div class="box">
+
+                                    <!-- PanelHeading -->
+                                    <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                        <h2>
+                                            <i class="fa fa-info" style="color: white;"></i>
+                                            <span class="break"></span>
+                                            Πίνακας Διατροφικής Αξίας
+                                        </h2>
+                                        <div class="box-icon">
+                                            <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                            <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- /PanelHeading -->
+
+                                    <!-- Panel Content -->
+                                    <div class="box-content clearfix">
+
+                                        <table class="table table-striped table-bordered" id="DiatrofikhAnalysi">
+                                            <!--  DiatrofikiAnalysi Table HEADING  -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-6">
+                                                        Μέση Ανάλυση Θρ. Συστατικών
+                                                    </th>
+                                                    <th class="col-lg-3">
+                                                        Ανά 100g Πιάτου
+                                                    </th>
+                                                    <th class="col-lg-3">
+                                                        Ανά Μερίδα
+                                                    </th>
+                                                </tr>
+                                            </thead>   
+                                            <!--  / DiatrofikiAnalysi Table  HEADING  -->
+
+                                            <!--  DiatrofikiAnalysi Table   BODY  -->
+                                            <tbody>
+                                                <!--  DiatrofikiAnalysi Table  Line1  -->
+                                                <tr>
+                                                    <td>
+                                                        Ενέργεια
+                                                    </td>
+                                                    <td>
+                                                        223,51 kJ/ 53,34 kcal
+                                                    </td>
+                                                    <td>
+                                                        355,1 kJ / 84,75 kcal
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table  Line1  -->
+                                                <!--  DiatrofikiAnalysi Table  Line2  -->
+                                                <tr>
+                                                    <td>
+                                                        Λιπαρά
+                                                    </td>
+                                                    <td>
+                                                        3,86 g
+                                                    </td>
+                                                    <td>
+                                                        6,13 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table  Line2  -->
+                                                <!--  DiatrofikiAnalysi Table  Line3  -->
+                                                <tr>
+                                                    <td>
+                                                        &emsp;&nbsp;
+                                                        εκ των οποίων Κορεσμένα
+
+                                                    </td>
+                                                    <td>
+                                                        1,29 g
+
+                                                    </td>
+                                                    <td>
+
+                                                        2,04 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line3  -->
+                                                <!--  DiatrofikiAnalysi Table  Line4  -->
+                                                <tr>
+                                                    <td>
+                                                        Υδατάνθρακες
+                                                    </td>
+                                                    <td>
+                                                        3,56 g
+                                                    </td>
+                                                    <td>
+                                                        5,66 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line4  -->
+                                                <!--  DiatrofikiAnalysi Table  Line5  -->
+                                                <tr>
+                                                    <td>
+                                                        &emsp;&nbsp;
+                                                        εκ των οποίων Απλά Σάκχαρα
+                                                    </td>
+                                                    <td>
+                                                        2,26 g
+                                                    </td>
+                                                    <td>
+                                                        3,59 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line5  -->
+                                                <!--  DiatrofikiAnalysi Table  Line6  -->
+                                                <tr>
+                                                    <td>
+                                                        Φυτικές Ίνες
+                                                    </td>
+                                                    <td>
+                                                        0,92 g
+                                                    </td>
+                                                    <td>
+                                                        1,47 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line6  -->
+                                                <!--  DiatrofikiAnalysi Table  Line7  -->
+                                                <tr>
+                                                    <td>
+                                                        Πρωτεΐνες
+                                                    </td>
+                                                    <td>
+                                                        1,59 g
+                                                    </td>
+                                                    <td>
+                                                        2,53 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line7  -->
+                                                <!--  DiatrofikiAnalysi Table  Line8  -->
+                                                <tr>
+                                                    <td>
+                                                        Αλάτι
+                                                    </td>
+                                                    <td>
+                                                        0,26 g
+                                                    </td>
+                                                    <td>
+                                                        0,41 g
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line8  -->
+                                            </tbody>
+                                            <!--  / DiatrofikiAnalysi Table  BODY -->
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--  / DiatrofikiAnalysi /Table -->
+
+
+                            <!-- DiatrofikoiIsxurismoi Table -->
+                            <div class="col-lg-12">
+
+                                <div class="box">
+
+                                    <!-- PanelHeading -->
+                                    <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                        <h2>
+                                            <i class="fa fa-info" style="color: white;"></i>
+                                            <span class="break"></span>
+                                            Ιχνοστοιχεία και Βιταμίνες
+                                        </h2>
+                                        <div class="box-icon">
+                                            <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                            <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- /PanelHeading -->
+
+                                    <!-- Panel Content -->
+                                    <div class="box-content clearfix">
+
+                                        <table class="table table-striped table-bordered bootstrap-datatable datatable" id="DiatrofikoiIsxurismoi">
+                                            <!--  DiatrofikoiIsxurismoi Table  HEADING  -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-4"><!-- gia stoixish sto kentro style="text-align: center;" -->
+                                                        Μέση Ανάλυση Θρ. Συστατικών
+                                                    </th>
+                                                    <th class="col-lg-4">
+                                                        Ανά 100g Πιάτου (ΠΠΑ% ανά 100gr)
+                                                    </th>
+                                                    <th class="col-lg-4">
+                                                        Ανά Μερίδα (ΠΠΑ% ανά μερίδα)
+                                                    </th>
+                                                </tr>
+                                            </thead>   
+                                            <!--  / DiatrofikoiIsxurismoi Table  HEADING  -->
+
+                                            <!--  DiatrofikoiIsxurismoi Table  BODY  -->
+                                            <tbody>
+                                                <!--  DiatrofikoiIsxurismoi Table Line1  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη K
+                                                    </td>
+                                                    <td>
+                                                        7,10 μg (12,4%)
+                                                    </td>
+                                                    <td>
+                                                        11,06 μg (20,4%)
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line1  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line2  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη C
+                                                    </td>
+                                                    <td>
+                                                        8,13 μg (9,3%)
+                                                    </td>
+                                                    <td>
+                                                        14,77 μg (16,4%)
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line2  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line3  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη D
+                                                    </td>
+                                                    <td>
+                                                        6,08 μg (8,5%)
+                                                    </td>
+                                                    <td>
+                                                        10,82 μg (12,6%)
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line3  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line4  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη E
+                                                    </td>
+                                                    <td>
+                                                        7,73 μg (10,3%)
+                                                    </td>
+                                                    <td>
+                                                        12,28 μg (13,0%)
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line4  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line5  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B1
+                                                    </td>
+                                                    <td>
+                                                        12,22 μg (9,0%)
+                                                    </td>
+                                                    <td>
+                                                        21,09 μg (21,8%)
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line5  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line6  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B9
+                                                    </td>
+                                                    <td>
+                                                        5,5 μg (6,6%)
+                                                    </td>
+                                                    <td>
+                                                        9,11 μg (17,7%)
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line6  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line7  -->
+                                                <tr>
+                                                    <td>
+                                                        Βιταμίνη B2
+                                                    </td>
+                                                    <td>
+                                                        15,15 μg (11,7%)
+                                                    </td>
+                                                    <td>
+                                                        27,31 μg (11,5%)
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line7  -->                                           
+                                            </tbody>
+                                            <!--  / DiatrofikoiIsxurismoi Table  BODY -->
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /DiatrofikoiIsxurismoi /Table -->
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <!-- / - - - - - - /.modal - - - - - - - -->
+
+
+
+
+            <div class="clearfix"></div>
+
+        </div>
+
+        <!-- footer -->
+        <footer style="font-family: arial; height: 63px;">
+            <p>
+                <span style="text-align:left;float:left">
+                    <a href="http://www.disys.gr" style="text-decoration: none; color: white;" target="_blank">
+                        <img src="DISYS FOOTER IMG.png" alt="" height="40">
+                    </a>
+                </span>
+                <span class="hidden-phone" style="text-align: right; float: right; margin-top: 12px;">
+                    <a href="http://www.disys.gr" style="text-decoration: none; color: white;" target="_blank">
+                        Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+                        &nbsp;&nbsp;&nbsp;
+                        -
+                        &nbsp;&nbsp;&nbsp;
+                        ΔΙΣΥΣ
+                        &copy;
+                        &nbsp;
+                        2014
+                        &nbsp;&nbsp;
+                    </a>
+                </span>
+            </p>
+        </footer>
+        <!-- /footer -->
+
+
+    </body>
+</html>

@@ -1,0 +1,1125 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>ΔΙΣΥΣ - Πελάτης - Εγγραφή Χρήστη</title>
+        <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+
+        <!-- start: CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/style.min.css" rel="stylesheet">
+        <link href="assets/css/retina.min.css" rel="stylesheet">
+        <link href="assets/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+        <!-- end: CSS -->
+
+        <!-- start: JavaScript-->
+        <!--[if !IE]>-->
+        <script src="assets/js/jquery-2.0.3.min.js"></script>
+        <!--<![endif]-->
+
+        <!--[if IE]>
+                <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+
+        <!--[if !IE]>-->
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+        </script>
+        <!--<![endif]-->
+
+        <!--[if IE]>
+                <script type="text/javascript">
+                window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+                </script>
+        <![endif]-->
+
+        <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>	
+
+        <!-- page scripts -->
+        <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="assets/js/jquery.sparkline.min.js"></script>
+        <script src="assets/js/jquery.chosen.min.js"></script>
+        <script src="assets/js/jquery.cleditor.min.js"></script>
+        <script src="assets/js/jquery.autosize.min.js"></script>
+        <script src="assets/js/jquery.placeholder.min.js"></script>
+        <script src="assets/js/jquery.maskedinput.min.js"></script>
+        <script src="assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/js/excanvas.min.js"></script><![endif]-->
+        <script src="assets/js/jquery.flot.min.js"></script>
+        <script src="assets/js/jquery.flot.pie.min.js"></script>
+        <script src="assets/js/jquery.flot.stack.min.js"></script>
+        <script src="assets/js/jquery.flot.resize.min.js"></script>
+        <script src="assets/js/jquery.flot.time.min.js"></script>
+        <script src="assets/js/jquery.autosize.min.js"></script>
+        <script src="assets/js/jquery.placeholder.min.js"></script>
+        <script src="assets/js/jquery.mockjax.min.js"></script>
+        <script src="assets/js/wizard.min.js"></script>
+
+        <!-- theme scripts -->
+        <script src="assets/js/custom.min.js"></script>
+        <script src="assets/js/core.min.js"></script>
+
+        <!-- inline scripts related to this page -->
+        <script src="assets/js/pages/form-wizard.js"></script>
+
+        <script type="text/javascript">
+
+            function test(sel) {
+                //alert(sel.value);
+                if (sel.value === "female") {
+                    jQuery("#iffemale").show();
+                    //jQuery("#iffemale").prop('disabled',true);
+                }
+                else {
+                    jQuery("#iffemale").hide();
+                    //jQuery("#iffemale").prop('disabled',false);
+                }
+            }
+
+        </script>
+
+        <style type="text/css">
+
+            .chosen-choices
+            {
+                min-width: 700px;
+                max-height: 120px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-results
+            {
+                height: 120px;
+            };
+
+        </style>
+
+        <style type="text/css">
+
+            .chosen-drop
+            {
+                min-width: 700px;
+                max-height: 120px;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-title
+            {
+                background-color: #39afea;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover-content
+            {
+                background-color: #f9f9f9;
+            }
+        </style>
+
+        <style type="text/css">
+            .popover
+            {
+                border-color: #2d8cbb;
+            }
+        </style>
+
+        <!-- end: JavaScript-->
+        
+    </head>
+
+
+    <body>
+        <!-- HeaderBar -->
+        <header class="navbar" style="font-family: arial;">
+            <div class="container">
+                <a id="main-menu-toggle" class="hidden-xs open" style="padding-left: 0px; padding-bottom: 0px; padding-top: 0px;">
+                    <img src="NEWNEW4.png" alt="" height="40" style="background-color: #28993c;">&nbsp;
+                </a>		
+                <div class="col-sm-7 col-xs-8 col-lg-6" style="margin:8px; padding-left: 5px; padding-top: 2px;">
+                    <a href="http://www.disys.gr/" target="_blank" style="text-decoration: none;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>
+                            ΔΙΣΥΣ
+                        </strong>
+                        &nbsp;&nbsp;
+                        -
+                        &nbsp;&nbsp;
+                        Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+                    </a>
+                </div>
+
+                <!-- HeaderMenu -->
+                <div class="nav-no-collapse header-nav">
+                    <ul class="nav navbar-nav pull-right">
+
+                        <!-- HeaderUserDropdown -->
+                        <li class="dropdown">
+                            <a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
+                                <div class="avatar">
+                                </div>
+                                <div class="user">
+                                    <span class="hello">
+                                        Καλώς ήρθατε!
+                                    </span>
+                                    <span class="name">
+                                        Όνομα Χρήστη
+                                    </span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="index.html#">
+                                        <i class="fa fa-cog"></i>
+                                        Ρυθμίσεις προφίλ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="page-login.html">
+                                        <i class="fa fa-sign-out"></i> 
+                                        Αποσύνδεση
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- HeaderUserDropdown -->
+                    </ul>
+                </div>
+                <!-- /HeaderMenu -->
+
+            </div>
+        </header>
+        <!-- /HeaderBar -->
+
+        <div class="container" style="font-family: arial">
+            <div class="row">
+
+                <!-- start: Content -->
+                <div id="content" class="col-sm-12 full">
+
+                    <ol class="breadcrumb"><!-- 2nd horizontal bar - grey -->
+                        <li>
+                            <a href="#">
+                                &nbsp;ΔΙΣΥΣ
+                            </a>
+                        </li>
+                        <li class="active" >
+                            Εγγραφή Χρήστη
+                        </li>                    
+                    </ol>
+
+                    <!-- panel Εγγραφή -->
+                    <div class="row">
+                        <div class="col-lg-12">
+
+
+                            <div class="box">
+
+                                <!-- PanelHeading -->
+                                <div class="box-header" style="background-color: #28993c; border-color: #248936;">
+                                    <h2 style="color: white;">
+                                        <i class="fa fa-user" style="color: white;"></i>
+                                        <span class="break"></span>
+                                        Εγγραφή στο Σύστημα
+                                    </h2>
+                                </div>
+                                <!--  /PanelHeading  -->
+
+                                <div class="box-content clearfix">
+
+                                    <div class="col-lg-12">
+                                        <div id="MyWizard" class="wizard">
+                                            <ul class="steps">
+                                                <li data-target="#step1" class="active"><span class="badge badge-info">1</span><span class="chevron"></span>Step 1</li>
+                                                <li data-target="#step2"><span class="badge">2</span><span class="chevron"></span>Step 2</li>
+                                                <li data-target="#step3"><span class="badge">3</span>Step 3</li>
+                                            </ul>
+                                            <div class="actions" style="padding: 0px;">
+                                                <button type="button" class="btn btn-prev" style="width: 100px;">&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Prev&nbsp;&nbsp;</button>
+                                                <button type="button" class="btn btn-info btn-next" data-last="Finish" style="width: 100px;">&nbsp;&nbsp;Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="step-content">
+
+                                            <!--  S T E P  (1)  -->
+                                            <div class="step-pane active" id="step1">
+                                                <form class="form-horizontal register" action="#" method="post">
+                                                    <fieldset class="col-lg-12">
+
+                                                        <div class="text-center">
+                                                            <h2>
+                                                                <em>
+                                                                    <b>
+                                                                        Εγγραφή
+                                                                    </b>        
+                                                                </em>
+                                                            </h2>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-4">
+                                                                <label class="control-label">
+                                                                    Επίθετο Χρήστη
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                        <input class="form-control focused" id="UserSurname" type="text" placeholder="Surname">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-4">
+                                                                <label class="control-label">
+                                                                    Όνομα Χρήστη
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>                                            
+                                                                        <input class="form-control focused" id="UserFirstName" type="text" placeholder="First Name">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-4">
+                                                                <label class="control-label">
+                                                                    Ψευδώνυμο
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                        <input class="form-control focused" id="Username" type="text" placeholder="Username">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <br>
+                                                            <div class="row">&nbsp;</div>
+                                                            <br>
+
+                                                            <div class="col-lg-4">	
+                                                                <label class="control-label">
+                                                                    Διεύθυνση ηλεκτρονικού ταχυδρομίου
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon">
+                                                                            <strong>
+                                                                                @
+                                                                            </strong>
+                                                                        </span>
+                                                                        <input type="email" class="form-control" id="email_1" placeholder="address@email.com"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-4">	
+                                                                <label class="control-label">
+                                                                    Διεύθυνση ηλεκτρονικού ταχυδρομίου
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                &nbsp;(επανάληψη)
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon">
+                                                                            <strong>
+                                                                                @
+                                                                            </strong>
+                                                                        </span>
+                                                                        <input type="email" class="form-control" id="email_2" placeholder="confirmation@mail.com"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-2">	
+                                                                <label class="control-label">
+                                                                    Κινητό Τηλέφωνο
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                                        <input type="email" class="form-control" id="phone_1"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-2">	
+                                                                <label class="control-label">
+                                                                    Σταθερό Τηλέφωνο
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                                        <input type="email" class="form-control" id="phone_2"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <br>
+                                                            <div class="row">&nbsp;</div>
+                                                            <br>
+
+                                                            <div class="col-lg-3">	
+                                                                <label class="control-label">
+                                                                    Χώρα
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                                                                        <input class="form-control" id="land"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-3">	
+                                                                <label class="control-label">
+                                                                    Πόλη
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                                                        <input class="form-control" id="city"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-2">	
+                                                                <label class="control-label">
+                                                                    Τ.Κ.
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
+                                                                        <input class="form-control" id="postcode"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-4">&nbsp;</div>
+
+                                                            <br>
+                                                            <div class="row">&nbsp;</div>
+                                                            <br>
+
+                                                            <div class="col-sm-2">	
+                                                                <label class="control-label">
+                                                                    Κωδικός Πρόσβασης
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                                        <input type="password" class="form-control" id="password1"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-sm-2">	
+                                                                <label class="control-label">
+                                                                    Επανάληψη Κωδικού
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                                        <input type="password" class="form-control" id="password2"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-sm-8">
+                                                                <div class="text-right">
+                                                                    <br>
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                    <em>
+                                                                        Υποχρεωτικά πεδία για τη Δημιουργία Νέου Χρήστη
+                                                                    </em>
+                                                                </div>
+                                                            </div>
+
+                                                            <br>
+                                                            <div class="row">&nbsp;</div>
+                                                            <br>
+
+                                                            <!--  ALERTS - ΕΓΓΡΑΦΗ  -->
+                                                            <div class="col-lg-12">
+                                                                <div class="text-center">
+                                                                    <div class="alert alert-danger">
+                                                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                                                        <i class="fa fa-exclamation-circle"></i>
+                                                                        &nbsp;
+                                                                        <strong>
+                                                                            Προσοχή!
+                                                                        </strong>
+                                                                        Πρέπει να συμπληρώσετε όλα τα υποχρεωτικά πεδία.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="text-center">
+                                                                    <div class="alert alert-danger">
+                                                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                                        &nbsp;
+                                                                        <strong>
+                                                                            Προσοχή!
+                                                                        </strong>
+                                                                        Το Όνομα Χρήστη χρησιμοποιείται ήδη.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="text-center">
+                                                                    <div class="alert alert-danger">
+                                                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                        &nbsp;
+                                                                        <strong>
+                                                                            Προσοχή!
+                                                                        </strong>
+                                                                        Οι χαρακτήρες που χρησιμοποιήσατε στον Κωδικό Πρόσβασης δεν είναι αποδεκτοί.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="text-center">
+                                                                    <div class="alert alert-warning">
+                                                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                                                        <h4 class="alert-heading">
+                                                                            Προσοχή!
+                                                                        </h4>
+                                                                        <p>
+                                                                            Είστε σίγουροι ότι θέλετε να ακυρώσετε τη διαδικασία Εγγραφής Νέου Χρήστη;
+                                                                        </p>
+                                                                        <p></p>
+                                                                        <div class="text-center">
+                                                                            <div class="btn btn-danger" style="width:105px">
+                                                                                <strong>
+                                                                                    Ακύρωση
+                                                                                </strong>
+                                                                            </div>
+                                                                            &nbsp;
+                                                                            <div class="btn btn-primary" style="width:105px">
+                                                                                <strong>
+                                                                                    Συνέχεια
+                                                                                </strong>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--  / ALERTS - ΕΓΓΡΑΦΗ  -->
+
+                                                        </div>
+
+                                                    </fieldset>	
+                                                </form>
+                                            </div>
+                                            <!--  / S T E P  (1)  -->
+
+                                            <!--  S T E P  (2)  -->
+                                            <div class="step-pane" id="step2">
+                                                <form class="form-horizontal">
+                                                    <fieldset class="col-sm-12">
+
+                                                        <div class="text-center">
+                                                            <h2>
+                                                                <b>
+                                                                    <em>
+                                                                        Προσωπικά Στοιχεία
+                                                                    </em>
+                                                                </b>
+                                                            </h2>
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-6">	
+                                                                <label class="control-label">
+                                                                    Φύλλο
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select onchange="test(this)" class="form-control" id="genderselect">
+                                                                        <option value="none">
+                                                                            επιλέξτε φύλλο...
+                                                                        </option>
+                                                                        <option value="male">
+                                                                            Άνδρας
+                                                                        </option>
+                                                                        <option value="female">
+                                                                            Γυναίκα
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-6"><!-- na emfanizetai mono an fullo=gynaika -->	
+                                                                <div style="display: none;" id="iffemale">
+                                                                    <label class="control-label">
+                                                                        Επιλέξτε ένα από τα παρακάτω
+                                                                        <span style="color:red">
+                                                                            &nbsp;*
+                                                                        </span>
+                                                                    </label>
+                                                                    <div class="controls">
+                                                                        <select class="form-control" id="egkumosuni">
+                                                                            <option>
+                                                                                επιλέξτε...
+                                                                            </option>
+                                                                            <option>
+                                                                                Εγκυμοσύνη: 1ο τρίμηνο
+                                                                            </option>
+                                                                            <option>
+                                                                                Εγκυμοσύνη: 2ο τρίμηνο
+                                                                            </option>
+                                                                            <option>
+                                                                                Εγκυμοσύνη: 3ο τρίμηνο
+                                                                            </option>
+                                                                            <option>
+                                                                                Θηλασμός
+                                                                            </option>
+                                                                            <option>
+                                                                                κανένα από τα παραπάνω
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>	
+
+                                                        </div>
+                                                        <br>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-4">	
+                                                                <label class="control-label">
+                                                                    Βάρος [kg]
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <input class="form-control" placeholder="Συμπληρώστε το βάρος σας σε σε κιλά (kg)"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-4">	
+                                                                <label class="control-label">
+                                                                    Ύψος [cm]
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <input class="form-control" placeholder="Συμπληρώστε το ύψος σας σε σε εκατοστά (cm)"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                            <div class="col-lg-4">	
+                                                                <label class="control-label">
+                                                                    Ηλικία
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls row">
+                                                                    <div class="input-group col-sm-12">	
+                                                                        <input class="form-control" placeholder="Συμπληρώστε την ηλικία σας σε έτη"/>
+                                                                    </div>	
+                                                                </div>
+                                                            </div>	
+
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-12">
+                                                                <label class="control-label">
+                                                                    Θα σας ενδιέφερε οι συστάσεις και επιλογές των μενού/ τροφίμων να λαμβάνουν υπόψη τους κάποια από τα παρακάτω;
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox1" value="option1">Αναιμία
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox2" value="option2">Διαβήτη τύπου
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox3" value="option3">Δυσκοιλιότητα
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox4" value="option4">Κοιλιοκάκη
+                                                                    &nbsp;
+                                                                    <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Κοιλιοκάκη" data-content="δυσανεξία στη γλουτένη">
+                                                                        (i)
+                                                                    </a>
+                                                                </label>
+                                                            </div>
+
+                                                            <br>
+
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox5" value="option5">Υπερουριχαιμία
+                                                                    &nbsp;
+                                                                    <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Υπερουριχαιμία" data-content="αυξημένα επίπεδα ουρικού οξέος">
+                                                                        (i)
+                                                                    </a>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox6" value="option6">Υπέρταση
+                                                                    &nbsp;
+                                                                    <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Υπέρταση" data-content="υψηλή αρτηριακή πίεση">
+                                                                        (i)
+                                                                    </a>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox7" value="option7">Υπερχοληστερολαιμία
+                                                                    &nbsp;
+                                                                    <a href="#" class="btn btn-xs btn-info" data-toggle="popover" title="Υπερχοληστερολαιμία" data-content="αυξημένα επίπεδα χοληστερόλης ή/και τριγλυκεριδίων">
+                                                                        (i)
+                                                                    </a>
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-6">
+                                                                <label class="control-label" id="WorkOutIntensity">
+                                                                    <i class="fa fa-heart" style="font-weight: bold;"></i>
+                                                                    &nbsp;
+                                                                    Επιλέξτε το επίπεδο σωματικής δραστηριότητάς σας
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <br>
+                                                                <div class="controls">
+                                                                    <select class="form-control">
+                                                                        <option>
+                                                                            επιλέξτε επίπεδο δραστηριότητας...
+                                                                        </option>
+                                                                        <option title="Περιλαμβάνει καθιστική εργασία με ελάχιστη ή καμία δυνατότητα μετακίνησης μέσα στο χώρο εργασίας, και ελάχιστες ή καθόλου δραστηριότητες/κινήσεις στον ελεύθερο χρόνο (συμπεριλαμβάνονται δραστηριότητες όπως ύπνος, κάθισμα στο καναπέ ή στέκομαι για λίγη ώρα όρθιος και ελαφριές δραστηριότητες στο σπίτι)." data-rel="tooltip">
+                                                                            Καθιστική Ζωή 
+                                                                        </option>
+                                                                        <option title="Περιλαμβάνει καθιστική εργασία με ελάχιστη ή καμία δυνατότητα μετακίνησης μέσα στο χώρο εργασίας, και μικρές ή ελαφριές δραστηριότητες/ κινήσεις που δεν απαιτούν μεγάλη προσπάθεια στον ελεύθερο χρόνο (συμπεριλαμβάνονται δραστηριότητες όπως ζωγραφική, οδήγηση, δακτυλογράφηση, ράψιμο, σιδέρωμα, μαγείρεμα, επιτραπέζια παιχνίδια, ενασχόληση με μουσικό όργανο και ήπιο περπάτημα τουλάχιστον 3 φορές/ εβδομάδα)." data-rel="tooltip">
+                                                                            Ήπια σωματική δραστηριότητα
+                                                                        </option>
+                                                                        <option title="Περιλαμβάνει καθιστική εργασία με ελάχιστη ή καμία δυνατότητα μετακίνησης μέσα στο χώρο εργασίας, και μέτριας έντασης ελεύθερες δραστηριότητες στην καθημερινότητα (συμπεριλαμβάνονται δραστηριότητες όπως σχεδόν καθημερινό περπάτημα σε ευθεία πορεία 4-5km/ώρα, επαγγέλματα που περιλαμβάνουν π.χ. ηλεκτρολογικές, ξυλουργικές εργασίες, εργασία σε γκαράζ, δουλειές του σπιτιού, φροντίδα παιδιών, εξυπηρέτηση σε εστιατόρια, οικοκυρικά καθώς και δραστηριότητες στην καθημερινότητα όπως γκολφ, ιστιοπλοΐα, πινγ πονκ κα.)." data-rel="tooltip">
+                                                                            Mέτρια σωματική δραστηριότητα
+                                                                        </option>
+                                                                        <option title="Περιλαμβάνει καθιστική εργασία με δυνατότητα μετακίνησης μέσα στο χώρο εργασίας καθώς και όλες τις εργασίες που περιλαμβάνουν έντονη κίνηση, και ελεύθερο χρόνο που εμπεριέχει έντονη ορθοστασία, έντονες δραστηριότητες 3-5 φορές την εβδομάδα όπως περπάτημα 5,5-6,5 km/ ώρα, μεταφορά φορτίων, ποδηλασία, τένις, χορός, ή/και εβδομαδιαία ενασχόληση με αθλητικές δραστηριότητες." data-rel="tooltip">
+                                                                            Έντονη σωματική δραστηριότητα
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <label class="control-label">
+                                                                    <i class="fa fa-leaf" style="font-weight: bold;"></i>
+                                                                    &nbsp;
+                                                                    Τι διατροφή ακολουθείς αυτό το διάστημα;
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <br>
+                                                                <div class="controls">
+                                                                    <select class="form-control">
+                                                                        <option>
+                                                                            επιλέξτε κατάσταση δίαιτας...
+                                                                        </option>
+                                                                        <option>
+                                                                            Απώλεια Βάρους 
+                                                                        </option>
+                                                                        <option>
+                                                                            Διατήρηση Βάρους 
+                                                                        </option>
+                                                                        <option>
+                                                                            Αύξηση Βάρους
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="control-label">
+                                                                    Επιλέξτε ποια από τα παρακάτω συστατικά δεν καταναλώνετε στην καθημερινή σας διατροφή:
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                                <div class="controls">
+                                                                    <select id="notdaily" class="form-control" multiple data-rel="chosen">
+                                                                        <option>
+                                                                            Αυγά
+                                                                        </option>
+                                                                        <option>
+                                                                            Αρνί
+                                                                        </option>
+                                                                        <option>
+                                                                            Γάλα
+                                                                        </option>
+                                                                        <option>
+                                                                            Σκληρό Τυρί
+                                                                        </option>
+                                                                        <option>
+                                                                            Φέτα
+                                                                        </option>
+                                                                        <option>
+                                                                            Μοσχάρι
+                                                                        </option>
+                                                                        <option>
+                                                                            Όστρακα/Μαλάκια
+                                                                        </option>
+                                                                        <option>
+                                                                            Χοιρινό
+                                                                        </option>
+                                                                        <option>
+                                                                            Ψάρι
+                                                                        </option>
+                                                                        <option>
+                                                                            Σιτάρι
+                                                                        </option>
+                                                                        <option>
+                                                                            Ψωμί
+                                                                        </option>
+                                                                        <option>
+                                                                            Σόγια
+                                                                        </option>
+                                                                        <option>
+                                                                            Σπόροι
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <br><br>
+
+
+                                                    </fieldset>	
+                                                </form>
+                                            </div>
+                                            <!-- / S T E P  (2)  -->
+
+                                            <!-- S T E P  (3)  -->                                                            
+                                            <div class="step-pane" id="step3">
+                                                <fieldset class="col-sm-12">
+                                                    <form class="form-horizontal">
+
+                                                        <div class="col-lg-12">
+                                                            <div class="text-center">
+                                                                <h2>
+                                                                    <b>
+                                                                        <em>
+                                                                            Διατροφικές Πληροφορίες
+                                                                        </em>
+                                                                    </b>
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="control-label">
+                                                                    Κατά την επιλογή των γευμάτων σας επιθυμείτε να ενημερώνεστε για τα παρακάτω:                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox11" value="option11" checked>Θερμίδες
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox12" value="option12" checked>Υδατάνθρακες
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox13" value="option13">Απλά σάκχαρα
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox14" value="option14">Φυτικές ίνες
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox15" value="option15" checked>Πρωτεΐνες
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox16" value="option16" checked>Λιπαρά
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox17" value="option17">Λίπος Κορεσμένο
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox18" value="option18">Λίπος Μονοακόρεστο
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox19" value="option19">Λίπος Πολυακόρεστο
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox20" value="option20" checked>Χοληστερόλη
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox21" value="option21">Μέταλλα/Ιχνοστοιχεία
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox22" value="option22">Βιταμίνες
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox23" value="option23">Αντιοξειδωτικά
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-9">
+                                                                &nbsp;
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="control-label">
+                                                                    Θέλω να καταγράφω και να παρακολουθώ καθημερινά:
+                                                                    <span style="color:red">
+                                                                        &nbsp;*
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox30" value="option30">Τα τρόφιμα, τις θερμίδες και τα θρεπτικά συστατικά που κατανάλωσα  
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" id="inlineCheckbox31" value="option31">Τα υγρά που κατανάλωσα 
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                &nbsp;
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="text-right">
+                                                                    <div class="btn btn-danger btn-setting" style="margin-bottom: 10px; width: 150px;">
+                                                                        <strong>
+                                                                            Ακύρωση
+                                                                        </strong>
+                                                                    </div>
+                                                                    &nbsp;
+                                                                    <a href="DISYS_Pelatis_OthoniYpodoxis.html" style="text-decoration: none; color: white;">                                                                    
+                                                                        <div class="btn btn-primary" style="margin-bottom: 10px; width: 150px;">
+                                                                            <strong>
+                                                                                Εγγραφή
+                                                                            </strong>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>	
+                                                </fieldset>	
+                                            </div>
+                                            <!-- /S T E P  (3)  -->                                                            
+
+                                        </div>
+
+
+                                    </div><!--  /box-content  -->
+
+                                </div><!--  /box  -->
+                            </div><!--  /col-lg-12  -->
+                        </div><!--  /row  -->
+                        <!-- /panel Εγγραφή -->
+
+                    </div>
+
+                </div>
+            </div><!--/col-->
+        </div>
+
+
+        <!-- - - - -  modal  - - - - - -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <br>
+                            <h2>
+                                <b>Είστε σίγουροι ότι θέλετε να ακυρώσετε την διαδικασία εγγραφής στο σύστημα;</b>
+                            </h2>
+                            <br>
+                            <br>
+                            <br>
+                            <a href="http://www.disys.gr" style="text-decoration: none; color: white;">
+                                <div class="btn btn-danger" style="margin-bottom: 10px; width: 150px;">
+                                    <strong>
+                                        Ακύρωση
+                                    </strong>
+                                </div>
+                            </a>
+                            &nbsp;
+                            <a href="DISYS_Pelatis_Ruthmiseis_Logariasmou.html" style="text-decoration: none; color: white;">                                                                    
+                                <div class="btn btn-primary" style="margin-bottom: 10px; width: 150px;">
+                                    <strong>
+                                        Εγγραφή
+                                    </strong>
+                                </div>
+                            </a>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- - - - -  / modal  - - - - - -->
+
+
+        <div class="clearfix" style="background-color: #f3f3f3; border-color: #f3f3f3">&nbsp;</div>
+
+
+        <!-- footer -->
+        <footer style="font-family: arial; height: 63px;">
+            <p>
+                <span style="text-align:left;float:left">
+                    <a href="http://www.disys.gr" style="text-decoration: none; color: white;" target="_blank">
+                        <img src="DISYS FOOTER IMG.png" alt="" height="40">
+                    </a>
+                </span>
+                <span class="hidden-phone" style="text-align: right; float: right; margin-top: 12px;">
+                    <a href="http://www.disys.gr" style="text-decoration: none; color: white;" target="_blank">
+                        Ευφυές Σύστημα Προσωποποιημένων ΔΙατροφικών ΣΥΣτάσεων
+                        &nbsp;&nbsp;&nbsp;
+                        -
+                        &nbsp;&nbsp;&nbsp;
+                        ΔΙΣΥΣ
+                        &copy;
+                        &nbsp;
+                        2014
+                        &nbsp;&nbsp;
+                    </a>
+                </span>
+            </p>
+        </footer>
+        <!-- /footer -->
+
+
+    </body>
+</html>

@@ -1,0 +1,126 @@
+@(userType: String, menu: String)
+@if(userType=="Admin") {
+            <!-- start: Main Menu -->
+            <div id="sidebar-left" class="col-lg-2 col-sm-1">
+
+                <div class="sidebar-nav nav-collapse collapse navbar-collapse">
+
+                    <ul class="nav main-menu">
+
+                        <li class="active">
+                            <a href="DISYS_Diaxeiristis_RuthmiseisApostolisEidopoihsewn.html">
+                                <i class="fa fa-gears" style="margin-right: 2px;"></i>
+                                <span class="hidden-sm text">
+                                    @Messages("menu.admin.settings")
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="DISYS_Diaxeiristis_DiaxeirishXrhstwn.html">
+                                <i class="fa fa-users" style="margin-right: 2px;"></i>
+                                <span class="hidden-sm text">
+                                    @Messages("menu.admin.manage_user")
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <a href="#" id="main-menu-min" class="full visible-md visible-lg">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+
+            </div>
+            <!-- end: Main Menu -->
+}
+
+@if(userType=="CUSTOMER") {
+                <!-- start: Main Menu -->
+               <div id="sidebar-left" class="col-lg-2 col-sm-1">
+                    <div class="sidebar-nav nav-collapse collapse navbar-collapse">
+
+                        <ul class="nav main-menu">
+
+                            <li @if(menu=="CUSTOMER_ACCOUNT_SETTINGS") { class="active"}>
+                                <a href="@routes.Customer.customerAccountSettings()">
+                                    <i class="fa fa-gears"></i>
+                                    <span class="hidden-sm text">
+                                        Προφίλ
+                                    </span>
+                                </a>
+                            </li>
+                            <li @if(menu=="CUSTOMER_SEARCHMEAL") { class="active"}>
+                                <a href="@routes.Customer.customerSearchMeal()">
+                                    <i class="fa fa-cutlery"></i>
+                                    <span class="hidden-sm text">
+                                        Επιλογή Γεύματος
+                                    </span>
+                                </a>
+                            </li>
+                            @if(session.get("tracking") == "1") {
+                            <li @if(menu=="CUSTOMER_TRACKING_MAIN") { class="active" }>
+                                <a href="@routes.Customer.customerTrackingMain()">
+                                    <i class="fa fa-chain"></i>
+                                    <span class="hidden-sm text">
+                                        Tracking
+                                    </span>
+                                </a>
+                            </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <a href="#" id="main-menu-min" class="full visible-md visible-lg">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+
+                </div>
+                <!-- end: Main Menu -->
+}
+
+@if(userType=="OWNER") {
+                <!-- start: Main Menu -->
+                <div id="sidebar-left" class="col-lg-2 col-sm-1">
+
+                    <div class="sidebar-nav nav-collapse collapse navbar-collapse">
+
+                        <ul class="nav main-menu">
+
+                            <li @if(menu=="OWNER_PROFILE") { class="active" }>
+                                <a href="@routes.Owner.ownerProfile()">
+                                    <i class="fa fa-user"></i>
+                                    <span class="hidden-sm text">
+                                        Προφίλ
+                                    </span>
+                                </a>
+                            </li>
+                            <li @if(menu=="OWNER_RESTAURANTS") { class="active" }>
+                                <a href="@routes.Owner.ownerRestaurants()">
+                                    <i class="fa fa-cutlery"></i>
+                                    <span class="hidden-sm text">
+                                        Καταστήματα
+                                    </span>
+                                </a>
+                            </li>
+                            <li @if(menu=="OWNER_RECIPES") { class="active"}>
+                                <a href="@routes.Owner.ownerRecipesMain()">
+                                    <i class="fa fa-book"></i>
+                                    <span class="hidden-sm text">
+                                        Συνταγές
+                                    </span>
+                                </a>                             
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <a href="#" id="main-menu-min" class="full visible-md visible-lg">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+
+                </div>
+                <!-- end: Main Menu -->
+}

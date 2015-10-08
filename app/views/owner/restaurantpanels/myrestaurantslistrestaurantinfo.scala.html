@@ -1,0 +1,374 @@
+@import models.restaurant._
+@(cousines: List[models.lists.Hcousine],
+licences: List[models.lists.Hrestaurantlicence],
+prices: List[models.lists.Hpricerange],
+restaurantcategories: List[models.lists.Hrestaurantcategory]
+)
+ 
+ <!-- - - - - - - - Πληροφορίες Καταστήματος - - - - - - - -->
+ <div class="tab-pane active" id="info">
+
+     <br>
+
+
+     <div class="row">
+
+         <div class="col-lg-8">
+
+             <div class="row">
+                 <div class="col-lg-6">
+                     <label class="control-label">
+                         Όνομα Καταστήματος
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-lg-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-cutlery"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantNameInput" type="text" placeholder="Restaurant Name" disabled>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-6">
+                     <label class="control-label">
+                         Επωνυμία Εταιρείας
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-building-o"></i>
+                             </span>
+                             <input class="form-control focused" id="OrganizationName" type="text" placeholder="Company Name" disabled>
+                         </div>
+                     </div>                                                                        
+                 </div>
+
+             </div>
+
+             <div class="row">&nbsp;</div>
+
+             <div class="row">
+                 <div class="col-lg-8">
+                     <label class="control-label">
+                         Κατηγορία Καταστήματος Βάσει Άδειας Λειτουργίας
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls">
+                         <select id="SelectStorelisence" class="form-control" disabled>
+                             <option></option>                         
+@for(licence <- licences) {
+<option value="@licence.getId()">
+	@licence.getDescription()
+</option>
+}
+                         </select>
+                     </div>
+                 </div>
+                 
+                 <div class="col-lg-4">
+                     <label class="control-label" id="RestaurantPrice">
+                         Εύρος Τιμής ανά άτομο
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls">
+                         <select id="PriceSelect" class="form-control" disabled>
+                             <option></option>
+@for(price <- prices) {
+<option value="@price.getId()">
+	@price.getDescription()
+</option>
+}
+                         </select>
+                     </div>
+                 </div>                                                                    
+                 
+             </div>
+
+             <div class="row">
+
+                 <div class="col-lg-6">
+                     <label class="control-label">
+                         Είδος Καταστήματος βάσει εμπορικού προφίλ
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls">
+                         <select id="SelectStoreKind" class="form-control" multiple data-rel="chosen" disabled>
+@for(restaurantcategory <- restaurantcategories) {
+<option value="@restaurantcategory.getId()">
+	@restaurantcategory.getDescription()
+</option>
+}
+                         </select>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-6">
+                     <label class="control-label" id="RestaurantCuisine">
+                         Ειδος Κουζίνας
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls">
+                         <select id="selectcuisine" name="selectcuisine" class="form-control" multiple data-rel="chosen" disabled>
+@for(cousine <- cousines) {
+<option value="@cousine.getId()">
+	@cousine.getDescription()
+</option>
+}
+                         </select>
+                     </div>
+                 </div>
+
+             </div>
+             
+             <br>
+             
+             <div class="row">
+                 <div class="col-lg-12">
+                     <label class="control-label">
+                         Επιπλέον Πληροφορίες
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-lg-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-info"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantInfo" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="row">&nbsp;</div>
+
+             <div class="row">
+                 <div class="col-lg-7">
+                     <label class="control-label">
+                         Δήμος
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-globe"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantCity" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-5">
+                     <label class="control-label">
+                         T.K.
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-location-arrow"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantPostcode" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <!--<div class="row">&nbsp;</div>-->                                                        
+
+             <div class="row">
+                 <div class="col-lg-7">
+                     <label class="control-label">
+                         Οδός
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-road"></i>
+                             </span>                                            
+                             <input class="form-control focused" id="RestaurantStreet" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-5">
+                     <label class="control-label">
+                         Αριθμός
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-map-marker"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantStreetNumber" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="row">&nbsp;</div>
+
+             <div class="row">
+                 <div class="col-lg-7">
+                     <label class="control-label">
+                         Ονοματεπώνυμο Υπεύθυνου Καταστήματος
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-user"></i>
+                             </span>                                            
+                             <input class="form-control focused" id="PersonInCharge" type="text"  disabled>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="row">&nbsp;</div>                                                        
+
+             <div class="row">
+                 <div class="col-lg-4">
+                     <label class="control-label">
+                         Τηλέφωνο Σταθερό
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-phone"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantPhone" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-4">
+                     <label class="control-label">
+                         Τηλέφωνο Κινητό
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-mobile-phone"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantCellPhone" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-4">
+                     <label class="control-label">
+                         Fax
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-phone-square"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantFax" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <!--<div class="row">&nbsp;</div>-->                                                        
+
+             <div class="row">
+                 <div class="col-lg-6">
+                     <label class="control-label">
+                         e-mail
+                         <span style="color:red">
+                             &nbsp;*
+                         </span>
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-envelope-o"></i>
+                             </span>
+                             <input class="form-control focused" id="RestaurantEmail" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-6">
+                     <label class="control-label">
+                         Site Εταιρείας
+                     </label>
+                     <div class="controls row">
+                         <div class="input-group col-sm-12">	
+                             <span class="input-group-addon">
+                                 <i class="fa fa-globe"></i>
+                             </span>
+                             <input class="form-control focused" id="OrganizationWebPage" type="text" disabled>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="row">&nbsp;</div>
+
+             <!--  <div class="row">
+                 <div class="col-lg-6">
+                     <br>
+                     <label class="control-label">
+                         Μεταφόρτωση Λογότυπου
+                     </label>
+                     <div class="controls" style="width: 350px;">
+                         <div id="dropzone">
+                             <div class="fallback">
+                                 <input name="file" type="file" multiple="" />
+                             </div>
+                         </div>
+                     </div>
+
+                 </div>
+
+                 <div class="col-lg-6">
+                     <div class="smallstat box" style="margin-bottom: 0px;">
+                         <div class="text-center">
+                             <img src="#" alt="" style="max-height: 171px; max-width: 250px">
+                         </div>
+                     </div>
+                 </div>
+             </div>-->
+
+
+         </div><!-- /col-lg-8 -->
+
+         <div class="col-lg-4" style="padding-top: 30px; padding-right: 0px;">
+             <div class="text-center">
+				<div id="map-canvas"></div>
+                 <!--<embed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6290.098037844253!2d23.734129869835552!3d37.97598533367047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd3e92480435%3A0x68ba1057cb0d560e!2zzqDOu86xz4TOtc6vzrEgzqPPhc69z4TOrM6zzrzOsc-Ezr_PgiwgzpHOuM6uzr3OsQ!5e0!3m2!1sel!2sgr!4v1412258773568" width="270" height="450" frameborder="0" style="border:0">-->
+
+             </div>
+         </div>
+
+     </div>
+ </div>
+ <!-- / - - - - - - - / Πληροφορίες Καταστήματος - - - - - - - -->

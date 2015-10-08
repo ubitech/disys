@@ -1,0 +1,2736 @@
+@import models.restaurant._
+@import beans._
+@import models.lists._
+@(ingredientGroups: ArrayList[IngredientGroup], 
+	ingredients: ArrayList[IngredientHelper], cousines: List[Hcousine], characteristics: List[Hcharacteristic],
+	categories: List[Hcategory],
+	fruitswithshell: List[Hfruitwithshell],
+	cerealswithglouten: List[Hcerealswithglouten])
+@main("ΔΙΣΥΣ - Πελάτης - Tracking", "CUSTOMER", "customer", "CUSTOMER_TRACKING") {
+            <!-- - - - -  modal  - - - - - -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Διατροφική Ανάλυση πιάτου</h4>
+                        </div>
+                        <div class="modal-body">
+                        <!-- Sunoptikes Plirofories -->
+                        <div class="col-lg-12">
+                            <div class="box">
+
+                                <!-- PanelHeading -->
+                                <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                    <h2>
+                                        <i class="fa fa-info" style="color: white;"></i>
+                                        <span class="break"></span>
+                                        Συνοπτική Παρουσίαση Διατροφικών Πληροφοριών
+                                    </h2>
+                                    <div class="box-icon">
+                                        <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                        <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                    </div>
+                                </div>
+                                <!-- /PanelHeading -->
+
+                                <!-- Panel Content -->
+                                <div class="box-content clearfix" style="display: none;">
+
+                                    <table class="table table-striped" id="DiatrofikhAnalysiSynoptika">
+                                        <tbody>
+                                            <tr><!-- 1st row - 8ermides -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Θερμίδες</p>
+                                                            <p id="caloriesBarel"></p>
+                                                            <p style="padding-top: 19px; color: black;" id="caloriesBarelPc"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Θερμίδες</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="caloriesBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr><!-- 2nd row - Lipara -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Λιπαρά</p>
+                                                            <p id="fatsBarel"></p>
+                                                            <p style="padding-top: 19px; color: black;" id="fatsBarelPc"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Λιπαρά</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="fatsBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr><!-- 3rd row - Koresmena -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Κορεσμένα</p>
+                                                            <p id="saturatedBarel"></p>
+                                                            <p style="padding-top: 19px; color: black;" id="saturatedBarelPc"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Κορεσμένα</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="saturatedBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr><!-- 4th row - Ydatan8rakes -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Υδατάνθρακες</p>
+                                                            <p id="hydrosBarel">654g</p>
+                                                            <p style="padding-top: 19px; color: black;" id="hydrosBarelPc">120%</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Υδατάνθρακες</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="hydrosBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr><!-- 5th row - Apla Sakxara -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Απλά Σάκχαρα</p>
+                                                            <p id="sugarsBarel"></p>
+                                                            <p style="padding-top: 19px; color: black;" id="sugarsBarelPc"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Απλά Σάκχαρα</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="sugarsBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr><!-- 6th row - Prwteines -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Πρωτεΐνες</p>
+                                                            <p id="proteinsBarel"></p>
+                                                            <p style="padding-top: 19px; color: black;" id="proteinsBarelPc"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Πρωτεΐνες</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="proteinsBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr><!-- 7th row - Alati -->
+                                                <td class="col-lg-2">
+                                                    <div style="background: url(@routes.Assets.at("assets/Foodlabel.png")); bottom: 0; left: 0.5em; width: 106px; height: 151px; position:relative; font-weight: bold; color: #fff;">
+                                                        <div class="text-center">
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-size: 12px;">Αλάτι</p>
+                                                            <p id="saltBarel"></p>
+                                                            <p style="padding-top: 19px; color: black;" id="saltBarelPc"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ul class="skill-bar col-lg-6">
+                                                        <li>
+                                                            <h5 class="text-left">Αλάτι</h5>
+                                                            <div class="meter">
+                                                                <span class="blue" id="saltBar"></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>  
+                        <!-- / Sunoptikes Plirofories -->
+
+                            <!--  / DiatrofikiAnalysi /Table -->
+                            <div class="col-lg-12">
+
+                                <div class="box">
+
+                                    <!-- PanelHeading -->
+                                    <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                        <h2>
+                                            <i class="fa fa-info" style="color: white;"></i>
+                                            <span class="break"></span>
+                                            Πίνακας Διατροφικής Αξίας
+                                        </h2>
+                                        <div class="box-icon">
+                                            <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                            <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- /PanelHeading -->
+
+                                    <!-- Panel Content -->
+                                    <div class="box-content clearfix" style="display: none;">
+
+                                        <table class="table table-striped table-bordered" id="DiatrofikhAnalysi">
+                                            <!--  DiatrofikiAnalysi Table HEADING  -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-6">
+                                                        Μέση Ανάλυση Θρ. Συστατικών
+                                                    </th>
+                                                    <th class="col-lg-3">
+                                                        Ανά 100g Πιάτου
+                                                    </th>
+                                                    <th class="col-lg-3">
+                                                        Ανά Μερίδα
+                                                    </th>
+                                                </tr>
+                                            </thead>   
+                                            <!--  / DiatrofikiAnalysi Table  HEADING  -->
+
+                                            <!--  DiatrofikiAnalysi Table   BODY  -->
+                                            <tbody>
+                                                <!--  DiatrofikiAnalysi Table  Line1  -->
+                                                <tr>
+                                                    <td>
+                                                        Ενέργεια
+                                                    </td>
+                                                    <td id="caloriesModalpc">                                                       
+                                                    </td>
+                                                    <td id="caloriesModal">
+                                                       
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table  Line1  -->
+                                                <!--  DiatrofikiAnalysi Table  Line2  -->
+                                                <tr>
+                                                    <td>
+                                                        Λιπαρά
+                                                    </td>
+                                                    <td id="fatsModalpc">                                                       
+                                                    </td>
+                                                    <td id="fatsModal">
+                                                        
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table  Line2  -->
+                                                <!--  DiatrofikiAnalysi Table  Line3  -->
+                                                <tr>
+                                                    <td>
+                                                        &emsp;&nbsp;
+                                                        εκ των οποίων Κορεσμένα
+
+                                                    </td>
+                                                    <td id="saturatedModalpc">
+                                                    </td>
+                                                    <td id="saturatedModal">
+
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line3  -->
+                                                <!--  DiatrofikiAnalysi Table  Line4  -->
+                                                <tr>
+                                                    <td>
+                                                        Υδατάνθρακες
+                                                    </td>
+                                                    <td id="hydrosModalpc">
+                                                    </td>
+                                                    <td id="hydrosModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line4  -->
+                                                <!--  DiatrofikiAnalysi Table  Line5  -->
+                                                <tr>
+                                                    <td>
+                                                        &emsp;&nbsp;
+                                                        εκ των οποίων Απλά Σάκχαρα
+                                                    </td>
+                                                    <td id="sugarsModalpc">
+                                                    </td>
+                                                    <td id="sugarsModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line5  -->
+                                                <!--  DiatrofikiAnalysi Table  Line6  -->
+                                                <tr>
+                                                    <td>
+                                                        Φυτικές Ίνες
+                                                    </td>
+                                                    <td id="fiberModalpc">
+                                                    </td>
+                                                    <td id="fiberModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line6  -->
+                                                <!--  DiatrofikiAnalysi Table  Line7  -->
+                                                <tr>
+                                                    <td>
+                                                        Πρωτεΐνες
+                                                    </td>
+                                                    <td id="proteinModalpc">
+                                                    </td>
+                                                    <td id="proteinModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line7  -->
+                                                <!--  DiatrofikiAnalysi Table  Line8  -->
+                                                <tr>
+                                                    <td>
+                                                        Αλάτι
+                                                    </td>
+                                                    <td id="saltModalpc">
+                                                    </td>
+                                                    <td id="saltModal">
+                                                    </td>                                                    
+                                                </tr>
+                                                <!--  / DiatrofikiAnalysi Table Line8  -->
+                                            </tbody>
+                                            <!--  / DiatrofikiAnalysi Table  BODY -->
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--  / DiatrofikiAnalysi /Table -->
+
+
+                            <!-- DiatrofikoiIsxurismoi Table -->
+                            <div class="col-lg-12">
+
+                                <div class="box">
+
+                                    <!-- PanelHeading -->
+                                    <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                                        <h2>
+                                            <i class="fa fa-info" style="color: white;"></i>
+                                            <span class="break"></span>
+                                            Ιχνοστοιχεία και Βιταμίνες
+                                        </h2>
+                                        <div class="box-icon">
+                                            <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                                            <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- /PanelHeading -->
+
+                                    <!-- Panel Content -->
+                                    <div class="box-content clearfix" style="display: none;">
+
+                                        <table class="table table-striped table-bordered" id="DiatrofikoiIsxurismoi">
+                                            <!--  DiatrofikoiIsxurismoi Table  HEADING  -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-4"><!-- gia stoixish sto kentro style="text-align: center;" -->
+                                                        Μέση Ανάλυση Θρ. Συστατικών
+                                                    </th>
+                                                    <th class="col-lg-4">
+                                                        Ανά 100g Πιάτου (ΠΠΑ% ανά 100gr)
+                                                    </th>
+                                                    <th class="col-lg-4">
+                                                        Ανά Μερίδα (ΠΠΑ% ανά μερίδα)
+                                                    </th>
+                                                </tr>
+                                            </thead>   
+                                            <!--  / DiatrofikoiIsxurismoi Table  HEADING  -->
+
+                                            <!--  DiatrofikoiIsxurismoi Table  BODY  -->
+                                            <tbody>
+                                                <!--  DiatrofikoiIsxurismoi Table Line1  -->
+                                                <tr id="vitkModalRow">
+                                                    <td>
+                                                        Βιταμίνη K
+                                                    </td>
+                                                    <td id="vitkModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="vitkModal">
+                                                       
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line1  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line2  -->
+                                                <tr id="vitcModalRow">
+                                                    <td>
+                                                        Βιταμίνη C
+                                                    </td>
+                                                    <td id="vitcModalpc">
+                                                        
+                                                    </td>
+                                                    <td id="vitcModal">
+                                                       
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line2  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line3  -->
+                                                <tr id="vitdModalRow">
+                                                    <td>
+                                                        Βιταμίνη D
+                                                    </td>
+                                                    <td id="vitdModalpc">
+                                                      
+                                                    </td>
+                                                    <td id="vitdModal">
+                                                        
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line3  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line4  -->
+                                                <tr id="viteModalRow">
+                                                    <td>
+                                                        Βιταμίνη E
+                                                    </td>
+                                                    <td id="viteModalpc">
+                                                        
+                                                    </td>
+                                                    <td id="viteModal">
+                                                        
+                                                    </td>             
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line4  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line5  -->
+                                                <tr id="thiaminModalRow">
+                                                    <td>
+                                                        Βιταμίνη B1
+                                                    </td>
+                                                    <td id="thiaminModalpc">
+                                                        
+                                                    </td>
+                                                    <td id="thiaminModal">
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line5  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line6  -->
+                                                <tr id="folateModalRow">
+                                                    <td>
+                                                        Φυλλικό οξύ
+                                                    </td>
+                                                    <td  id="folateModalpc">
+                                                       
+                                                    </td>
+                                                    <td  id="folateModal">
+
+                                                    </td>
+                                                </tr>
+                                                <!--  / DiatrofikoiIsxurismoi Table Line6  -->                                           
+                                                <!--  DiatrofikoiIsxurismoi Table Line7  -->
+                                                <tr id="riboflavinModalRow">
+                                                    <td>
+                                                        Βιταμίνη B2
+                                                    </td>
+                                                    <td  id="riboflavinModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="riboflavinModal">                                                        
+                                                    </td>             
+                                                </tr>                                                                                                                                             <tr>
+                                                <tr id="vitaminaModalRow">
+                                                    <td>
+                                                        Βιταμίνη A
+                                                    </td>
+                                                    <td  id="vitaminaModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="vitaminaModal">                                                        
+                                                    </td>             
+                                                </tr>
+                                                <tr id="niacinModalRow">
+                                                    <td>
+                                                        Νιασίνη
+                                                    </td>
+                                                    <td  id="niacinModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="niacinModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr id="b6ModalRow">
+                                                    <td>
+                                                        Βιταμίνη B6
+                                                    </td>
+                                                    <td  id="b6Modalpc">
+                                                       
+                                                    </td>
+                                                    <td id="b6Modal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr id="b12ModalRow">
+                                                    <td>
+                                                        Βιταμίνη B12
+                                                    </td>
+                                                    <td  id="b12Modalpc">
+                                                       
+                                                    </td>
+                                                    <td id="b12Modal">                                                        
+                                                    </td>             
+                                                </tr>   
+                                                <tr id="pantothenicModalRow">
+                                                    <td>
+                                                        Παντοθενικό Οξύ
+                                                    </td>
+                                                    <td  id="pantothenicModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="pantothenicModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr id="potassiumModalRow">
+                                                    <td>
+                                                        Κάλιο
+                                                    </td>
+                                                    <td  id="potassiumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="potassiumModal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr id="calciumModalRow">
+                                                    <td>
+                                                        Ασβέστιο
+                                                    </td>
+                                                    <td  id="calciumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="calciumModal">                                                        
+                                                    </td>             
+                                                </tr>     
+                                                <tr id="phosphorusModalRow">
+                                                    <td>
+                                                        Φωσφόρος
+                                                    </td>
+                                                    <td  id="phosphorusModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="phosphorusModal">                                                        
+                                                    </td>             
+                                                </tr>
+                                                <tr id="magnesiumModalRow">
+                                                    <td>
+                                                        Μαγνήσιο
+                                                    </td>
+                                                    <td  id="magnesiumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="magnesiumModal">                                                        
+                                                    </td>             
+                                                </tr>   
+                                                <tr id="ironModalRow">
+                                                    <td>
+                                                        Σίδηρος
+                                                    </td>
+                                                    <td  id="ironModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="ironModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr id="zincModalRow">
+                                                    <td>
+                                                        Ψευδάργυρος
+                                                    </td>
+                                                    <td  id="zincModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="zincModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr id="copperModalRow">
+                                                    <td>
+                                                        Χαλκός
+                                                    </td>
+                                                    <td  id="copperModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="copperModal">                                                        
+                                                    </td>             
+                                                </tr> 
+                                                <tr id="maganeseModalRow">
+                                                    <td>
+                                                        Μαγγάνιο
+                                                    </td>
+                                                    <td  id="maganeseModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="maganeseModal">                                                        
+                                                    </td>             
+                                                </tr>        
+                                                <tr id="seleniumModalRow">
+                                                    <td>
+                                                        Σελήνιο
+                                                    </td>
+                                                    <td  id="seleniumModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="seleniumModal">                                                        
+                                                    </td>             
+                                                </tr>  
+												<tr id="alphaModalRow">
+                                                    <td>
+                                                        α Καροτένιο 
+                                                    </td>
+                                                    <td  id="alphaModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="alphaModal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr id="betaModalRow">
+                                                    <td>
+                                                        β Καροτένιο 
+                                                    </td>
+                                                    <td  id="betaModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="betaModal">                                                        
+                                                    </td>             
+                                                </tr>  
+												<tr id="cryptoModalRow">
+                                                    <td>
+                                                        β Κρυπτοξανθίνη 
+                                                    </td>
+                                                    <td  id="cryptoModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="cryptoModal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr id="lycopeneModalRow">
+                                                    <td>
+                                                        Λυκοπένιο 
+                                                    </td>
+                                                    <td  id="lycopeneModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="lycopeneModal">                                                        
+                                                    </td>             
+                                                </tr>  
+                                                <tr id="luzeaModalRow">
+                                                    <td>
+                                                        Λουτεΐνη & Ζεαξανθίνη 
+                                                    </td>
+                                                    <td  id="luzeaModalpc">
+                                                       
+                                                    </td>
+                                                    <td id="luzeaModal">                                                        
+                                                    </td>             
+                                                </tr>                                                                                                                                                                                                                                                                                                 
+                                                <!--  / DiatrofikoiIsxurismoi Table Line7  -->                                           
+                                            </tbody>
+                                            <!--  / DiatrofikoiIsxurismoi Table  BODY -->
+                                        </table>
+* Οι ποσοστιαίες τιμές έχουν υπολογισθεί με βάση τις πληροφορίες του διατροφικού σας προφίλ
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /DiatrofikoiIsxurismoi /Table -->
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <!-- / - - - - - - /.modal - - - - - - - -->    
+                <!-- start: Content -->
+ <div id="content" class="col-lg-10 col-sm-11 ">
+
+     <ol class="breadcrumb">
+         <li>
+             <a href="#" style="text-decoration: none;">
+                 &nbsp;ΔΙΣΥΣ
+             </a>
+         </li>
+         <li class="active">
+             Tracking
+         </li>
+     </ol>
+<script>
+function submitProino() {
+    var f = document.createElement('form');
+    f.setAttribute("method", "POST");
+    f.setAttribute("action", "@routes.Customer.addDayDish()");
+
+    
+    var ingredientList = $('*[id^="ingredientToAddProino"]');
+    var ingredientsLength = document.createElement('input');
+    ingredientsLength.setAttribute('name', 'ingredientsLength');
+    ingredientsLength.setAttribute('value', ingredientList.length);
+    f.appendChild(ingredientsLength);
+    
+    for (var i = 0; i < ingredientList.length; i++) {
+    	var ingredient = document.createElement('input');
+    	ingredient.setAttribute('name', 'ingredients'+i);
+    	ingredient.setAttribute('value', $(ingredientList[i]).attr('id').replace('ingredientToAddProino',''));
+    	f.appendChild(ingredient);
+    }
+    var metricList = $('*[id^="metricToAddProino"]');
+    for (var i = 0; i < metricList.length; i++) {
+    	var metric = document.createElement('input');
+    	metric.setAttribute('name', 'metrics'+i);
+    	metric.setAttribute('value', $(metricList[i]).attr('id').replace('metricToAddProino',''));
+    	f.appendChild(metric);
+    }    
+    var amountList = $('*[id^="AmountToAddProino"]');
+    for (var i = 0; i < amountList.length; i++) {
+    	var amount = document.createElement('input');
+    	amount.setAttribute('name', 'amounts'+i);
+    	amount.setAttribute('value', $(amountList[i]).attr('id').replace('AmountToAddProino',''));
+    	f.appendChild(amount);
+    }
+    var dayperiod = document.createElement('input');
+    dayperiod.setAttribute('name', 'dayperiod');
+    dayperiod.setAttribute('value', 1);
+	f.appendChild(dayperiod);  
+	
+    var date = document.createElement('input');
+    date.setAttribute('name', 'date');
+    date.setAttribute('value', $("#datepicker").val());
+	f.appendChild(date);
+	
+    f.submit();		
+}
+function removeingredientproino(ingid) {
+	$("#ingredientRowProino"+ingid).remove();
+}
+function populateIngredientsProino(el) {
+	var ingredientCat = $("#IngredientCatSelectProino").val().replace("IngredientCat","");
+	$("#IngredientSelectProino").html("");
+	//$("#MetricSelect").html("");
+	$.ajax({
+		url: "@routes.Owner.fetchIngredientsbyCat()",
+		data: "ingredientCat="+ingredientCat,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			var toks = result.split('|');
+			html+="<option value=\"-1\">επιλέξτε συστατικό...</option>";
+			for (var i = 0; i < toks.length; i++) {
+				var vals = toks[i].split('=');
+				html+="<option value=\""+vals[1]+"\">"+vals[0]+"</option>";
+			}
+			$("#IngredientSelectProino").html(html);
+			$("#IngredientSelectProino").chosen().trigger("chosen:updated");	
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+function pickMetricProino(el) {
+	var ingredientId = $("#IngredientSelectProino").val();
+	$.ajax({
+		url: "@routes.Owner.fetchMetrics()",
+		data: "ingredientId=" + ingredientId,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			if (result["gmWt_1"] != null) {
+				html+="<option value=\""+1+"\">"+result["gmWt_Desc1"]+"</option>";
+			}
+			if (result["gmWt_2"] != null) {
+				html+="<option value=\""+2+"\">"+result["gmWt_Desc2"]+"</option>";
+			}	
+			html+='<option value="10">Γραμμάρια</option><option value="20">Κιλά</option>';
+			$("#MetricSelectProino").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_proino = 0;
+var ingredientsproino = [];
+var amountsproino = [];
+var metricsproino = [];
+function calculateIngredientRowProino() {
+	if ($("#IngredientSelectProino").val() == null || $("#IngredientSelectProino").val() == "-1") {
+		return;
+	}
+	if ($("#SubstanceAmmountNumericProino").val().length == 0) {
+		return;
+	}
+	if ($("#MetricSelectProino").val() == null) {
+		return;
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":$("#IngredientSelectProino").val(), 
+			"amountList":$("#SubstanceAmmountNumericProino").val(),
+			"metricList":$("#MetricSelectProino option:selected").val()},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});		
+
+}
+function calculateProino() {
+	ingredientsproino = [];
+	amountsproino = [];
+	metricsproino = [];	
+	var ingredientList = $('*[id^="ingredientToAddProino"]');
+	var amountList = $('*[id^="AmountToAddProino"]');
+	var metricList = $('*[id^="metricToAddProino"]');
+	var ingredients =""; var amounts=""; var metrics="";
+	for (var i = 0; i < ingredientList.length; i++) {
+		ingredientsproino.push($(ingredientList[i]).attr('id').replace('ingredientToAddProino',''));
+		amountsproino.push($(amountList[i]).attr('id').replace('AmountToAddProino',''));
+		metricsproino.push($(metricList[i]).attr('id').replace('metricToAddProino',''));
+		
+		ingredients+=($(ingredientList[i]).attr('id').replace('ingredientToAddProino','')+",");
+		amounts+=($(amountList[i]).attr('id').replace('AmountToAddProino','')+",");
+		metrics+=($(metricList[i]).attr('id').replace('metricToAddProino','')+",");
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":ingredients, "amountList":amounts,"metricList":metrics},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});	
+}
+function addIngredientToDishProino() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumericProino").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε ποσότητα συστατικού\n";
+		valid = false;
+	}
+	if ($("#IngredientProino").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}
+	if ($("#MetricSelectProino").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε μονάδα μέτρησης\n";
+		valid = false;
+	}
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+
+	var functions = '<td><div class="text-center">';
+	functions += '<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredientproino('+ingredient_counter_proino+')" data-rel="tooltip" style="margin-top: 2px;">';
+	functions += '<i class="fa fa-trash-o"></i></div></div></td>';	
+	html="<tr id=\"ingredientRowProino"+ingredient_counter_proino+"\">";
+	html+= "<td id=ingredientToAddProino"+$("#IngredientSelectProino").val()+">" + $("#IngredientSelectProino option:selected").text() + "</td>";
+	html+="<td id=AmountToAddProino"+$("#SubstanceAmmountNumericProino").val()+">"+$("#SubstanceAmmountNumericProino").val()+"</td>";
+	html+="<td id=metricToAddProino"+ $("#MetricSelectProino option:selected").val()+">"+ $("#MetricSelectProino option:selected").text()+"</td>";
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBodyProino").append(html);
+	ingredient_counter_proino++;
+}
+function fetchDishes() {
+	$.ajax({
+		url: "@routes.Customer.fetchDailyDishes()",
+		data: "date="+$("#datepicker").val(),
+		method: "POST",
+		success: function(result) {
+			document.getElementById("previousMealsTable").setAttribute("style","");
+			var html="";
+			//alert(JSON.stringify(result));
+			for (var i = 0; i < result.length; i++) {
+				//alert(result[i]);
+				html+='<tr><td>'+result[i].dayperiod+'</td>';
+				html+='<td>'+result[i].ingredient+'</td>';
+				html+='<td>'+result[i].amount+'</td>';
+				html+='<td>'+result[i].metric+'</td>';
+				html+='<td></td></tr>';
+			}
+			$("#previousMealsBody").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});	
+}
+$(function() {
+	fetchDishes();
+});
+</script>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="text-left">
+                                                    <p><strong>Επιλέξτε Ημερομηνία:&nbsp;</strong><input type="text" id="datepicker" onchange="fetchDishes()"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <br/>
+     <!--  panel 1 -  Πρωινό  -->
+     <div class="row">
+         <div class="col-lg-12">
+
+             <div class="box">
+
+                 <!-- PanelHeading -->
+                 <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                     <h2>
+                         <i class="fa fa-clock-o" style="color: white;"></i>
+                         <span class="break" style="color: white;"></span>
+                         Πρωινό
+                     </h2>
+                     <div class="box-icon">
+                         <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                         <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                     </div>
+                 </div>
+                 <!-- /PanelHeading -->
+
+                 <!-- Panel Content -->
+                 <div class="box-content clearfix" style="display: none;">                                            
+
+                     <div class="row" style="margin: 0px;">
+
+                         <div class="col-lg-3">
+                             <label class="control-label" id="IngredientCat">
+                                 Κατηγορία Συστατικού
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+  <select id="IngredientCatSelectProino" class="form-control" onchange="populateIngredientsProino(this)">
+      <option value="-1">
+          κατηγορία...
+      </option>                                                                    
+  @for(ingredientGroup <- ingredientGroups) {
+      <option  value="IngredientCat@ingredientGroup.getId()">
+          @ingredientGroup.getDescription()
+      </option>                                                                    
+  }
+  </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-4">
+                             <label class="control-label" id="Ingredient">
+                                 Συστατικό
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="IngredientSelectProino" data-rel="chosen" name="IngredientSelectProino" onchange="pickMetricProino(this)">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2">
+                             <label class="control-label">
+                                 Ποσότητα
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                     <input class="form-control focused" id="SubstanceAmmountNumericProino" type="text" placeholder="Ammount" style="padding: 5px;">
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2" style="padding-right: 0px;">
+                             <label class="control-label" id="DishSubstancesAmmountProino">
+                                 Μονάδα Μέτρησης
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="MetricSelectProino">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-1" style="padding-left: 5px; padding-right: 5px;">
+                             <label class="control-label">
+                                 &nbsp;
+                             </label>
+                             <div class="text-center">
+                                 <div class="btn btn-sm btn-info " title="Διατροφικές Πληροφορίες" data-rel="tooltip" style="margin-top: 2px;" onclick="calculateIngredientRowProino()">
+                                     <i class="fa fa-info"></i>
+                                 </div>                                                                    
+                                 <div class="btn btn-sm btn-success" title="Προσθήκη στην συνταγή" data-rel="tooltip" style="margin-top: 2px;" onclick="addIngredientToDishProino()">
+                                     <i class="fa fa-plus"></i>
+                                 </div>                                                                    
+                             </div>
+                         </div>
+
+                     </div>
+
+                     <br><br>
+
+                     <!-- Table Substances -->
+                     <div class="row" style="margin: 0px;">
+                         <div class="col-lg-12">
+
+                             <hr width="100%" style="margin-top: 0px;">
+                             <label class="control-label" id="DishCategCousine">
+                                 Όνομα Πιάτου
+                             </label>
+                             - Κατηγορία - Κουζίνα
+                             <br>
+                             <table class="table table-striped table-bordered bootstrap-datatable datatable" id="SyntagiPiatou">
+
+                                 <thead>
+                                     <tr>
+                                         <th class="col-lg-6">
+                                             Συστατικό
+                                         </th>
+                                         <th class="col-lg-2">
+                                             Ποσότητα
+                                         </th>
+                                         <th class="col-lg-3">
+                                             Μονάδα Μέτρησης
+                                         </th>
+                                         <th class="col-lg-1">
+                                             Επεξεργασία
+                                         </th>
+                                     </tr>
+                                 </thead>
+
+                                 <tbody id="IngredientTableBodyProino">
+
+                                 </tbody>
+
+                             </table>
+
+                         </div> 
+                     </div>
+                     <!-- /Table /Substances -->
+
+                     <br>
+
+                     <div class="col-lg-6">
+                         <div class="text-left">
+                             <em>
+                                 <a href="#" class="btn btn-info btn-setting1" onclick="calculateProino()">Δείτε <b>εδώ</b> αναλυτικά την διατροφική ανάλυση του μενού</a>
+                             </em>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-6">
+                         <div class="text-right">
+                             <div class="btn btn-primary" style="margin-top: 2px;" onclick="submitProino()">
+                                 <strong>Αποθήκευση</strong>
+                             </div>
+                         </div>
+                     </div>
+
+                 </div><!-- /box-content -->
+
+             </div><!-- /box -->
+
+         </div>
+
+     </div>
+     <!--  /panel 1 -  /Πρωινό  -->
+
+
+
+     <!--  panel 2 -  Μεσημεριανό  -->
+<script>
+function submitMesimeriano() {
+    var f = document.createElement('form');
+    f.setAttribute("method", "POST");
+    f.setAttribute("action", "@routes.Customer.addDayDish()");
+
+    
+    var ingredientList = $('*[id^="ingredientToAddMesimeriano"]');
+    var ingredientsLength = document.createElement('input');
+    ingredientsLength.setAttribute('name', 'ingredientsLength');
+    ingredientsLength.setAttribute('value', ingredientList.length);
+    f.appendChild(ingredientsLength);
+    
+    for (var i = 0; i < ingredientList.length; i++) {
+    	var ingredient = document.createElement('input');
+    	ingredient.setAttribute('name', 'ingredients'+i);
+    	ingredient.setAttribute('value', $(ingredientList[i]).attr('id').replace('ingredientToAddMesimeriano',''));
+    	f.appendChild(ingredient);
+    }
+    var metricList = $('*[id^="metricToAddMesimeriano"]');
+    for (var i = 0; i < metricList.length; i++) {
+    	var metric = document.createElement('input');
+    	metric.setAttribute('name', 'metrics'+i);
+    	metric.setAttribute('value', $(metricList[i]).attr('id').replace('metricToAddMesimeriano',''));
+    	f.appendChild(metric);
+    }    
+    var amountList = $('*[id^="AmountToAddMesimeriano"]');
+    for (var i = 0; i < amountList.length; i++) {
+    	var amount = document.createElement('input');
+    	amount.setAttribute('name', 'amounts'+i);
+    	amount.setAttribute('value', $(amountList[i]).attr('id').replace('AmountToAddMesimeriano',''));
+    	f.appendChild(amount);
+    }
+    var dayperiod = document.createElement('input');
+    dayperiod.setAttribute('name', 'dayperiod');
+    dayperiod.setAttribute('value', 2);
+	f.appendChild(dayperiod);    
+    f.submit();		
+}
+function removeingredientMesimeriano(ingid) {
+	$("#ingredientRowMesimeriano"+ingid).remove();
+}
+function populateIngredientsMesimeriano(el) {
+	var ingredientCat = $("#IngredientCatSelectMesimeriano").val().replace("IngredientCat","");
+	$("#IngredientSelectMesimeriano").html("");
+	//$("#MetricSelect").html("");
+	$.ajax({
+		url: "@routes.Owner.fetchIngredientsbyCat()",
+		data: "ingredientCat="+ingredientCat,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			var toks = result.split('|');
+			html+="<option value=\"-1\">επιλέξτε συστατικό...</option>";
+			for (var i = 0; i < toks.length; i++) {
+				var vals = toks[i].split('=');
+				html+="<option value=\""+vals[1]+"\">"+vals[0]+"</option>";
+			}
+			$("#IngredientSelectMesimeriano").html(html);
+			$("#IngredientSelectMesimeriano").chosen().trigger("chosen:updated");
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+function pickMetricMesimeriano(el) {
+	var ingredientId = $("#IngredientSelectMesimeriano").val();
+	$.ajax({
+		url: "@routes.Owner.fetchMetrics()",
+		data: "ingredientId=" + ingredientId,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			if (result["gmWt_1"] != null) {
+				html+="<option value=\""+1+"\">"+result["gmWt_Desc1"]+"</option>";
+			}
+			if (result["gmWt_2"] != null) {
+				html+="<option value=\""+2+"\">"+result["gmWt_Desc2"]+"</option>";
+			}		
+			html+="<option value=\"10\">Γραμμάρια</option>";
+			html+="<option value=\"20\">Κιλά</option>";
+			$("#MetricSelectMesimeriano").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_proino = 0;
+var ingredientsmesimeriano = [];
+var amountsmesimeriano = [];
+var metricsmesimeriano = [];
+function calculateIngredientRowMesimeriano() {
+	if ($("#IngredientSelectMesimeriano").val() == null || $("#IngredientSelectMesimeriano").val() == "-1") {
+		return;
+	}
+	if ($("#SubstanceAmmountNumericMesimeriano").val().length == 0) {
+		return;
+	}
+	if ($("#MetricSelectMesimeriano").val() == null) {
+		return;
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":$("#IngredientSelectMesimeriano").val(), 
+			"amountList":$("#SubstanceAmmountNumericMesimeriano").val(),
+			"metricList":$("#MetricSelectMesimeriano option:selected").val()},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});		
+
+}
+function calculateMesimeriano() {
+	ingredientsmesimeriano = [];
+	amountsmesimeriano = [];
+	metricsmesimeriano = [];	
+	var ingredientList = $('*[id^="ingredientToAddMesimeriano"]');
+	var amountList = $('*[id^="AmountToAddMesimeriano"]');
+	var metricList = $('*[id^="metricToAddMesimeriano"]');
+	var ingredients =""; var amounts=""; var metrics="";
+	for (var i = 0; i < ingredientList.length; i++) {
+		ingredientsmesimeriano.push($(ingredientList[i]).attr('id').replace('ingredientToAddMesimeriano',''));
+		amountsmesimeriano.push($(amountList[i]).attr('id').replace('AmountToAddMesimeriano',''));
+		metricsmesimeriano.push($(metricList[i]).attr('id').replace('metricToAddMesimeriano',''));
+		
+		ingredients+=($(ingredientList[i]).attr('id').replace('ingredientToAddMesimeriano','')+",");
+		amounts+=($(amountList[i]).attr('id').replace('AmountToAddMesimeriano','')+",");
+		metrics+=($(metricList[i]).attr('id').replace('metricToAddMesimeriano','')+",");
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":ingredients, "amountList":amounts,"metricList":metrics},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});	
+}
+var ingredient_counter_Mesimeriano = 0;
+function addIngredientToDishMesimeriano() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumericMesimeriano").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε ποσότητα συστατικού\n";
+		valid = false;
+	}
+	if ($("#IngredientMesimeriano").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}
+	if ($("#MetricSelectMesimeriano").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε μονάδα μέτρησης\n";
+		valid = false;
+	}
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+	var functions = '<td><div class="text-center">';
+	functions += '<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredientMesimeriano('+ingredient_counter_Mesimeriano+')" data-rel="tooltip" style="margin-top: 2px;">';
+	functions += '<i class="fa fa-trash-o"></i></div></div></td>';	
+	html="<tr id=\"ingredientRowMesimeriano"+ingredient_counter_Mesimeriano+"\">";
+	html+= "<td id=ingredientToAddMesimeriano"+$("#IngredientSelectMesimeriano").val()+">" + $("#IngredientSelectMesimeriano option:selected").text() + "</td>";
+	html+="<td id=AmountToAddMesimeriano"+$("#SubstanceAmmountNumericMesimeriano").val()+">"+$("#SubstanceAmmountNumericMesimeriano").val()+"</td>";
+	html+="<td id=metricToAddMesimeriano"+ $("#MetricSelectMesimeriano option:selected").val()+">"+ $("#MetricSelectMesimeriano option:selected").text()+"</td>";
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBodyMesimeriano").append(html);
+	ingredient_counter_Mesimeriano++;
+}
+</script>     
+     <div class="row">
+         <div class="col-lg-12">
+
+             <div class="box">
+
+                 <!-- PanelHeading -->
+                 <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                     <h2>
+                         <i class="fa fa-sun-o" style="color: white;"></i>
+                         <span class="break" style="color: white;"></span>
+                         Μεσημεριανό
+                     </h2>
+                     <div class="box-icon">
+                         <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                         <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                     </div>
+                 </div>
+                 <!-- /PanelHeading -->
+
+                 <!-- Panel Content -->
+                 <div class="box-content clearfix" style="display: none;">                                            
+                     <div class="row" style="margin: 0px;">
+
+                         <div class="col-lg-3">
+                             <label class="control-label" id="IngredientCat">
+                                 Κατηγορία Συστατικού
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+  <select id="IngredientCatSelectMesimeriano" class="form-control" onchange="populateIngredientsMesimeriano(this)">
+      <option value="-1">
+          κατηγορία...
+      </option>                                                                    
+  @for(ingredientGroup <- ingredientGroups) {
+      <option  value="IngredientCat@ingredientGroup.getId()">
+          @ingredientGroup.getDescription()
+      </option>                                                                    
+  }
+  </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-4">
+                             <label class="control-label" id="Ingredient">
+                                 Συστατικό
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="IngredientSelectMesimeriano" data-rel="chosen" name="IngredientSelectMesimeriano" onchange="pickMetricMesimeriano(this)">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2">
+                             <label class="control-label">
+                                 Ποσότητα
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                     <input class="form-control focused" id="SubstanceAmmountNumericMesimeriano" type="text" placeholder="Ammount" style="padding: 5px;">
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2" style="padding-right: 0px;">
+                             <label class="control-label" id="DishSubstancesAmmountMesimeriano">
+                                 Μονάδα Μέτρησης
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="MetricSelectMesimeriano">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-1" style="padding-left: 5px; padding-right: 5px;">
+                             <label class="control-label">
+                                 &nbsp;
+                             </label>
+                             <div class="text-center">
+                                 <div class="btn btn-sm btn-info" title="Διατροφικές Πληροφορίες" data-rel="tooltip" style="margin-top: 2px;" onclick="calculateIngredientRowMesimeriano()">
+                                     <i class="fa fa-info"></i>
+                                 </div>                                                                    
+                                 <div class="btn btn-sm btn-success" title="Προσθήκη στην συνταγή" data-rel="tooltip" style="margin-top: 2px;" onclick="addIngredientToDishMesimeriano()">
+                                     <i class="fa fa-plus"></i>
+                                 </div>                                                                    
+                             </div>
+                         </div>
+
+                     </div>
+
+                     <br><br>
+
+                     <!-- Table Substances -->
+                     <div class="row" style="margin: 0px;">
+                         <div class="col-lg-12">
+
+                             <hr width="100%" style="margin-top: 0px;">
+                             <label class="control-label" id="DishCategCousine">
+                                 Όνομα Πιάτου
+                             </label>
+                             - Κατηγορία - Κουζίνα
+                             <br>
+                             <table class="table table-striped table-bordered bootstrap-datatable datatable" id="SyntagiPiatou">
+
+                                 <thead>
+                                     <tr>
+                                         <th class="col-lg-6">
+                                             Συστατικό
+                                         </th>
+                                         <th class="col-lg-2">
+                                             Ποσότητα
+                                         </th>
+                                         <th class="col-lg-3">
+                                             Μονάδα Μέτρησης
+                                         </th>
+                                         <th class="col-lg-1">
+                                             Επεξεργασία
+                                         </th>
+                                     </tr>
+                                 </thead>
+
+                                 <tbody id="IngredientTableBodyMesimeriano">
+
+                                 </tbody>
+
+                             </table>
+
+                         </div> 
+                     </div>
+                     <!-- /Table /Substances -->
+
+                     <br>
+
+                     <div class="col-lg-6">
+                         <div class="text-left">
+                             <em>
+                                 <a href="#" class="btn btn-info btn-setting1" onclick="calculateMesimeriano()">Δείτε <b>εδώ</b> αναλυτικά την διατροφική ανάλυση του μενού</a>
+                             </em>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-6">
+                         <div class="text-right">
+                             <div class="btn btn-primary" style="margin-top: 2px;" onclick="submitMesimeriano()">
+                                 <strong>Αποθήκευση</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <br>
+
+
+
+
+
+                 </div><!-- /box-content -->
+
+             </div><!-- /box -->
+
+         </div>
+
+     </div>
+     <!--  /panel 2 -  /Μεσημεριανό  -->
+
+
+
+     <!--  panel 3 -  Βραδινό  -->
+<script>
+function submitVradino() {
+    var f = document.createElement('form');
+    f.setAttribute("method", "POST");
+    f.setAttribute("action", "@routes.Customer.addDayDish()");
+
+    
+    var ingredientList = $('*[id^="ingredientToAddVradino"]');
+    var ingredientsLength = document.createElement('input');
+    ingredientsLength.setAttribute('name', 'ingredientsLength');
+    ingredientsLength.setAttribute('value', ingredientList.length);
+    f.appendChild(ingredientsLength);
+    
+    for (var i = 0; i < ingredientList.length; i++) {
+    	var ingredient = document.createElement('input');
+    	ingredient.setAttribute('name', 'ingredients'+i);
+    	ingredient.setAttribute('value', $(ingredientList[i]).attr('id').replace('ingredientToAddVradino',''));
+    	f.appendChild(ingredient);
+    }
+    var metricList = $('*[id^="metricToAddVradino"]');
+    for (var i = 0; i < metricList.length; i++) {
+    	var metric = document.createElement('input');
+    	metric.setAttribute('name', 'metrics'+i);
+    	metric.setAttribute('value', $(metricList[i]).attr('id').replace('metricToAddVradino',''));
+    	f.appendChild(metric);
+    }    
+    var amountList = $('*[id^="AmountToAddVradino"]');
+    for (var i = 0; i < amountList.length; i++) {
+    	var amount = document.createElement('input');
+    	amount.setAttribute('name', 'amounts'+i);
+    	amount.setAttribute('value', $(amountList[i]).attr('id').replace('AmountToAddVradino',''));
+    	f.appendChild(amount);
+    }
+    var dayperiod = document.createElement('input');
+    dayperiod.setAttribute('name', 'dayperiod');
+    dayperiod.setAttribute('value', 3);
+	f.appendChild(dayperiod);    
+    f.submit();		
+}
+function removeingredientVradino(ingid) {
+	alert(ingid);
+	$("#ingredientRowVradino"+ingid).remove();
+}
+function populateIngredientsVradino(el) {
+	var ingredientCat = $("#IngredientCatSelectVradino").val().replace("IngredientCat","");
+	$("#IngredientSelectVradino").html("");
+	//$("#MetricSelect").html("");
+	$.ajax({
+		url: "@routes.Owner.fetchIngredientsbyCat()",
+		data: "ingredientCat="+ingredientCat,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			var toks = result.split('|');
+			html+="<option value=\"-1\">επιλέξτε συστατικό...</option>";
+			for (var i = 0; i < toks.length; i++) {
+				var vals = toks[i].split('=');
+				html+="<option value=\""+vals[1]+"\">"+vals[0]+"</option>";
+			}
+			$("#IngredientSelectVradino").html(html);
+			$("#IngredientSelectVradino").chosen().trigger("chosen:updated");
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_vradino = 0;
+var ingredientsvradino = [];
+var amountsvradino = [];
+var metricsvradino = [];
+function calculateIngredientRowVradino() {
+	if ($("#IngredientSelectVradino").val() == null || $("#IngredientSelectVradino").val() == "-1") {
+		return;
+	}
+	if ($("#SubstanceAmmountNumericVradino").val().length == 0) {
+		return;
+	}
+	if ($("#MetricSelectVradino").val() == null) {
+		return;
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":$("#IngredientSelectVradino").val(), 
+			"amountList":$("#SubstanceAmmountNumericVradino").val(),
+			"metricList":$("#MetricSelectVradino option:selected").val()},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});		
+
+}
+function calculateVradino() {
+	ingredientsvradino = [];
+	amountsvradino = [];
+	metricsvradino = [];	
+	var ingredientList = $('*[id^="ingredientToAddVradino"]');
+	var amountList = $('*[id^="AmountToAddVradino"]');
+	var metricList = $('*[id^="metricToAddVradino"]');
+	var ingredients =""; var amounts=""; var metrics="";
+	for (var i = 0; i < ingredientList.length; i++) {
+		ingredientsvradino.push($(ingredientList[i]).attr('id').replace('ingredientToAddVradino',''));
+		amountsvradino.push($(amountList[i]).attr('id').replace('AmountToAddVradino',''));
+		metricsvradino.push($(metricList[i]).attr('id').replace('metricToAddVradino',''));
+		
+		ingredients+=($(ingredientList[i]).attr('id').replace('ingredientToAddVradino','')+",");
+		amounts+=($(amountList[i]).attr('id').replace('AmountToAddVradino','')+",");
+		metrics+=($(metricList[i]).attr('id').replace('metricToAddVradino','')+",");
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":ingredients, "amountList":amounts,"metricList":metrics},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});	
+}
+function pickMetricVradino(el) {
+	var ingredientId = $("#IngredientSelectVradino").val();
+	$.ajax({
+		url: "@routes.Owner.fetchMetrics()",
+		data: "ingredientId=" + ingredientId,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			if (result["gmWt_1"] != null) {
+				html+="<option value=\""+1+"\">"+result["gmWt_Desc1"]+"</option>";
+			}
+			if (result["gmWt_2"] != null) {
+				html+="<option value=\""+2+"\">"+result["gmWt_Desc2"]+"</option>";
+			}		
+			html+="<option value=\"10\">Γραμμάρια</option>";
+			html+="<option value=\"20\">Κιλά</option>";
+			$("#MetricSelectVradino").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_Vradino = 0;
+function addIngredientToDishVradino() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumericVradino").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε ποσότητα συστατικού\n";
+		valid = false;
+	}
+	if ($("#IngredientVradino").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}
+	if ($("#MetricSelectVradino").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε μονάδα μέτρησης\n";
+		valid = false;
+	}
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+	var functions = '<td><div class="text-center">';
+	functions += '<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredientVradino('+ingredient_counter_Vradino+')" data-rel="tooltip" style="margin-top: 2px;">';
+	functions += '<i class="fa fa-trash-o"></i></div></div></td>';	
+	html="<tr id=\"ingredientRowVradino"+ingredient_counter_Vradino+"\">";
+	html+= "<td id=ingredientToAddVradino"+$("#IngredientSelectVradino").val()+">" + $("#IngredientSelectVradino option:selected").text() + "</td>";
+	html+="<td id=AmountToAddVradino"+$("#SubstanceAmmountNumericVradino").val()+">"+$("#SubstanceAmmountNumericVradino").val()+"</td>";
+	html+="<td id=metricToAddVradino"+ $("#MetricSelectVradino option:selected").val()+">"+ $("#MetricSelectVradino option:selected").text()+"</td>";
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBodyVradino").append(html);
+	ingredient_counter_Vradino++;
+}
+</script>     
+     <div class="row">
+         <div class="col-lg-12">
+
+             <div class="box">
+
+                 <!-- PanelHeading -->
+                 <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                     <h2>
+                         <i class="fa fa-sun-o" style="color: white;"></i>
+                         <span class="break" style="color: white;"></span>
+                         Βραδινό
+                     </h2>
+                     <div class="box-icon">
+                         <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                         <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                     </div>
+                 </div>
+                 <!-- /PanelHeading -->
+
+                 <!-- Panel Content -->
+                 <div class="box-content clearfix" style="display: none;">                                            
+                     <div class="row" style="margin: 0px;">
+
+                         <div class="col-lg-3">
+                             <label class="control-label" id="IngredientCat">
+                                 Κατηγορία Συστατικού
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+  <select id="IngredientCatSelectVradino" class="form-control" onchange="populateIngredientsVradino(this)">
+      <option value="-1">
+          κατηγορία...
+      </option>                                                                    
+  @for(ingredientGroup <- ingredientGroups) {
+      <option  value="IngredientCat@ingredientGroup.getId()">
+          @ingredientGroup.getDescription()
+      </option>                                                                    
+  }
+  </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-4">
+                             <label class="control-label" id="Ingredient">
+                                 Συστατικό
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="IngredientSelectVradino" data-rel="chosen" name="IngredientSelectVradino" onchange="pickMetricVradino(this)">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2">
+                             <label class="control-label">
+                                 Ποσότητα
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                     <input class="form-control focused" id="SubstanceAmmountNumericVradino" type="text" placeholder="Ammount" style="padding: 5px;">
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2" style="padding-right: 0px;">
+                             <label class="control-label" id="DishSubstancesAmmountVradino">
+                                 Μονάδα Μέτρησης
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="MetricSelectVradino">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-1" style="padding-left: 5px; padding-right: 5px;">
+                             <label class="control-label">
+                                 &nbsp;
+                             </label>
+                             <div class="text-center">
+                                 <div class="btn btn-sm btn-info" title="Διατροφικές Πληροφορίες" data-rel="tooltip" style="margin-top: 2px;" onclick="calculateIngredientRowVradino()">
+                                     <i class="fa fa-info"></i>
+                                 </div>                                                                    
+                                 <div class="btn btn-sm btn-success" title="Προσθήκη στην συνταγή" data-rel="tooltip" style="margin-top: 2px;" onclick="addIngredientToDishVradino()">
+                                     <i class="fa fa-plus"></i>
+                                 </div>                                                                    
+                             </div>
+                         </div>
+
+                     </div>
+
+                     <br><br>
+
+                     <!-- Table Substances -->
+                     <div class="row" style="margin: 0px;">
+                         <div class="col-lg-12">
+
+                             <hr width="100%" style="margin-top: 0px;">
+                             <label class="control-label" id="DishCategCousine">
+                                 Όνομα Πιάτου
+                             </label>
+                             - Κατηγορία - Κουζίνα
+                             <br>
+                             <table class="table table-striped table-bordered bootstrap-datatable datatable" id="SyntagiPiatou">
+
+                                 <thead>
+                                     <tr>
+                                         <th class="col-lg-6">
+                                             Συστατικό
+                                         </th>
+                                         <th class="col-lg-2">
+                                             Ποσότητα
+                                         </th>
+                                         <th class="col-lg-3">
+                                             Μονάδα Μέτρησης
+                                         </th>
+                                         <th class="col-lg-1">
+                                             Επεξεργασία
+                                         </th>
+                                     </tr>
+                                 </thead>
+
+                                 <tbody id="IngredientTableBodyVradino">
+
+                                 </tbody>
+
+                             </table>
+
+                         </div> 
+                     </div>
+                     <!-- /Table /Substances -->
+
+                     <br>
+
+                     <div class="col-lg-6">
+                         <div class="text-left">
+                             <em>
+                                 <a href="#" class="btn btn-info btn-setting1" onclick="calculateVradino()">Δείτε <b>εδώ</b> αναλυτικά την διατροφική ανάλυση του μενού</a>
+                             </em>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-6">
+                         <div class="text-right">
+                             <div class="btn btn-primary" style="margin-top: 2px;" onclick="submitVradino()">
+                                 <strong>Αποθήκευση</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <br>
+
+
+
+
+
+                 </div><!-- /box-content -->
+
+             </div><!-- /box -->
+
+         </div>
+
+     </div>
+     <!--  /panel 3 -  /Βραδινό  -->
+
+
+
+     <!--  panel 4 -  Ενδιάμεσα σνακ  -->
+<script>
+function submitSnaks() {
+    var f = document.createElement('form');
+    f.setAttribute("method", "POST");
+    f.setAttribute("action", "@routes.Customer.addDayDish()");
+
+    
+    var ingredientList = $('*[id^="ingredientToAddSnaks"]');
+    var ingredientsLength = document.createElement('input');
+    ingredientsLength.setAttribute('name', 'ingredientsLength');
+    ingredientsLength.setAttribute('value', ingredientList.length);
+    f.appendChild(ingredientsLength);
+    
+    for (var i = 0; i < ingredientList.length; i++) {
+    	var ingredient = document.createElement('input');
+    	ingredient.setAttribute('name', 'ingredients'+i);
+    	ingredient.setAttribute('value', $(ingredientList[i]).attr('id').replace('ingredientToAddSnaks',''));
+    	f.appendChild(ingredient);
+    }
+    var metricList = $('*[id^="metricToAddSnaks"]');
+    for (var i = 0; i < metricList.length; i++) {
+    	var metric = document.createElement('input');
+    	metric.setAttribute('name', 'metrics'+i);
+    	metric.setAttribute('value', $(metricList[i]).attr('id').replace('metricToAddSnaks',''));
+    	f.appendChild(metric);
+    }    
+    var amountList = $('*[id^="AmountToAddSnaks"]');
+    for (var i = 0; i < amountList.length; i++) {
+    	var amount = document.createElement('input');
+    	amount.setAttribute('name', 'amounts'+i);
+    	amount.setAttribute('value', $(amountList[i]).attr('id').replace('AmountToAddSnaks',''));
+    	f.appendChild(amount);
+    }
+    var dayperiod = document.createElement('input');
+    dayperiod.setAttribute('name', 'dayperiod');
+    dayperiod.setAttribute('value', 4);
+	f.appendChild(dayperiod);    
+    f.submit();		
+}
+function removeingredientSnaks(ingid) {
+	$("#ingredientRowSnaks"+ingid).remove();
+}
+function populateIngredientsSnaks(el) {
+	var ingredientCat = $("#IngredientCatSelectSnaks").val().replace("IngredientCat","");
+	$("#IngredientSelectSnaks").html("");
+	//$("#MetricSelect").html("");
+	$.ajax({
+		url: "@routes.Owner.fetchIngredientsbyCat()",
+		data: "ingredientCat="+ingredientCat,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			var toks = result.split('|');
+			html+="<option value=\"-1\">επιλέξτε συστατικό...</option>";
+			for (var i = 0; i < toks.length; i++) {
+				var vals = toks[i].split('=');
+				html+="<option value=\""+vals[1]+"\">"+vals[0]+"</option>";
+			}
+			$("#IngredientSelectSnaks").html(html);
+			$("#IngredientSelectSnaks").chosen().trigger("chosen:updated");
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_snaks = 0;
+var ingredientssnaks = [];
+var amountssnaks = [];
+var metricssnaks = [];
+function calculateIngredientRowSnaks() {
+	if ($("#IngredientSelectSnaks").val() == null || $("#IngredientSelectSnaks").val() == "-1") {
+		return;
+	}
+	if ($("#SubstanceAmmountNumericSnaks").val().length == 0) {
+		return;
+	}
+	if ($("#MetricSelectSnaks").val() == null) {
+		return;
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":$("#IngredientSelectSnaks").val(), 
+			"amountList":$("#SubstanceAmmountNumericSnaks").val(),
+			"metricList":$("#MetricSelectSnaks option:selected").val()},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});		
+
+}
+function calculateSnaks() {
+	ingredientssnaks = [];
+	amountssnaks = [];
+	metricssnaks = [];	
+	var ingredientList = $('*[id^="ingredientToAddSnaks"]');
+	var amountList = $('*[id^="AmountToAddSnaks"]');
+	var metricList = $('*[id^="metricToAddSnaks"]');
+	var ingredients =""; var amounts=""; var metrics="";
+	for (var i = 0; i < ingredientList.length; i++) {
+		ingredientssnaks.push($(ingredientList[i]).attr('id').replace('ingredientToAddSnaks',''));
+		amountssnaks.push($(amountList[i]).attr('id').replace('AmountToAddSnaks',''));
+		metricssnaks.push($(metricList[i]).attr('id').replace('metricToAddSnaks',''));
+		
+		ingredients+=($(ingredientList[i]).attr('id').replace('ingredientToAddSnaks','')+",");
+		amounts+=($(amountList[i]).attr('id').replace('AmountToAddSnaks','')+",");
+		metrics+=($(metricList[i]).attr('id').replace('metricToAddSnaks','')+",");
+	}
+	$.ajax({
+		url: "@routes.Customer.calculateIngredientsDailyRatios()",
+		data: {"ingredientList":ingredients, "amountList":amounts,"metricList":metrics},
+		method: "POST",
+		success: function(result) {
+			fillModal(result);			
+			$("#myModal").modal('show');			
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});	
+}
+function pickMetricSnaks(el) {
+	var ingredientId = $("#IngredientSelectSnaks").val();
+	$.ajax({
+		url: "@routes.Owner.fetchMetrics()",
+		data: "ingredientId=" + ingredientId,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			if (result["gmWt_1"] != null) {
+				html+="<option value=\""+1+"\">"+result["gmWt_Desc1"]+"</option>";
+			}
+			if (result["gmWt_2"] != null) {
+				html+="<option value=\""+2+"\">"+result["gmWt_Desc2"]+"</option>";
+			}			
+			html+="<option value=\"10\">Γραμμάρια</option>";
+			html+="<option value=\"20\">Κιλά</option>";
+			$("#MetricSelectSnaks").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_Snaks = 0;
+function addIngredientToDishSnaks() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumericSnaks").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε ποσότητα συστατικού\n";
+		valid = false;
+	}
+	if ($("#IngredientSnaks").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}
+	if ($("#MetricSelectSnaks").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε μονάδα μέτρησης\n";
+		valid = false;
+	}
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+	var functions = '<td><div class="text-center">';
+	functions += '<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredientSnaks('+ingredient_counter_Snaks+')" data-rel="tooltip" style="margin-top: 2px;">';
+	functions += '<i class="fa fa-trash-o"></i></div></div></td>';	
+	html="<tr id=\"ingredientRowSnaks"+ingredient_counter_Snaks+"\">";
+	html+= "<td id=ingredientToAddSnaks"+$("#IngredientSelectSnaks").val()+">" + $("#IngredientSelectSnaks option:selected").text() + "</td>";
+	html+="<td id=AmountToAddSnaks"+$("#SubstanceAmmountNumericSnaks").val()+">"+$("#SubstanceAmmountNumericSnaks").val()+"</td>";
+	html+="<td id=metricToAddSnaks"+ $("#MetricSelectSnaks option:selected").val()+">"+ $("#MetricSelectSnaks option:selected").text()+"</td>";
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBodySnaks").append(html);
+	ingredient_counter_Snaks++;
+}
+</script>     
+     <div class="row">
+         <div class="col-lg-12">
+
+             <div class="box">
+
+                 <!-- PanelHeading -->
+                 <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                     <h2>
+                         <i class="fa fa-sun-o" style="color: white;"></i>
+                         <span class="break" style="color: white;"></span>
+                         Ενδιάμεσα σνακ
+                     </h2>
+                     <div class="box-icon">
+                         <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                         <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                     </div>
+                 </div>
+                 <!-- /PanelHeading -->
+
+                 <!-- Panel Content -->
+                 <div class="box-content clearfix" style="display: none;">                                            
+                     <div class="row" style="margin: 0px;">
+
+                         <div class="col-lg-3">
+                             <label class="control-label" id="IngredientCat">
+                                 Κατηγορία Συστατικού
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+  <select id="IngredientCatSelectSnaks" class="form-control" onchange="populateIngredientsSnaks(this)">
+      <option value="-1">
+          κατηγορία...
+      </option>                                                                    
+  @for(ingredientGroup <- ingredientGroups) {
+      <option  value="IngredientCat@ingredientGroup.getId()">
+          @ingredientGroup.getDescription()
+      </option>                                                                    
+  }
+  </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-4">
+                             <label class="control-label" id="Ingredient">
+                                 Συστατικό
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="IngredientSelectSnaks" data-rel="chosen" name="IngredientSelectSnaks" onchange="pickMetricSnaks(this)">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2">
+                             <label class="control-label">
+                                 Ποσότητα
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                     <input class="form-control focused" id="SubstanceAmmountNumericSnaks" type="text" placeholder="Ammount" style="padding: 5px;">
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2" style="padding-right: 0px;">
+                             <label class="control-label" id="DishSubstancesAmmountSnaks">
+                                 Μονάδα Μέτρησης
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="MetricSelectSnaks">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-1" style="padding-left: 5px; padding-right: 5px;">
+                             <label class="control-label">
+                                 &nbsp;
+                             </label>
+                             <div class="text-center">
+                                 <div class="btn btn-sm btn-info" title="Διατροφικές Πληροφορίες" data-rel="tooltip" style="margin-top: 2px;" onclick="calculateIngredientRowSnaks()">
+                                     <i class="fa fa-info"></i>
+                                 </div>                                                                    
+                                 <div class="btn btn-sm btn-success" title="Προσθήκη στην συνταγή" data-rel="tooltip" style="margin-top: 2px;" onclick="addIngredientToDishSnaks()">
+                                     <i class="fa fa-plus"></i>
+                                 </div>                                                                    
+                             </div>
+                         </div>
+
+                     </div>
+
+                     <br><br>
+
+                     <!-- Table Substances -->
+                     <div class="row" style="margin: 0px;">
+                         <div class="col-lg-12">
+
+                             <hr width="100%" style="margin-top: 0px;">
+                             <label class="control-label" id="DishCategCousine">
+                                 Όνομα Πιάτου
+                             </label>
+                             - Κατηγορία - Κουζίνα
+                             <br>
+                             <table class="table table-striped table-bordered bootstrap-datatable datatable" id="SyntagiPiatou">
+
+                                 <thead>
+                                     <tr>
+                                         <th class="col-lg-6">
+                                             Συστατικό
+                                         </th>
+                                         <th class="col-lg-2">
+                                             Ποσότητα
+                                         </th>
+                                         <th class="col-lg-3">
+                                             Μονάδα Μέτρησης
+                                         </th>
+                                         <th class="col-lg-1">
+                                             Επεξεργασία
+                                         </th>
+                                     </tr>
+                                 </thead>
+
+                                 <tbody id="IngredientTableBodySnaks">
+
+                                 </tbody>
+
+                             </table>
+
+                         </div> 
+                     </div>
+                     <!-- /Table /Substances -->
+
+                     <br>
+
+                     <div class="col-lg-6">
+                         <div class="text-left">
+                             <em>
+                                 <a href="#" class="btn btn-info btn-setting1" onclick="calculateSnaks()">Δείτε <b>εδώ</b> αναλυτικά την διατροφική ανάλυση του μενού</a>
+                             </em>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-6">
+                         <div class="text-right">
+                             <div class="btn btn-primary" style="margin-top: 2px;" onclick="submitSnaks()">
+                                 <strong>Αποθήκευση</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <br>
+
+
+
+
+
+                 </div><!-- /box-content -->
+
+             </div><!-- /box -->
+
+         </div>
+
+     </div>
+     <!--  /panel 4 -  /Ενδιάμεσα σνακ  -->
+
+
+
+     <!--  panel 5 -  Υγρά  -->
+<script>
+function submitLiquids() {
+    var f = document.createElement('form');
+    f.setAttribute("method", "POST");
+    f.setAttribute("action", "@routes.Customer.addDayDish()");
+
+    
+    var ingredientList = $('*[id^="ingredientToAddLiquids"]');
+    var ingredientsLength = document.createElement('input');
+    ingredientsLength.setAttribute('name', 'ingredientsLength');
+    ingredientsLength.setAttribute('value', ingredientList.length);
+    f.appendChild(ingredientsLength);
+    
+    for (var i = 0; i < ingredientList.length; i++) {
+    	var ingredient = document.createElement('input');
+    	ingredient.setAttribute('name', 'ingredients'+i);
+    	ingredient.setAttribute('value', $(ingredientList[i]).attr('id').replace('ingredientToAddLiquids',''));
+    	f.appendChild(ingredient);
+    }
+    var metricList = $('*[id^="metricToAddLiquids"]');
+    for (var i = 0; i < metricList.length; i++) {
+    	var metric = document.createElement('input');
+    	metric.setAttribute('name', 'metrics'+i);
+    	metric.setAttribute('value', $(metricList[i]).attr('id').replace('metricToAddLiquids',''));
+    	f.appendChild(metric);
+    }    
+    var amountList = $('*[id^="AmountToAddLiquids"]');
+    for (var i = 0; i < amountList.length; i++) {
+    	var amount = document.createElement('input');
+    	amount.setAttribute('name', 'amounts'+i);
+    	amount.setAttribute('value', $(amountList[i]).attr('id').replace('AmountToAddLiquids',''));
+    	f.appendChild(amount);
+    }
+    var dayperiod = document.createElement('input');
+    dayperiod.setAttribute('name', 'dayperiod');
+    dayperiod.setAttribute('value', 5);
+	f.appendChild(dayperiod);    
+    f.submit();		
+}
+function removeingredientLiquids(ingid) {
+	$("#ingredientRowLiquids"+ingid).remove();
+}
+function populateIngredientsLiquids(el) {
+	var ingredientCat = $("#IngredientCatSelectLiquids").val().replace("IngredientCat","");
+	$("#IngredientSelectLiquids").html("");
+	//$("#MetricSelect").html("");
+	$.ajax({
+		url: "@routes.Owner.fetchIngredientsbyCat()",
+		data: "ingredientCat="+ingredientCat,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			var toks = result.split('|');
+			html+="<option value=\"-1\">επιλέξτε συστατικό...</option>";
+			for (var i = 0; i < toks.length; i++) {
+				var vals = toks[i].split('=');
+				html+="<option value=\""+vals[1]+"\">"+vals[0]+"</option>";
+			}
+			$("#IngredientSelectLiquids").html(html);
+			$("#IngredientSelectLiquids").chosen().trigger("chosen:updated");
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+function pickMetricLiquids(el) {
+	var ingredientId = $("#IngredientSelectLiquids").val();
+	$.ajax({
+		url: "@routes.Owner.fetchMetrics()",
+		data: "ingredientId=" + ingredientId,
+		method: "POST",
+		success: function(result) {
+			var html="";
+			if (result["gmWt_1"] != null) {
+				html+="<option value=\""+1+"\">"+result["gmWt_Desc1"]+"</option>";
+			}
+			if (result["gmWt_2"] != null) {
+				html+="<option value=\""+2+"\">"+result["gmWt_Desc2"]+"</option>";
+			}		
+			html+="<option value=\"10\">Γραμμάρια</option>";
+			html+="<option value=\"20\">Κιλά</option>";
+			$("#MetricSelectLiquids").html(html);
+		},
+		error: function(result) {
+			alert("Error!");
+		}
+	});
+}
+var ingredient_counter_Liquids = 0;
+function addIngredientToDishLiquids() {
+	var err_mesg = "";
+	var valid = true;
+	if ( $.trim($("#SubstanceAmmountNumericLiquids").val()) == '') {
+		err_mesg+="Πρέπει να εισάγετε ποσότητα συστατικού\n";
+		valid = false;
+	}
+	if ($("#IngredientLiquids").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε συστατικό\n";
+		valid = false;
+	}
+	if ($("#MetricSelectLiquids").val() == "-1") {
+		err_mesg+="Πρέπει να επιλέξετε μονάδα μέτρησης\n";
+		valid = false;
+	}
+	if (!valid) {
+		alert(err_mesg);
+		return;
+	}
+	var functions = '<td><div class="text-center"> \
+	<div class="btn btn-xs btn-danger" title="Διαγραφή" onclick="removeingredientLiquids(\""+ingredient_counter_Liquids+"\")" data-rel="tooltip" style="margin-top: 2px;">\
+	<i class="fa fa-trash-o"></i>\
+   	</div>\
+    	</div>\
+   	</td>';	
+	html="<tr id=\"ingredientRowLiquids"+ingredient_counter_Liquids+"\">";
+	html+= "<td id=ingredientToAddLiquids"+$("#IngredientSelectLiquids").val()+">" + $("#IngredientSelectLiquids option:selected").text() + "</td>";
+	html+="<td id=AmountToAddLiquids"+$("#SubstanceAmmountNumericLiquids").val()+">"+$("#SubstanceAmmountNumericLiquids").val()+"</td>";
+	html+="<td id=metricToAddLiquids"+ $("#MetricSelectLiquids option:selected").val()+">"+ $("#MetricSelectLiquids option:selected").text()+"</td>";
+	html+=functions;
+	html+="</tr>";
+	$("#IngredientTableBodyLiquids").append(html);
+	ingredient_counter_Liquids++;
+}
+</script>     
+     <div class="row">
+         <div class="col-lg-12">
+
+             <div class="box">
+
+                 <!-- PanelHeading -->
+                 <div class="box-header" style="background-color: #28993c; border-color: #248936; color: white;">
+                     <h2>
+                         <i class="fa fa-sun-o" style="color: white;"></i>
+                         <span class="break" style="color: white;"></span>
+                         Υγρά
+                     </h2>
+                     <div class="box-icon">
+                         <a href="#" class="btn-minimize"><i class="fa fa-chevron-down" style="color: white;"></i></a>
+                         <a href="#" class="btn-close"><i class="fa fa-times" style="color: white;"></i></a>
+                     </div>
+                 </div>
+                 <!-- /PanelHeading -->
+
+                 <!-- Panel Content -->
+                 <div class="box-content clearfix" style="display: none;">                                            
+                     <div class="row" style="margin: 0px;">
+
+                         <div class="col-lg-3">
+                             <label class="control-label" id="IngredientCat">
+                                 Κατηγορία Συστατικού
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+  <select id="IngredientCatSelectLiquids" class="form-control" onchange="populateIngredientsLiquids(this)">
+      <option value="-1">
+          κατηγορία...
+      </option>                                                                    
+  @for(ingredientGroup <- ingredientGroups) {
+      <option  value="IngredientCat@ingredientGroup.getId()">
+          @ingredientGroup.getDescription()
+      </option>                                                                    
+  }
+  </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-4">
+                             <label class="control-label" id="Ingredient">
+                                 Συστατικό
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="IngredientSelectLiquids" data-rel="chosen" name="IngredientSelectLiquids" onchange="pickMetricLiquids(this)">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2">
+                             <label class="control-label">
+                                 Ποσότητα
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls row">
+                                 <div class="input-group col-sm-12" style="padding-right: 0px;">	
+                                     <input class="form-control focused" id="SubstanceAmmountNumericLiquids" type="text" placeholder="Ammount" style="padding: 5px;">
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-2" style="padding-right: 0px;">
+                             <label class="control-label" id="DishSubstancesAmmountLiquids">
+                                 Μονάδα Μέτρησης
+                                 <span style="color:red">
+                                     &nbsp;*
+                                 </span>
+                             </label>
+                             <div class="controls">
+                                 <select class="form-control" id="MetricSelectLiquids">
+
+                                 </select>
+                             </div>
+                         </div>
+
+                         <div class="col-lg-1" style="padding-left: 5px; padding-right: 5px;">
+                             <label class="control-label">
+                                 &nbsp;
+                             </label>
+                             <div class="text-center">
+                                 <div class="btn btn-sm btn-info btn-setting" title="Διατροφικές Πληροφορίες" data-rel="tooltip" style="margin-top: 2px;">
+                                     <i class="fa fa-info"></i>
+                                 </div>                                                                    
+                                 <div class="btn btn-sm btn-success" title="Προσθήκη στην συνταγή" data-rel="tooltip" style="margin-top: 2px;" onclick="addIngredientToDishLiquids()">
+                                     <i class="fa fa-plus"></i>
+                                 </div>                                                                    
+                             </div>
+                         </div>
+
+                     </div>
+
+                     <br><br>
+
+                     <!-- Table Substances -->
+                     <div class="row" style="margin: 0px;">
+                         <div class="col-lg-12">
+
+                             <hr width="100%" style="margin-top: 0px;">
+                             <label class="control-label" id="DishCategCousine">
+                                 Όνομα Πιάτου
+                             </label>
+                             - Κατηγορία - Κουζίνα
+                             <br>
+                             <table class="table table-striped table-bordered bootstrap-datatable datatable" id="SyntagiPiatou">
+
+                                 <thead>
+                                     <tr>
+                                         <th class="col-lg-6">
+                                             Συστατικό
+                                         </th>
+                                         <th class="col-lg-2">
+                                             Ποσότητα
+                                         </th>
+                                         <th class="col-lg-3">
+                                             Μονάδα Μέτρησης
+                                         </th>
+                                         <th class="col-lg-1">
+                                             Επεξεργασία
+                                         </th>
+                                     </tr>
+                                 </thead>
+
+                                 <tbody id="IngredientTableBodyLiquids">
+
+                                 </tbody>
+
+                             </table>
+
+                         </div> 
+                     </div>
+                     <!-- /Table /Substances -->
+
+                     <br>
+
+                     <div class="col-lg-6">
+                         <div class="text-left">
+                             <em>
+                                 <a href="#" class="btn btn-info btn-setting1">Δείτε <b>εδώ</b> αναλυτικά την διατροφική ανάλυση του μενού</a>
+                             </em>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-6">
+                         <div class="text-right">
+                             <div class="btn btn-primary" style="margin-top: 2px;" onclick="submitLiquids()">
+                                 <strong>Αποθήκευση</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <br>
+
+
+
+
+
+                 </div><!-- /box-content -->
+
+             </div><!-- /box -->
+
+         </div>
+
+     </div>
+     <!--  /panel 5 -  /Υγρά  -->
+     <table id="previousMealsTable" style="display:none" class="table table-striped bootstrap-datatable datatable"><!-- αν θέλω και κάθετες γραμμές, table-bordered -->
+
+         <thead>
+             <tr>
+                 <th class="col-lg-2">
+                     Γεύμα
+                 </th>
+                 <th class="col-lg-4">
+                     Συστατικό
+                 </th>
+                 <th class="col-lg-2">
+                     Ποσότητα
+                 </th>
+                 <th class="col-lg-2">
+                 	Μονάδα Μέτρησης                                                    
+                 </th>
+                 <th class="col-lg-2">
+                     Πληροφορίες
+                 </th>
+             </tr>
+         </thead>
+         <tbody id="previousMealsBody">
+         </tbody>
+	</table>         
+
+    
+ </div><!-- /end: Content -->
+<script>
+function fillModal(result) {
+	var fields = result;
+	$("#caloriesModal").html(fields["calories"]+" Kcal ("+(100*fields["calories"]/fields["caloriesNeeded"]).toFixed(2)+"%)" );
+	$("#caloriesModalpc").html((100*fields["calories"]/fields["weight"]).toFixed(2)+" Kcal ("+(100*(100*(fields["calories"]/fields["caloriesNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#caloriesBarel").html(fields["calories"]+ "Kcal");
+	$("#caloriesBarelPc").html((100*fields["calories"]/fields["caloriesNeeded"]).toFixed(2)+"%");
+	$("#caloriesBar").html((100*fields["calories"]/fields["caloriesNeeded"]).toFixed(2)+"%");
+	$("#caloriesBar").css('width', (100*fields["calories"]/fields["caloriesNeeded"]).toFixed(2)+'%');
+	
+	$("#proteinModal").html(fields["proteins"]+" g ("+(100*fields["proteins"]/fields["proteinsNeeded"]).toFixed(2)+"%)" );
+	$("#proteinModalpc").html((100*fields["proteins"]/fields["weight"]).toFixed(2)+" g ("+(100*(100*(fields["proteins"]/fields["proteinsNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#proteinsBarel").html(fields["proteins"]+ "g");
+	$("#proteinsBarelPc").html((100*fields["proteins"]/fields["proteinsNeeded"]).toFixed(2)+"%");
+	$("#proteinsBar").html((100*fields["proteins"]/fields["proteinsNeeded"]).toFixed(2)+"%");
+	$("#proteinsBar").css('width', (100*fields["proteins"]/fields["proteinsNeeded"]).toFixed(2)+'%');
+	
+	$("#fatsModal").html(fields["fats"]+" g ("+(100*fields["fats"]/fields["fatsNeeded"]).toFixed(2)+"%)" );
+	$("#fatsModalpc").html((100*fields["fats"]/fields["weight"]).toFixed(2)+" g ("+(100*(100*(fields["fats"]/fields["fatsNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#fatsBarel").html(fields["fats"]+ "g");
+	$("#fatsBarelPc").html((100*fields["fats"]/fields["fatsNeeded"]).toFixed(2)+"%");
+	$("#fatsBar").html((100*fields["fats"]/fields["fatsNeeded"]).toFixed(2)+"%");
+	$("#fatsBar").css('width', (100*fields["fats"]/fields["fatsNeeded"]).toFixed(2)+'%');
+	
+	$("#hydrosModal").html(fields["hydros"]+" g ("+(100*fields["hydros"]/fields["hydrosNeeded"]).toFixed(2)+"%)" );
+	$("#hydrosModalpc").html((100*fields["hydros"]/fields["weight"]).toFixed(2)+" g ("+(100*(100*(fields["hydros"]/fields["hydrosNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#hydrosBarel").html(fields["hydros"]+ "g");
+	$("#hydrosBarelPc").html((100*fields["hydros"]/fields["hydrosNeeded"]).toFixed(2)+"%");
+	$("#hydrosBar").html((100*fields["hydros"]/fields["hydrosNeeded"]).toFixed(2)+"%");
+	$("#hydrosBar").css('width', (100*fields["hydros"]/fields["hydrosNeeded"]).toFixed(2)+'%');
+	
+	$("#saturatedModal").html(fields["saturated"]+" g ("+(100*fields["saturated"]/fields["saturatedNeeded"]).toFixed(2)+"%)" );
+	$("#saturatedModalpc").html((100*fields["saturated"]/fields["weight"]).toFixed(2)+" g ("+(100*(100*(fields["saturated"]/fields["saturatedNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#saturatedBarel").html(fields["saturated"]+ "g");
+	$("#saturatedBarelPc").html((100*fields["saturated"]/fields["saturatedNeeded"]).toFixed(2)+"%");
+	$("#saturatedBar").html((100*fields["saturated"]/fields["saturatedNeeded"]).toFixed(2)+"%");
+	$("#saturatedBar").css('width', (100*fields["saturated"]/fields["saturatedNeeded"]).toFixed(2)+'%');
+	
+	$("#saltModal").html(fields["salt"]+" mg ("+(100*fields["salt"]/fields["saltNeeded"]).toFixed(2)+"%)" );
+	$("#saltModalpc").html((100*fields["salt"]/fields["weight"]).toFixed(2)+" mg ("+(100*(100*(fields["salt"]/fields["saltNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#saltBarel").html(fields["salt"]+ "g");
+	$("#saltBarelPc").html((100*fields["salt"]/fields["saltNeeded"]).toFixed(2)+"%");
+	$("#saltBar").html((100*fields["salt"]/fields["saltNeeded"]).toFixed(2)+"%");
+	$("#saltBar").css('width', (100*fields["salt"]/fields["saltNeeded"]).toFixed(2)+'%');
+	
+	$("#sugarsModal").html(fields["sugars"]+" g ("+(100*fields["sugars"]/fields["sugarsNeeded"]).toFixed(2)+"%)" );
+	$("#sugarsModalpc").html((100*fields["sugars"]/fields["weight"]).toFixed(2)+" g ("+(100*(100*(fields["sugars"]/fields["sugarsNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	$("#sugarsBarel").html(fields["sugars"]+ "g");
+	$("#sugarsBarelPc").html((100*fields["sugars"]/fields["sugarsNeeded"]).toFixed(2)+"%");
+	$("#sugarsBar").html((100*fields["sugars"]/fields["sugarsNeeded"]).toFixed(2)+"%");	
+	$("#sugarsBar").css('width', (100*fields["sugars"]/fields["sugarsNeeded"]).toFixed(2)+'%');
+	
+	$("#fiberModal").html(fields["fiber"]+" g("+(100*fields["fiber"]/fields["fiberNeeded"]).toFixed(2)+"%)" );
+	$("#fiberModalpc").html((100*fields["fiber"]/fields["weight"]).toFixed(2)+" g ("+(100*(100*(fields["fiber"]/fields["fiberNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	
+	$("#thiaminModal").html(fields["thiamin"]+" mg ("+(100*fields["thiamin"]/fields["thiaminNeeded"]).toFixed(2)+"%)" );
+	$("#thiaminModalpc").html((100*fields["thiamin"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["thiamin"]/fields["thiaminNeeded"] ))/fields["weight"]).toFixed(2)+"%)" );
+	if (fields["thiaminDisplayed"] == "0") {
+		$("#thiaminModalRow").attr("style", "display:none");
+	}			
+	
+	$("#riboflavinModal").html(fields["riboflavin"]+" mg ("+(100*fields["riboflavin"]/fields["riboflavinNeeded"]).toFixed(2)+"%)");
+	$("#riboflavinModalpc").html((100*fields["riboflavin"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100* (100*(fields["riboflavin"]/fields["riboflavinNeeded"] ))/fields["weight"]).toFixed(2)+"%)");
+	if (fields["riboflavinDisplayed"] == "0") {
+		$("#riboflavinModalRow").attr("style", "display:none");
+	}			
+	
+	$("#folateModal").html(fields["folate"]+" μg ("+(100*fields["folate"]/400).toFixed(2)+"%)");
+	$("#folateModalpc").html( (100*fields["folate"]/fields["weight"]).toFixed(2)+
+			" μg ("+ (100* (100*(fields["folate"]/400))/fields["weight"]).toFixed(2)+"%)");
+	if (fields["folateDisplayed"] == "0") {
+		$("#folateModalRow").attr("style", "display:none");
+	}			
+	
+	$("#vitcModal").html(fields["vitaminc"]+" mg ("+(100*fields["vitaminc"]/fields["vitamincNeeded"]).toFixed(2)+"%)");
+	$("#vitcModalpc").html((100*fields["vitaminc"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["vitaminc"]/fields["vitamincNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["vitamincDisplayed"] == "0") {
+		$("#vitcModalRow").attr("style", "display:none");
+	}			
+	
+	$("#vitdModal").html(fields["vitamind"]+" mg ("+(100*fields["vitamind"]/fields["vitamindNeeded"]).toFixed(2)+"%)");
+	$("#vitdModalpc").html((100*fields["vitamind"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["vitamind"]/fields["vitamindNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["vitamindDisplayed"] == "0") {
+		$("#vitdModalRow").attr("style", "display:none");
+	}			
+	
+	$("#viteModal").html(fields["vitamine"]+" mg ("+(100*fields["vitamine"]/fields["vitamineNeeded"]).toFixed(2)+"%)");
+	$("#viteModalpc").html((100*fields["vitamine"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["vitamine"]/fields["vitamineNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["vitamineDisplayed"] == "0") {
+		$("#viteModalRow").attr("style", "display:none");
+	}			
+	
+	$("#vitkModal").html(fields["vitamink"]+" μg ("+(100*fields["vitamink"]/fields["vitaminkNeeded"]).toFixed(2)+"%)");
+	$("#vitkModalpc").html((100*fields["vitamink"]/fields["weight"]).toFixed(2)+
+			" μg ("+(100*(100*(fields["vitamink"]/fields["vitaminkNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["vitaminkDisplayed"] == "0") {
+		$("#vitkModalRow").attr("style", "display:none");
+	}			
+					
+	
+	$("#vitaminaModal").html(fields["vitamina"].toFixed(2)+" μg ("+(100*fields["vitamina"]/fields["vitaminaNeeded"]).toFixed(2)+"%)");
+	$("#vitaminaModalpc").html((100*fields["vitamina"]/fields["weight"]).toFixed(2)+
+			" μg ("+(100*(100*(fields["vitamina"]/fields["vitaminaNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["vitaminaDisplayed"] == "0") {
+		$("#vitaminaModalRow").attr("style", "display:none");
+	}			
+	
+	$("#niacinModal").html(fields["niacin"].toFixed(2)+" mg ("+(100*fields["niacin"]/fields["niacinNeeded"]).toFixed(2)+"%)");
+	$("#niacinModalpc").html((100*fields["niacin"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["niacin"]/fields["niacinNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["niacinDisplayed"] == "0") {
+		$("#niacinModalRow").attr("style", "display:none");
+	}				
+	
+	$("#b6Modal").html(fields["b6"].toFixed(2)+" mg ("+(100*fields["b6"]/fields["b6Needed"]).toFixed(2)+"%)");
+	$("#b6Modalpc").html((100*fields["b6"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["b6"]/fields["b6Needed"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["b6Displayed"] == "0") {
+		$("#b6ModalRow").attr("style", "display:none");
+	}			
+	
+	$("#b12Modal").html(fields["b12"].toFixed(2)+" μg ("+(100*fields["b12"]/fields["b12Needed"]).toFixed(2)+"%)");
+	$("#b12Modalpc").html((100*fields["b12"]/fields["weight"]).toFixed(2)+
+			" μg ("+(100*(100*(fields["b12"]/fields["b12"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["b12Displayed"] == "0") {
+		$("#b12ModalRow").attr("style", "display:none");
+	}			
+	
+	$("#pantothenicModal").html(fields["pantothenic"].toFixed(2)+" mg ("+(100*fields["pantothenic"]/16).toFixed(2)+"%)");
+	$("#pantothenicModalpc").html((100*fields["pantothenic"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["pantothenic"]/16))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["pantothenicDisplayed"] == "0") {
+		$("#pantothenicModalRow").attr("style", "display:none");
+	}			
+	
+	$("#potassiumModal").html(fields["potassium"].toFixed(2)+" mg ("+(100*fields["potassium"]/fields["potassiumNeeded"]).toFixed(2)+"%)");
+	$("#potassiumModalpc").html((100*fields["potassium"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["potassium"]/fields["potassiumNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["potassiumDisplayed"] == "0") {
+		$("#potassiumModalRow").attr("style", "display:none");
+	}			
+	
+	$("#calciumModal").html(fields["calcium"].toFixed(2)+" mg ("+(100*fields["calcium"]/fields["calciumNeeded"]).toFixed(2)+"%)");
+	$("#calciumModalpc").html((100*fields["calcium"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["calcium"]/fields["calciumNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["calciumDisplayed"] == "0") {
+		$("#calciumModalRow").attr("style", "display:none");
+	}
+	
+	$("#phosphorusModal").html(fields["phosphorus"].toFixed(2)+" mg ("+(100*fields["phosphorus"]/fields["phosphorusNeeded"]).toFixed(2)+"%)");
+	$("#phosphorusModalpc").html((100*fields["phosphorus"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["phosphorus"]/fields["phosphorusNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["phosphorusDisplayed"] == "0") {
+		$("#phosphorusModalRow").attr("style", "display:none");
+	}			
+	
+	$("#magnesiumModal").html(fields["magnesium"].toFixed(2)+" mg ("+(100*fields["magnesium"]/fields["magnesiumNeeded"]).toFixed(2)+"%)");
+	$("#magnesiumModalpc").html((100*fields["magnesium"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["magnesium"]/fields["magnesiumNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["magnesiumDisplayed"] == "0") {
+		$("#magnesiumModalRow").attr("style", "display:none");
+	}			
+	
+	$("#ironModal").html(fields["iron"].toFixed(2)+" mg ("+(100*fields["iron"]/fields["ironNeeded"]).toFixed(2)+"%)");
+	$("#ironModalpc").html((100*fields["iron"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["iron"]/fields["ironNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["ironDisplayed"] == "0") {
+		$("#ironModalRow").attr("style", "display:none");
+	}			
+	
+	$("#zincModal").html(fields["zinc"].toFixed(2)+" mg ("+(100*fields["zinc"]/fields["zincNeeded"]).toFixed(2)+"%)");
+	$("#zincModalpc").html((100*fields["zinc"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["zinc"]/fields["zincNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["zincDisplayed"] == "0") {
+		$("#zincModalRow").attr("style", "display:none");
+	}			
+	
+	$("#copperModal").html(fields["copper"].toFixed(2)+" mg ("+(100*fields["copper"]/fields["copperNeeded"]).toFixed(2)+"%)");
+	$("#copperModalpc").html((100*fields["copper"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["copper"]/fields["copperNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["copperDisplayed"] == "0") {
+		$("#copperModalRow").attr("style", "display:none");
+	}			
+	
+	$("#maganeseModal").html(fields["maganese"].toFixed(2)+" mg ("+(100*fields["maganese"]/fields["maganeseNeeded"]).toFixed(2)+"%)");
+	$("#maganeseModalpc").html((100*fields["maganese"]/fields["weight"]).toFixed(2)+
+			" mg ("+(100*(100*(fields["maganese"]/fields["maganese"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["maganeseDisplayed"] == "0") {
+		$("#maganeseModalRow").attr("style", "display:none");
+	}			
+	
+	$("#seleniumModal").html(fields["selenium"].toFixed(2)+" μg ("+(100*fields["selenium"]/fields["seleniumNeeded"]).toFixed(2)+"%)");
+	$("#seleniumModalpc").html((100*fields["selenium"]/fields["weight"]).toFixed(2)+
+			" μg ("+(100*(100*(fields["selenium"]/fields["seleniumNeeded"]))/fields["weight"]).toFixed(2) +"%)");
+	if (fields["seleniumDisplayed"] == "0") {
+		$("#seleniumModalRow").attr("style", "display:none");
+	}	
+	
+	$("#alphaModal").html(fields["alphaCarot"].toFixed(2)+" μg");
+	$("#alphaModalpc").html((100*fields["alphaCarot"]/fields["weight"]).toFixed(2)+" μg" );
+	if (fields["alphaCarotDisplayed"] == "0") {
+		$("#alphaModalRow").attr("style", "display:none");
+	}	
+	$("#betaModal").html(fields["betaCarot"].toFixed(2)+" μg");
+	$("#betaModalpc").html((100*fields["betaCarot"]/fields["weight"]).toFixed(2)+" μg" );
+	if (fields["betaCarotDisplayed"] == "0") {
+		$("#betaModalRow").attr("style", "display:none");
+	}		
+	$("#cryptoModal").html(fields["crypto"].toFixed(2)+" μg");
+	$("#cryptoModalpc").html((100*fields["crypto"]/fields["weight"]).toFixed(2)+" μg" );
+	if (fields["cryptoDisplayed"] == "0") {
+		$("#cryptoModalRow").attr("style", "display:none");
+	}		
+	$("#lycopeneModal").html(fields["lycopene"].toFixed(2)+" μg");
+	$("#lycopeneModalpc").html((100*fields["alphaCarot"]/fields["weight"]).toFixed(2)+" μg" );
+	if (fields["lycopeneDisplayed"] == "0") {
+		$("#lycopeneModalRow").attr("style", "display:none");
+	}		
+	$("#luzeaModal").html(fields["luzea"].toFixed(2)+" μg");
+	$("#luzeaModalpc").html((100*fields["luzea"]/fields["weight"]).toFixed(2)+" μg" );
+	if (fields["luzeaDisplayed"] == "0") {
+		$("#luzeaModalRow").attr("style", "display:none");
+	}			
+}
+</script>
+}

@@ -1,0 +1,22 @@
+import models.user.Profile;
+import models.restaurant.Dish;
+ 
+dialect "mvel"
+ 
+/*RULES FOR 7ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules sets dish priorities due to ΑΝΕΜΙΑ 
+ */
+
+
+rule "Priorities for users with ΑΝΕΜΙΑ"
+    when
+       $u : Profile(hasAnemia == true)    
+        $dish : Dish()
+   		eval($dish.getListOfIngredientConditionsArrayStr() contains "2")  
+    then
+    	$dish.priority = 1;
+    	$dish.exclude = true;
+        System.out.println("Rule (priorities for users with ANEMIA): " + $dish.priority);    
+end

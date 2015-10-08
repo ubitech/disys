@@ -1,0 +1,414 @@
+package com.examples.drools
+ 
+import model.PavetBean;
+import model.Dish;
+ 
+dialect "mvel"
+ 
+/*RULES FOR 8ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules Includes/ Excludes dishes based on preferences for wheat  
+ */
+
+
+rule "Includes/ Excludes dishes based on preferences for wheat"
+    when $p : PavetBean(wantWheat==true)
+    $dishBean : Dish($listOfIngredients: listOfIngredients,
+    	$listOfIngredients contains "﻿Σιτάρι" || 
+$listOfIngredients contains "Φύτρο Σιταριού" || 
+$listOfIngredients contains "Γλουτένη Σίτου" || 
+$listOfIngredients contains "Αλεύρι Σίτου" || 
+$listOfIngredients contains "Πλιγούρι" || 
+$listOfIngredients contains "Σιμιγδαλι" || 
+$listOfIngredients contains "Ρέσι" || 
+$listOfIngredients contains "Ψωμί" || 
+$listOfIngredients contains "Φρυγανιές" || 
+$listOfIngredients contains "Δημητριακά Πρωινού" || 
+$listOfIngredients contains "Ζυμαρικά" || 
+$listOfIngredients contains "Κοφτό Μακαρονάκι" || 
+$listOfIngredients contains "Μακαρόνια" || 
+$listOfIngredients contains "Λαζάνια" || 
+$listOfIngredients contains "Ραβιόλια" || 
+$listOfIngredients contains "Φραντζολάκι" || 
+$listOfIngredients contains "Burger" || 
+$listOfIngredients contains "Noodles" || 
+$listOfIngredients contains "Πίτσα" || 
+$listOfIngredients contains "Cheeseburger" || 
+$listOfIngredients contains "Burrito" || 
+$listOfIngredients contains "Μπισκότα" || 
+$listOfIngredients contains "Cookie" || 
+$listOfIngredients contains "Muffins" || 
+$listOfIngredients contains "Couscous" || 
+$listOfIngredients contains "Spelt" || 
+$listOfIngredients contains "S ANDwich" || 
+$listOfIngredients contains "Παναρισμένα" || 
+$listOfIngredients contains "Πανέ" || 
+$listOfIngredients contains "Μπύρα" || 
+$listOfIngredients contains "Ginger Ale" || 
+$listOfIngredients contains "Root Beer" || 
+$listOfIngredients contains "Τύπου Μπύρας" || 
+$listOfIngredients contains "Shoyu" || 
+$listOfIngredients contains "Σάλτσα Σόγιας Φτιαγμένη Από Υδρολυμένη Φυτική Πρωτεΐνη" || 
+$listOfIngredients contains "Σάλτσα Σόγιας" || 
+$listOfIngredients contains "Μειωμένου Νατρίου" || 
+$listOfIngredients contains "Παρασκευασμένο Από Υδρολυμένη Φυτική Πρωτεΐνη" || 
+$listOfIngredients contains "Τσιπς ή κροκάν σόγιας" || 
+$listOfIngredients contains "Κέτσαπ" || 
+$listOfIngredients contains "Hot Dog" || 
+$listOfIngredients contains "Λουκάνικο" || 
+$listOfIngredients contains "Αλλαντικά" || 
+$listOfIngredients contains "Ζαμπόν" || 
+$listOfIngredients contains "Σαλάμι" || 
+$listOfIngredients contains "Παριζάκι" || 
+$listOfIngredients contains "Σουτζιούκος" || 
+$listOfIngredients contains "Κιοφτέρι" || 
+$listOfIngredients contains "Παξιμάδι" || 
+$listOfIngredients contains "Κριθαρένιο Κρήτης" || 
+$listOfIngredients contains "Κούπες" || 
+$listOfIngredients contains "Δάκτυλα" || 
+$listOfIngredients contains "Λουκουμάδες" || 
+$listOfIngredients contains "Κρουασάν" || 
+$listOfIngredients contains "Κολοκότη" || 
+$listOfIngredients contains "Πουρέκια" || 
+$listOfIngredients contains "Πίτες" || 
+$listOfIngredients contains "Φλαουνες" || 
+$listOfIngredients contains "Τυρόπιτα" || 
+$listOfIngredients contains "Ταχινόπιτα" || 
+$listOfIngredients contains "Σιαμισιη" || 
+$listOfIngredients contains "Πίτα Για Σουβλάκι" || 
+$listOfIngredients contains "Τραχανάς" || 
+$listOfIngredients contains "Χυλοπίτες" || 
+$listOfIngredients contains "Πίτα" || 
+$listOfIngredients contains "Πρασόπιτα" || 
+$listOfIngredients contains "Σπανακόπιτα" || 
+$listOfIngredients contains "Παγωτό" || 
+$listOfIngredients contains "Χωνάκι" || 
+$listOfIngredients contains "Κρέμα Ζαχαροπλαστικής" || 
+$listOfIngredients contains "Κρέμα Πατισερί" || 
+$listOfIngredients contains "«Μους" || 
+$listOfIngredients contains "Σοκολάτας»" || 
+$listOfIngredients contains "Κρέμα" || 
+$listOfIngredients contains "Μπάρα Δημητριακών" || 
+$listOfIngredients contains "Granola" || 
+$listOfIngredients contains "Κριτσίνια" || 
+$listOfIngredients contains "Τορτίγια" || 
+$listOfIngredients contains "Tostada" || 
+$listOfIngredients contains "Chimichanga" || 
+$listOfIngredients contains "Enchirito" || 
+$listOfIngredients contains "Taco" || 
+$listOfIngredients contains "Taco από καλαμπόκι" || 
+$listOfIngredients contains "Bagel" || 
+$listOfIngredients contains "Jellybeans" || 
+$listOfIngredients contains "Stroganoff  ANDμπύρα" || 
+$listOfIngredients contains "επικάλυψη" || 
+$listOfIngredients contains "WAFERS" || 
+$listOfIngredients contains "CROUTONS" || 
+$listOfIngredients contains "καλαμέλες" || 
+$listOfIngredients contains "αλλαντικά" || 
+$listOfIngredients contains "ζωμός" || 
+$listOfIngredients contains "ζυμαρικά" || 
+$listOfIngredients contains "παστίτσιο" || 
+$listOfIngredients contains "σάλτσα" || 
+$listOfIngredients contains "σούπας" || 
+$listOfIngredients contains "γέμιση" || 
+$listOfIngredients contains "«Μαλακόστρακα, κάβουρας, alaska king, απομίμηση, παρασκευασμένα από σουρίμι»" || 
+$listOfIngredients contains "«Μαλακόστρακα, γαρίδα, ανάμεικτα είδη, απομίμηση, παρασκευασμένα από σουρίμι»" || 
+$listOfIngredients contains "«Μαλάκια, χτένι, ανάμεικτα είδη, απομίμηση, παρασκευασμένα από σουρίμι»" || 
+$listOfIngredients contains "«Μπέικον, χορτοφαγικό»" || 
+$listOfIngredients contains "«Λουκάνικο, χορτοφαγικό»" || 
+$listOfIngredients contains "σάλτσα σόγιας"
+
+    )
+    then
+    	$dishBean.priority = 2;
+        System.out.println("Rule (user LIKES wheat): " + $dishBean.priority);    
+end
+
+rule "Includes/ Excludes dishes based on preferences for eggs"
+    when $p : PavetBean(wantWheat==false)
+     $dishBean : Dish($listOfIngredients: listOfIngredients,
+        $listOfIngredients contains "﻿Σιτάρι" || 
+$listOfIngredients contains "Φύτρο Σιταριού" || 
+$listOfIngredients contains "Γλουτένη Σίτου" || 
+$listOfIngredients contains "Αλεύρι Σίτου" || 
+$listOfIngredients contains "Πλιγούρι" || 
+$listOfIngredients contains "Σιμιγδαλι" || 
+$listOfIngredients contains "Ρέσι" || 
+$listOfIngredients contains "Ψωμί" || 
+$listOfIngredients contains "Φρυγανιές" || 
+$listOfIngredients contains "Δημητριακά Πρωινού" || 
+$listOfIngredients contains "Ζυμαρικά" || 
+$listOfIngredients contains "Κοφτό Μακαρονάκι" || 
+$listOfIngredients contains "Μακαρόνια" || 
+$listOfIngredients contains "Λαζάνια" || 
+$listOfIngredients contains "Ραβιόλια" || 
+$listOfIngredients contains "Φραντζολάκι" || 
+$listOfIngredients contains "Burger" || 
+$listOfIngredients contains "Noodles" || 
+$listOfIngredients contains "Πίτσα" || 
+$listOfIngredients contains "Cheeseburger" || 
+$listOfIngredients contains "Burrito" || 
+$listOfIngredients contains "Μπισκότα" || 
+$listOfIngredients contains "Cookie" || 
+$listOfIngredients contains "Muffins" || 
+$listOfIngredients contains "Couscous" || 
+$listOfIngredients contains "Spelt" || 
+$listOfIngredients contains "S ANDwich" || 
+$listOfIngredients contains "Παναρισμένα" || 
+$listOfIngredients contains "Πανέ" || 
+$listOfIngredients contains "Μπύρα" || 
+$listOfIngredients contains "Ginger Ale" || 
+$listOfIngredients contains "Root Beer" || 
+$listOfIngredients contains "Τύπου Μπύρας" || 
+$listOfIngredients contains "Shoyu" || 
+$listOfIngredients contains "Σάλτσα Σόγιας Φτιαγμένη Από Υδρολυμένη Φυτική Πρωτεΐνη" || 
+$listOfIngredients contains "Σάλτσα Σόγιας" || 
+$listOfIngredients contains "Μειωμένου Νατρίου" || 
+$listOfIngredients contains "Παρασκευασμένο Από Υδρολυμένη Φυτική Πρωτεΐνη" || 
+$listOfIngredients contains "Τσιπς ή κροκάν σόγιας" || 
+$listOfIngredients contains "Κέτσαπ" || 
+$listOfIngredients contains "Hot Dog" || 
+$listOfIngredients contains "Λουκάνικο" || 
+$listOfIngredients contains "Αλλαντικά" || 
+$listOfIngredients contains "Ζαμπόν" || 
+$listOfIngredients contains "Σαλάμι" || 
+$listOfIngredients contains "Παριζάκι" || 
+$listOfIngredients contains "Σουτζιούκος" || 
+$listOfIngredients contains "Κιοφτέρι" || 
+$listOfIngredients contains "Παξιμάδι" || 
+$listOfIngredients contains "Κριθαρένιο Κρήτης" || 
+$listOfIngredients contains "Κούπες" || 
+$listOfIngredients contains "Δάκτυλα" || 
+$listOfIngredients contains "Λουκουμάδες" || 
+$listOfIngredients contains "Κρουασάν" || 
+$listOfIngredients contains "Κολοκότη" || 
+$listOfIngredients contains "Πουρέκια" || 
+$listOfIngredients contains "Πίτες" || 
+$listOfIngredients contains "Φλαουνες" || 
+$listOfIngredients contains "Τυρόπιτα" || 
+$listOfIngredients contains "Ταχινόπιτα" || 
+$listOfIngredients contains "Σιαμισιη" || 
+$listOfIngredients contains "Πίτα Για Σουβλάκι" || 
+$listOfIngredients contains "Τραχανάς" || 
+$listOfIngredients contains "Χυλοπίτες" || 
+$listOfIngredients contains "Πίτα" || 
+$listOfIngredients contains "Πρασόπιτα" || 
+$listOfIngredients contains "Σπανακόπιτα" || 
+$listOfIngredients contains "Παγωτό" || 
+$listOfIngredients contains "Χωνάκι" || 
+$listOfIngredients contains "Κρέμα Ζαχαροπλαστικής" || 
+$listOfIngredients contains "Κρέμα Πατισερί" || 
+$listOfIngredients contains "«Μους" || 
+$listOfIngredients contains "Σοκολάτας»" || 
+$listOfIngredients contains "Κρέμα" || 
+$listOfIngredients contains "Μπάρα Δημητριακών" || 
+$listOfIngredients contains "Granola" || 
+$listOfIngredients contains "Κριτσίνια" || 
+$listOfIngredients contains "Τορτίγια" || 
+$listOfIngredients contains "Tostada" || 
+$listOfIngredients contains "Chimichanga" || 
+$listOfIngredients contains "Enchirito" || 
+$listOfIngredients contains "Taco" || 
+$listOfIngredients contains "Taco από καλαμπόκι" || 
+$listOfIngredients contains "Bagel" || 
+$listOfIngredients contains "Jellybeans" || 
+$listOfIngredients contains "Stroganoff  ANDμπύρα" || 
+$listOfIngredients contains "επικάλυψη" || 
+$listOfIngredients contains "WAFERS" || 
+$listOfIngredients contains "CROUTONS" || 
+$listOfIngredients contains "καλαμέλες" || 
+$listOfIngredients contains "αλλαντικά" || 
+$listOfIngredients contains "ζωμός" || 
+$listOfIngredients contains "ζυμαρικά" || 
+$listOfIngredients contains "παστίτσιο" || 
+$listOfIngredients contains "σάλτσα" || 
+$listOfIngredients contains "σούπας" || 
+$listOfIngredients contains "γέμιση" || 
+$listOfIngredients contains "«Μαλακόστρακα, κάβουρας, alaska king, απομίμηση, παρασκευασμένα από σουρίμι»" || 
+$listOfIngredients contains "«Μαλακόστρακα, γαρίδα, ανάμεικτα είδη, απομίμηση, παρασκευασμένα από σουρίμι»" || 
+$listOfIngredients contains "«Μαλάκια, χτένι, ανάμεικτα είδη, απομίμηση, παρασκευασμένα από σουρίμι»" || 
+$listOfIngredients contains "«Μπέικον, χορτοφαγικό»" || 
+$listOfIngredients contains "«Λουκάνικο, χορτοφαγικό»" || 
+$listOfIngredients contains "σάλτσα σόγιας"
+	
+ 	)  
+    then
+    	$dishBean.exclude = true;
+        System.out.println("Rule (user DOES NOT LIKE wheat): " + $dishBean.exclude);    
+end
+
+/*RULES FOR 8ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules Includes/ Excludes dishes based on preferences for sogia  
+ */
+
+
+rule "Includes/ Excludes dishes based on preferences for veal"
+    when $p : PavetBean(wantVeal==true)
+    $dishBean : Dish($listOfIngredients: listOfIngredients,
+    	$listOfIngredients contains "﻿Μοσχάρι" || 
+$listOfIngredients contains "Μορταδέλα" || 
+$listOfIngredients contains "Μοσχαρίσιο" || 
+$listOfIngredients contains "Σιεφταλιά" || 
+$listOfIngredients contains "Παστίτσιο" || 
+$listOfIngredients contains "Βοδινό" || 
+$listOfIngredients contains "Κιμά (Σ)" || 
+$listOfIngredients contains "Μπιφτέκι" || 
+$listOfIngredients contains "Ρολό" || 
+$listOfIngredients contains "Stroganoff" || 
+$listOfIngredients contains "Κεφτεδάκια" || 
+$listOfIngredients contains "Chili Con Carne" || 
+$listOfIngredients contains "Πεπερόνι"
+
+    )
+    then
+    	$dishBean.priority = 2;
+        System.out.println("Rule (user LIKES veal): " + $dishBean.priority);    
+end
+
+rule "Includes/ Excludes dishes based on preferences for eggs"
+    when $p : PavetBean(wantVeal==false)
+     $dishBean : Dish($listOfIngredients: listOfIngredients,
+        $listOfIngredients contains "﻿Μοσχάρι" || 
+$listOfIngredients contains "Μορταδέλα" || 
+$listOfIngredients contains "Μοσχαρίσιο" || 
+$listOfIngredients contains "Σιεφταλιά" || 
+$listOfIngredients contains "Παστίτσιο" || 
+$listOfIngredients contains "Βοδινό" || 
+$listOfIngredients contains "Κιμά (Σ)" || 
+$listOfIngredients contains "Μπιφτέκι" || 
+$listOfIngredients contains "Ρολό" || 
+$listOfIngredients contains "Stroganoff" || 
+$listOfIngredients contains "Κεφτεδάκια" || 
+$listOfIngredients contains "Chili Con Carne" || 
+$listOfIngredients contains "Πεπερόνι"
+	
+ 	)  
+    then
+    	$dishBean.exclude = true;
+        System.out.println("Rule (user DOES NOT LIKE veal): " + $dishBean.exclude);    
+end
+
+
+/*RULES FOR 7ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules sets dish priorities due to HYPERURICEMIA 
+ */
+
+rule "Excludes for users with HYPERURICEMIA"
+    when
+       $p : PavetBean($medicalConditions: medicalConditions, 
+        	$medicalConditions contains "HYPERURICEMIA")    
+        $dishBean : Dish($listOfIngredients: listOfIngredients,
+        	$listOfIngredients contains "Συκώτι" ||        	  
+        	$listOfIngredients contains "νεφρά" ||        	      
+	        $listOfIngredients contains "καρδιά" || 
+	        $listOfIngredients contains "πνεύμονες" || 
+	        $listOfIngredients contains "σπλήνα" || 
+	        $listOfIngredients contains "Θύμος αδένας" || 
+	        $listOfIngredients contains "ξίγκι" || 
+	        $listOfIngredients contains "εντόσθια" || 
+	        $listOfIngredients contains "φασιανός" || 
+	        $listOfIngredients contains "κουνέλι" || 
+	        $listOfIngredients contains "θύραμα" || 
+	        $listOfIngredients contains "γαύρος" || 
+	        $listOfIngredients contains "ρέγγα" || 
+	        $listOfIngredients contains "σκουμπρί" || 
+	        $listOfIngredients contains "σαρδέλλα" || 
+	        $listOfIngredients contains "μαρίδα" || 
+	        $listOfIngredients contains "πέστροφα" || 
+	        $listOfIngredients contains "μύδια" || 
+	        $listOfIngredients contains "καβούρι" || 
+	        $listOfIngredients contains "γαρίδες" || 
+	        $listOfIngredients contains "Μαλακόστρακα" || 
+	        $listOfIngredients contains "αυγοτάραχο" || 
+	        $listOfIngredients contains "χαβιάρι" || 
+	        $listOfIngredients contains "ζωμός" || 
+	        $listOfIngredients contains "CAMPBELL'S" || 
+	        $listOfIngredients contains "σούπα" || 
+	        $listOfIngredients contains "σάλτσα" || 
+	        $listOfIngredients contains "σως" || 
+	        $listOfIngredients contains "Μπύρα" || 
+	        $listOfIngredients contains "σιρόπι καλαμποκιού υψηλής περιεκτικότητας σε φρουκτόζη"
+ )      
+    then
+    	$dishBean.exclude = true;
+        System.out.println("Rule (excludes for users with HYPERURICEMIA): " + $dishBean.exclude);    
+end
+
+
+/*RULES FOR 7ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules sets dish priorities due to ΑΝΕΜΙΑ 
+ */
+
+
+rule "Priorities for users with ΑΝΕΜΙΑ"
+    when
+       $p : PavetBean($medicalConditions: medicalConditions, 
+        	$medicalConditions contains "ΑΝΕΜΙΑ")    
+        $dishBean : Dish($listOfIngredients: listOfIngredients,
+        		$listOfIngredients contains "﻿μύδια" || 
+				$listOfIngredients contains "Δημητριακά πρωινού" || 
+				$listOfIngredients contains "στρείδια" || 
+				$listOfIngredients contains "συκώτι" || 
+				$listOfIngredients contains "νεφρά" || 
+				$listOfIngredients contains "καρδιά" || 
+				$listOfIngredients contains "πνεύμονες" || 
+				$listOfIngredients contains "σπλήνα" || 
+				$listOfIngredients contains "Θύμος αδένας" || 
+				$listOfIngredients contains "φασόλια σόγιας" || 
+				$listOfIngredients contains "κολοκύθα" || 
+				$listOfIngredients contains "άσπρα φασόλια" || 
+				$listOfIngredients contains "Μελάσσα" || 
+				$listOfIngredients contains "φακές" || 
+				$listOfIngredients contains "σπανάκι" || 
+				($listOfIngredients contains "Βοδινό" && $listOfIngredients contains "λάπα") ||
+				($listOfIngredients contains "Βοδινό" && $listOfIngredients contains "στρογγυλό") ||
+				($listOfIngredients contains "Βοδινό" && $listOfIngredients contains "παϊδάκι") ||
+				($listOfIngredients contains "Βοδινό" && $listOfIngredients contains "ουρά") ||
+				($listOfIngredients contains "Βοδινό" && $listOfIngredients contains "κιλότο") ||
+				$listOfIngredients contains "στρογγυλό" || 
+				$listOfIngredients contains "παϊδάκι" || 
+				$listOfIngredients contains "ουρά" || 
+				$listOfIngredients contains "κιλότο)" || 
+				$listOfIngredients contains "«Φασόλια, νεφρών»" || 
+				$listOfIngredients contains "«Φασόλια, κόκκινα (kidney)»" || 
+				$listOfIngredients contains "σαρδέλλα" || 
+				$listOfIngredients contains "ρεβύθι" || 
+				$listOfIngredients contains "πάπια" || 
+				$listOfIngredients contains "Αρνί (ώμος)" || 
+				$listOfIngredients contains "Χυμός δαμάσκηνου" || 
+				$listOfIngredients contains "γαρίδες" || 
+				$listOfIngredients contains "Μαυρομάτικα" || 
+				$listOfIngredients contains "« Πουρές από δαμάσκηνο»" || 
+				$listOfIngredients contains "«Φασόλια, λευκά»" || 
+				$listOfIngredients contains "« Λευκά φασόλια, navy»" || 
+				$listOfIngredients contains "GUAVA" || 
+				$listOfIngredients contains "Κόκκινη πιπεριά" || 
+				$listOfIngredients contains "ακτινίδιο" || 
+				$listOfIngredients contains "πορτοκάλι" || 
+				$listOfIngredients contains "πράσινη πιπεριά" || 
+				$listOfIngredients contains "Grapefruit" || 
+				$listOfIngredients contains "φράουλες" || 
+				$listOfIngredients contains "Λαχανάκια Βρυξελλών" || 
+				$listOfIngredients contains "Πεπόνια" || 
+				$listOfIngredients contains "πεπονιού" || 
+				$listOfIngredients contains "Παπάγια" || 
+				$listOfIngredients contains "Μπρόκολο" || 
+				$listOfIngredients contains "αρακάς" || 
+				$listOfIngredients contains "μπιζέλια" || 
+				$listOfIngredients contains "Γλυκοπατάτα" || 
+				$listOfIngredients contains "Κουνουπίδι" || 
+				$listOfIngredients contains "Ανανάς" || 
+				$listOfIngredients contains "σέσκουλο" || 
+				$listOfIngredients contains "ροβίτσα"
+				 )      
+    then
+    	$dishBean.priority = 1;
+        System.out.println("Rule (priorities for users with ANEMIA): " + $dishBean.priority);    
+end

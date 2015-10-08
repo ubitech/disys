@@ -1,0 +1,30 @@
+import models.user.Profile;
+import models.restaurant.Dish;
+ 
+dialect "mvel"
+
+/*RULES FOR 8ο βήμα υπολογισμού (εννοιολογικός) */
+
+/*
+ * This set of rules Includes/ Excludes dishes based on preferences for bread  
+ */
+
+
+rule "Includes dishes based on preferences for bread"
+    when $u : Profile(wantBread==2)
+   		$dish : Dish()
+   		eval($dish.getListOfIngredientCategoriesArrayStr() contains "11")
+    then
+    	$dish.priority = 2.0;
+        System.out.println("Rule (user LIKES bread): " + $dish.priority);    
+end
+
+rule "Excludes dishes based on preferences for bread"
+    when $u : Profile(wantBread==1)
+    	 $dish : Dish()
+   		eval($dish.getListOfIngredientCategoriesArrayStr() contains "11")
+    then
+    	$dish.exclude = true;
+        System.out.println("Rule (user DOES NOT LIKE bread): " + $dish.exclude);    
+end
+

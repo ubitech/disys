@@ -1,0 +1,10 @@
+import models.restaurant.Dish;
+
+dialect "mvel"
+
+rule "Rule 1"
+when 
+	$d : Dish(id==1)
+then
+	System.out.println("Dish 1 found");
+end
