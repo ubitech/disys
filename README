@@ -1,4 +1,7 @@
-This is your new Play application
-=================================
+# DISYS
+An Integrated Platform for Intelligent Meal Recommendations
 
-This file will be packaged with your application, when using `activator dist`.
+## DISYS WebApp
+This WebApp has functionalities allowing:
+-Restaurant Owners to insert their restaurants' information and dishes offered by each restaurant's menu
+-Customers to search the dishes and filter them according to their needs (nutritional targets, ingredient preferences, medical history constraints)
