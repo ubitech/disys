@@ -15,6 +15,7 @@ rule "Includes dishes based on preferences for sogia"
    		eval($dish.getListOfIngredientCategoriesArrayStr() contains "12")
     then
     	$dish.priority = 2;
+        $dish.sogiaPriority = 1; 
         System.out.println("Rule (user LIKES σόγια): " + $dish.priority);    
 end
 

@@ -61,6 +61,48 @@ public class Dish extends Model implements Comparable<Dish> {
 	@Transient
 	Double priority = 0.0;
 	
+	@Transient
+	Double breadPriority = 0.0;
+	
+	@Transient
+	Double eggsPriority = 0.0;
+	
+	@Transient
+	Double fetaPriority = 0.0;
+	
+	@Transient
+	Double fishPriority = 0.0;
+	
+	@Transient
+	Double kaseriPriority = 0.0;
+	
+	@Transient
+	Double milkPriority = 0.0;
+	
+	@Transient
+	Double lactosePriority = 0.0;
+	
+	@Transient
+	Double lampPriority = 0.0;
+	
+	@Transient
+	Double porkPriority = 0.0;
+	
+	@Transient
+	Double seedsPriority = 0.0;
+	
+	@Transient
+	Double shellsPriority = 0.0;
+	
+	@Transient
+	Double sogiaPriority = 0.0;
+	
+	@Transient
+	Double vealPriority = 0.0;
+	
+	@Transient
+	Double wheatPriority = 0.0;
+	
 	@ManyToOne
 	@JoinColumn(name="cousineid", referencedColumnName="id")	
 	Hcousine cousine;
@@ -275,6 +317,118 @@ public class Dish extends Model implements Comparable<Dish> {
 			List<Joindishcharacteristic> dishcharacteristics) {
 		this.dishcharacteristics = dishcharacteristics;
 	}
+	
+	public Double getBreadPriority() {
+		return breadPriority;
+	}
+
+	public void setBreadPriority(Double breadPriority) {
+		this.breadPriority = breadPriority;
+	}
+
+	public Double getEggsPriority() {
+		return eggsPriority;
+	}
+
+	public void setEggsPriority(Double eggsPriority) {
+		this.eggsPriority = eggsPriority;
+	}
+
+	public Double getFetaPriority() {
+		return fetaPriority;
+	}
+
+	public void setFetaPriority(Double fetaPriority) {
+		this.fetaPriority = fetaPriority;
+	}
+
+	public Double getFishPriority() {
+		return fishPriority;
+	}
+
+	public void setFishPriority(Double fishPriority) {
+		this.fishPriority = fishPriority;
+	}
+
+	public Double getKaseriPriority() {
+		return kaseriPriority;
+	}
+
+	public void setKaseriPriority(Double kaseriPriority) {
+		this.kaseriPriority = kaseriPriority;
+	}
+
+	public Double getMilkPriority() {
+		return milkPriority;
+	}
+
+	public void setMilkPriority(Double milkPriority) {
+		this.milkPriority = milkPriority;
+	}
+
+	public Double getLactosePriority() {
+		return lactosePriority;
+	}
+
+	public void setLactosePriority(Double lactosePriority) {
+		this.lactosePriority = lactosePriority;
+	}
+
+	public Double getLampPriority() {
+		return lampPriority;
+	}
+
+	public void setLampPriority(Double lampPriority) {
+		this.lampPriority = lampPriority;
+	}
+
+	public Double getPorkPriority() {
+		return porkPriority;
+	}
+
+	public void setPorkPriority(Double porkPriority) {
+		this.porkPriority = porkPriority;
+	}
+
+	public Double getSeedsPriority() {
+		return seedsPriority;
+	}
+
+	public void setSeedsPriority(Double seedsPriority) {
+		this.seedsPriority = seedsPriority;
+	}
+
+	public Double getShellsPriority() {
+		return shellsPriority;
+	}
+
+	public void setShellsPriority(Double shellsPriority) {
+		this.shellsPriority = shellsPriority;
+	}
+
+	public Double getSogiaPriority() {
+		return sogiaPriority;
+	}
+
+	public void setSogiaPriority(Double sogiaPriority) {
+		this.sogiaPriority = sogiaPriority;
+	}
+
+	public Double getVealPriority() {
+		return vealPriority;
+	}
+
+	public void setVealPriority(Double vealPriority) {
+		this.vealPriority = vealPriority;
+	}
+
+	public Double getWheatPriority() {
+		return wheatPriority;
+	}
+
+	public void setWheatPriority(Double wheatPriority) {
+		this.wheatPriority = wheatPriority;
+	}
 
 	@Override
 	public int compareTo(Dish other) {
@@ -290,4 +444,23 @@ public class Dish extends Model implements Comparable<Dish> {
 	public int hashCode() {
 		return (int) (long) (this.id);
 	}	
+	
+	public double getIngredientPreferences(){
+		
+		double result = breadPriority +
+				eggsPriority + 
+				fetaPriority +
+				fishPriority +
+				kaseriPriority +
+				milkPriority +
+				lactosePriority +
+				lampPriority +
+				porkPriority +
+				seedsPriority +
+				shellsPriority +
+				sogiaPriority +
+				vealPriority +
+				wheatPriority;
+		return result;
+	}
 }

@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.ArrayList;
+
 public class DishDetails {
 	public boolean selectable = true;
 	String name;
@@ -11,6 +13,8 @@ public class DishDetails {
 	double price;
 	String characteristic;
 	Integer calories;
+	ArrayList<String> preferenceExplanation = null;
+
 	public String getCharacteristic() {
 		return characteristic;
 	}
@@ -65,4 +69,19 @@ public class DishDetails {
 	public void setCalories(Integer calories) {
 		this.calories = calories;
 	}	
+	public ArrayList<String> getPreferenceExplanation() {
+		return preferenceExplanation;
+	}
+	public void setPreferenceExplanation(ArrayList<String> preferenceExplanation) {
+		this.preferenceExplanation = preferenceExplanation;
+	}
+	
+	public void addPreferenceExplanation(String preferenceExplanation) {
+		if (this.preferenceExplanation == null){
+			this.preferenceExplanation = new ArrayList<String>();
+		}
+		this.preferenceExplanation.add(preferenceExplanation);
+	}
+	
+	
 }

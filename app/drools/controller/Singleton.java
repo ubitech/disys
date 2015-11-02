@@ -45,6 +45,6 @@ public class Singleton {
 				"rules/preferences/step8_sogia.drl",
 				"rules/preferences/step8_veal.drl",
 				"rules/preferences/step8_wheat.drl" };		
-		dishKnowledgeBase = ruleRunner.createKnowledgeBase(basicRules);
+		dishKnowledgeBase = ruleRunner.createKnowledgeBase(dishRules);
 	}
 }

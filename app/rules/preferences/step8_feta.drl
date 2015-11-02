@@ -15,6 +15,7 @@ rule "Includes dishes based on preferences for feta"
    		eval($dish.getListOfIngredientCategoriesArrayStr() contains "5")
     then
     	$dish.priority = 2;
+        $dish.fetaPriority = 2;        
         System.out.println("Rule (user LIKES feta): " + $dish.priority);    
 end
 

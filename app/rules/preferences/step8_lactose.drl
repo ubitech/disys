@@ -15,7 +15,8 @@ rule "Includes/ Excludes dishes based on preferences for lactose"
    		eval($dish.getListOfIngredientCategoriesArrayStr() contains "3")
     then
     	$dish.priority = 2;
-        System.out.println("Rule (user LIKES lactose): " + $dish.priority);    
+      $dish.lactosePriority = 1;      
+      System.out.println("Rule (user LIKES lactose): " + $dish.priority);    
 end
 
 rule "Excludes dishes based on preferences for lactose"

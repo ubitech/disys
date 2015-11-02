@@ -496,7 +496,7 @@ public class Customer extends Controller {
 
 		//user has set mandatory preferences
 		boolean hasMandatory = false;
-		if (notdaily != null && notdaily.length >0) {
+		if (notdaily != null && notdaily.length >0 && false) {
 			hasMandatory = true;
 			profile.setWantEggs(1);
 			profile.setWantLamp(1);
@@ -512,7 +512,7 @@ public class Customer extends Controller {
 			profile.setWantBread(1);
 			profile.setWantSogia(1);
 			profile.setWantSeeds(1);
-		}
+		}		
 		if (notdaily != null && notdaily.length > 0) {
 			for (String entry : notdaily) {
 				switch (entry) {
@@ -767,6 +767,72 @@ public class Customer extends Controller {
 				DishDetails dishDetails = iterator.next();
 				Long dishid = dishDetails.getDishid();
 				if (dishid == dish.getId() && dish.getSelectable()) {
+					//add explanation
+					double rating = recommender.getPreferenceForDish(profile,dish);
+					if (rating > 0){
+						dishDetails.addPreferenceExplanation("Το ΔΙΣΥΣ υπολόγισε ότι το πιάτο αυτό θα το αξιολογούσατε με " + rating + " στα 5.");
+						Logger.debug("Το ΔΙΣΥΣ υπολόγισε ότι το πιάτο αυτό θα το αξιολογούσατε με " + rating + " στα 5.");						
+					}
+					else{
+						Logger.debug("no rating available: " +rating);
+					}
+					
+					if (dish.getBreadPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει ψωμί, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains bread");
+					}
+					if (dish.getKaseriPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει κασέρι, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains kaseri");
+					}
+					if (dish.getEggsPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει αυγά, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains eggs");
+					}
+					if (dish.getFetaPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει φέτα, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains feta");
+					}
+					if (dish.getLampPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει αρνί, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains lamp");
+					}
+					if (dish.getFishPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει ψάρι, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains fish");
+					}
+					if (dish.getMilkPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει γάλα, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains milk");
+					}
+					if (dish.getLactosePriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει λακτόζη, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains lactose");
+					}
+					if (dish.getPorkPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει χοιρινό, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains pork");
+					}
+					if (dish.getSeedsPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει σπόρους, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains seeds");
+					}
+					if (dish.getSogiaPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει σόγια, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains sogia");
+					}
+					if (dish.getVealPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει βοδινό, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains veal");
+					}
+					if (dish.getShellsPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει όστρακα/ μαλάκια, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains shells");
+					}
+					if (dish.getWheatPriority() > 0){
+						dishDetails.addPreferenceExplanation("Το πιάτο περιέχει σιτάρι, σύμφωνα με τις προτιμήσεις σας!");
+						Logger.debug("dish contains wheat");
+					}
 					dishDetailsListFinal.add(dishDetails);
 				}
 			}

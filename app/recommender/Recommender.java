@@ -42,10 +42,10 @@ public class Recommender {
 	public ArrayList<Dish> runDishRules(Profile profile, ArrayList<Dish> dishes) {
 
 		ArrayList<Dish> filteredDishes = new ArrayList<Dish>();
-		Logger.debug("before running dish rules " + (new Date()));
+		Logger.debug("before running dish rules " + (new Date()));		
 		RuleRunner runner = new RuleRunner();
 		for (int i = 0; i < dishes.size(); i++) {
-			Dish dish = dishes.get(i);			
+			Dish dish = dishes.get(i);						
 			Object[] facts = { profile, dish };
 			runner.runDishRules(facts);
 		}
@@ -59,12 +59,14 @@ public class Recommender {
 		LinkedHashMap<Dish, Double> filteredDishesWithPreferences = new LinkedHashMap<Dish, Double>();
 		dishes = runDishRules(profile, dishes);		
 		for (Dish dish : dishes) {
-//			Logger.debug("dish priority: " + dish.getPriority());
+			Logger.debug("dish priority: " + dish.getIngredientPreferences());
+			Logger.debug("ingredient categories: " + Arrays.toString(dish.getListOfIngredientCategoriesArrayStr()));
 			if (!dish.getExclude()) {
 				filteredDishesWithPreferences.put(
 						dish,
 						getPreferenceForDish(profile, dish)
-								+ dish.getPriority());
+								//+ dish.getPriority());
+						+ dish.getIngredientPreferences());
 //				Logger.debug("don't exclude");
 			}
 //			Logger.debug("dish ingredient size: "

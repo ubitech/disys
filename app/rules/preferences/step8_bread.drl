@@ -16,7 +16,8 @@ rule "Includes dishes based on preferences for bread"
    		eval($dish.getListOfIngredientCategoriesArrayStr() contains "11")
     then
     	$dish.priority = 2.0;
-        System.out.println("Rule (user LIKES bread): " + $dish.priority);    
+      $dish.breadPriority = 1.0;
+      System.out.println("Rule (user LIKES bread): " + $dish.priority);    
 end
 
 rule "Excludes dishes based on preferences for bread"
